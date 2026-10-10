@@ -1,159 +1,137 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:maternal/features/calories/domain/calorie_target.dart';
-import 'package:maternal/features/calories/domain/food_entry.dart';
-import 'package:maternal/features/cycle/domain/cycle_predictor.dart';
-import 'package:maternal/features/cycle/domain/period_entry.dart';
-import 'package:maternal/features/health_log/domain/health_log.dart';
-import 'package:maternal/features/pregnancy/domain/gestation.dart';
+import 'package:maternal/core/util/dates.dart';
+import 'package:maternal/data/models.dart';
+import 'package:maternal/domain/health_rules.dart';
 
-PeriodEntry period(DateTime start, [int days = 5]) => PeriodEntry(
-  id: start.toIso8601String(),
-  start: start,
-  end: start.add(Duration(days: days - 1)),
-);
+import 'test_app.dart';
 
 void main() {
-  group('Gestation', () {
-    final today = DateTime(2026, 10, 6);
+  final c = loadContent();
+  final today = DateTime(2026, 10, 6);
 
-    test('32+4 weeks when 52 days remain to the due date', () {
-      final g = Gestation.fromDueDate(DateTime(2026, 11, 27), today: today);
-      expect((g.weeks, g.days), (32, 4));
-      expect(g.daysToDue, 52);
-      expect(g.trimester, Trimester.third);
-    });
-
-    test('LMP and due date give the same result', () {
-      final fromLmp = Gestation.fromLmp(DateTime(2026, 7, 1), today: today);
-      final fromEdd = Gestation.fromDueDate(DateTime(2027, 4, 7), today: today);
-      expect(fromLmp.dueDate, DateTime(2027, 4, 7));
-      expect((fromLmp.weeks, fromLmp.days), (fromEdd.weeks, fromEdd.days));
-      expect((fromLmp.weeks, fromLmp.days), (13, 6));
-    });
-
-    test('trimester boundaries at 13 and 27 weeks', () {
-      Gestation at(int weeks) => Gestation.fromDueDate(
-        today.add(Duration(days: 280 - weeks * 7)),
-        today: today,
+  group('PregnancyStatus', () {
+    test('dates from the due date', () {
+      final p = Profile(
+        id: 'x',
+        name: 'A',
+        journey: Journey.pregnancy,
+        due: addDays(today, 52),
       );
-      expect(at(12).trimester, Trimester.first);
-      expect(at(13).trimester, Trimester.second);
-      expect(at(26).trimester, Trimester.second);
-      expect(at(27).trimester, Trimester.third);
+      final s = PregnancyStatus.of(p, today, c)!;
+      expect(s.weeks, 32);
+      expect(s.days, 4);
+      expect(s.trimester, Trimester.third);
+      expect(s.check, DueCheck.ok);
     });
 
-    test('progress is clamped past the due date', () {
-      final g = Gestation.fromDueDate(DateTime(2026, 9, 30), today: today);
-      expect(g.daysToDue, -6);
-      expect(g.progress, 1.0);
-    });
-  });
-
-  group('CyclePredictor', () {
-    test('defaults without history', () {
-      final f = CyclePredictor.forecast(const []);
-      expect(f.hasEnoughHistory, isFalse);
-      expect(f.nextPeriodStart, isNull);
+    test('flags a due date too far away', () {
+      final p = Profile(
+        id: 'x',
+        name: 'A',
+        journey: Journey.pregnancy,
+        due: addDays(today, 400),
+      );
+      expect(PregnancyStatus.of(p, today, c)!.check, DueCheck.future);
     });
 
-    test('regular 28-day cycles predict next period and fertile window', () {
-      final f = CyclePredictor.forecast([
-        period(DateTime(2026, 7, 1)),
-        period(DateTime(2026, 7, 29)),
-        period(DateTime(2026, 8, 26), 4),
-      ]);
-      expect(f.averageCycleLength, 28);
-      expect(f.averagePeriodLength, 5);
-      expect(f.isIrregular, isFalse);
-      expect(f.nextPeriodStart, DateTime(2026, 9, 23));
-      expect(f.ovulationDay, DateTime(2026, 9, 9));
-      expect(f.fertileStart, DateTime(2026, 9, 4));
-      expect(f.fertileEnd, DateTime(2026, 9, 10));
-      expect(f.isPredictedPeriod(DateTime(2026, 9, 27)), isTrue);
-      expect(f.isPredictedPeriod(DateTime(2026, 9, 28)), isFalse);
-    });
-
-    test('flags irregular cycles', () {
-      final f = CyclePredictor.forecast([
-        period(DateTime(2026, 5, 1)),
-        period(DateTime(2026, 5, 23)), // 22 days
-        period(DateTime(2026, 6, 27)), // 35 days
-      ]);
-      expect(f.isIrregular, isTrue);
-    });
-
-    test('ignores implausible gaps', () {
-      final f = CyclePredictor.forecast([
-        period(DateTime(2025, 1, 1)),
-        period(DateTime(2026, 1, 1)), // a year apart
-      ]);
-      expect(f.hasEnoughHistory, isFalse);
-      expect(f.averageCycleLength, CyclePredictor.defaultCycleLength);
-    });
-  });
-
-  group('CalorieTarget', () {
-    test('falls back without profile data', () {
+    test('is null when not pregnant', () {
       expect(
-        CalorieTarget.estimate(
-          weightKg: null,
-          heightCm: 160,
-          ageYears: 30,
-          activity: ActivityLevel.light,
+        PregnancyStatus.of(
+          Profile(id: 'x', name: 'A', journey: Journey.general),
+          today,
+          c,
         ),
-        CalorieTarget.fallbackKcal,
+        isNull,
       );
-    });
-
-    test('adds trimester allowance', () {
-      int est([Trimester? t]) => CalorieTarget.estimate(
-        weightKg: 60,
-        heightCm: 160,
-        ageYears: 30,
-        activity: ActivityLevel.low,
-        trimester: t,
-      );
-      // BMR = 600 + 1000 - 150 - 161 = 1289; x1.2 = 1546.8
-      expect(est(), 1550);
-      expect(est(Trimester.second), 1890);
-      expect(est(Trimester.third), 2000);
     });
   });
 
-  test('blood pressure status uses diastolic too', () {
-    HealthLogEntry bp(double s, double d) => HealthLogEntry(
+  group('CycleEstimate', () {
+    List<DateTime> period(DateTime start, int len) => [
+      for (var i = 0; i < len; i++) addDays(start, i),
+    ];
+
+    test('no data', () {
+      expect(CycleEstimate.from([], today, c).status, CycleStatus.none);
+    });
+
+    test('averages recent cycles and estimates the next period', () {
+      final s1 = addDays(today, -56), s2 = addDays(today, -28);
+      final e = CycleEstimate.from(
+        [...period(s1, 5), ...period(s2, 5)],
+        today,
+        c,
+      );
+      expect(e.status, CycleStatus.history);
+      expect(e.cycleLength, 28);
+      expect(e.periodLength, 5);
+      expect(e.next, addDays(s2, 28));
+      expect(e.ovulation!.isBefore(e.next!), isTrue);
+      expect(e.fertileStart!.isBefore(e.fertileEnd!), isTrue);
+    });
+
+    test('marks a long-overdue period as stale', () {
+      final e = CycleEstimate.from(period(addDays(today, -120), 4), today, c);
+      expect(e.status, CycleStatus.stale);
+    });
+  });
+
+  group('rangeOf', () {
+    test('blood pressure above range', () {
+      final o = Observation('x', today, ObsType.bp, 150, value2: 95);
+      expect(rangeOf(o, c), RangeClass.above);
+    });
+
+    test('heart rate within range', () {
+      expect(
+        rangeOf(Observation('x', today, ObsType.hr, 80), c),
+        RangeClass.within,
+      );
+    });
+
+    test('glucose after a meal is not classified', () {
+      final o = Observation(
+        'x',
+        today,
+        ObsType.glu,
+        9,
+        ctx: GlucoseContext.after,
+      );
+      expect(rangeOf(o, c), RangeClass.unknown);
+    });
+  });
+
+  group('calorieTarget', () {
+    final p = Profile(
       id: 'x',
-      metric: HealthMetric.bloodPressure,
-      time: DateTime(2026),
-      value: s,
-      secondary: d,
+      name: 'A',
+      journey: Journey.general,
+      dob: DateTime(1993, 5, 14),
+      height: 160,
     );
-    expect(bp(118, 76).status, RangeStatus.normal);
-    expect(bp(125, 95).status, RangeStatus.high);
-    expect(bp(145, 80).status, RangeStatus.high);
-    expect(bp(118, 76).displayValue, '118/76');
-  });
 
-  test('day totals sum calories and macros', () {
-    final t = DayTotals.of([
-      FoodEntry(
-        id: '1',
-        date: DateTime(2026),
-        meal: Meal.lunch,
-        name: 'Rice',
-        kcal: 300,
-        carbsG: 60,
-      ),
-      FoodEntry(
-        id: '2',
-        date: DateTime(2026),
-        meal: Meal.lunch,
-        name: 'Egg',
-        kcal: 80,
-        proteinG: 6,
-        fatG: 5,
-      ),
-    ]);
-    expect((t.kcal, t.proteinG, t.carbsG, t.fatG), (380, 6.0, 60.0, 5.0));
+    test('needs date of birth, height and weight', () {
+      expect(
+        calorieTarget(
+          Profile(id: 'y', name: 'B', journey: Journey.general),
+          60,
+          null,
+          today,
+          c,
+        ),
+        isNull,
+      );
+    });
+
+    test('adds the trimester extra', () {
+      final base = calorieTarget(p, 60, null, today, c)!;
+      final third = calorieTarget(p, 60, Trimester.third, today, c)!;
+      expect(third, greaterThan(base));
+    });
+
+    test('a clinician target wins', () {
+      p.clinicianTarget = 2100;
+      expect(calorieTarget(p, 60, Trimester.first, today, c), 2100);
+    });
   });
 }

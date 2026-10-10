@@ -120,54 +120,53 @@ class _TriggerPill extends StatelessWidget {
   final VoidCallback onTap;
 
   @override
-  Widget build(BuildContext context) => Semantics(
-    button: true,
-    expanded: expanded,
-    label: context.l10n.language,
-    child: Material(
-      color: Colors.white,
-      shape: const StadiumBorder(side: BorderSide(color: AppColors.line)),
-      child: InkWell(
-        key: const Key('language-switcher'),
-        customBorder: const StadiumBorder(),
-        onTap: onTap,
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(minHeight: 40),
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(12, 6, 8, 6),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Icon(
-                  Icons.translate_rounded,
-                  size: 18,
-                  color: AppColors.roseDeep,
-                ),
-                const SizedBox(width: 6),
-                Text(
-                  label,
-                  style: const TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w600,
-                    color: AppColors.ink,
+  Widget build(BuildContext context) {
+    final p = context.pal;
+    return Semantics(
+      button: true,
+      expanded: expanded,
+      label: context.l10n.languageSwitchLabel,
+      child: Material(
+        color: p.card,
+        shape: StadiumBorder(side: BorderSide(color: p.line)),
+        child: InkWell(
+          key: const Key('language-switcher'),
+          customBorder: const StadiumBorder(),
+          onTap: onTap,
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(minHeight: 40),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(12, 6, 8, 6),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.translate_rounded, size: 18, color: p.rose),
+                  const SizedBox(width: 6),
+                  Text(
+                    label,
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                      color: p.ink,
+                    ),
                   ),
-                ),
-                AnimatedRotation(
-                  turns: expanded ? 0.5 : 0,
-                  duration: const Duration(milliseconds: 200),
-                  child: const Icon(
-                    Icons.expand_more_rounded,
-                    size: 20,
-                    color: AppColors.muted,
+                  AnimatedRotation(
+                    turns: expanded ? 0.5 : 0,
+                    duration: const Duration(milliseconds: 200),
+                    child: Icon(
+                      Icons.expand_more_rounded,
+                      size: 20,
+                      color: p.muted,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
       ),
-    ),
-  );
+    );
+  }
 }
 
 class _BubbleOverlay extends StatelessWidget {
@@ -286,7 +285,7 @@ class _Bubble extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              context.l10n.language,
+              context.l10n.languageSwitchLabel,
               style: const TextStyle(
                 fontSize: 12.5,
                 fontWeight: FontWeight.w600,

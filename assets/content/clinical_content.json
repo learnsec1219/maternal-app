@@ -1,0 +1,554 @@
+{
+ "version": "0.1.0-demo",
+ "reviewStatus": "pending_clinical_review",
+ "reviewedBy": null,
+ "reviewedOn": null,
+ "notes": "DEMO CONTENT. Every value in this file must be reviewed and signed off by a qualified clinician before production. Vaccine items are adapted from the web prototype (US ACOG-based) and must be checked against Malaysian Ministry of Health guidance and local availability.",
+ "emergencyNumber": "999",
+ "dating": {
+  "pregnancyLengthDays": 280,
+  "secondTrimesterStartWeek": 14,
+  "thirdTrimesterStartWeek": 28,
+  "maxDaysPastDue": 21
+ },
+ "cycle": {
+  "defaultCycleLength": 28,
+  "defaultPeriodLength": 5,
+  "lutealPhaseDays": 14,
+  "fertileDaysBeforeOvulation": 5,
+  "fertileDaysAfterOvulation": 1,
+  "irregularVariationDays": 7,
+  "minCycleLength": 15,
+  "maxCycleLength": 60,
+  "cyclesUsedForAverage": 6,
+  "maxGapWithinPeriodDays": 1
+ },
+ "energy": {
+  "activityFactors": {
+   "sedentary": 1.2,
+   "light": 1.375,
+   "moderate": 1.55,
+   "active": 1.725
+  },
+  "pregnancyExtraKcal": {
+   "1": 0,
+   "2": 340,
+   "3": 452
+  }
+ },
+ "counters": {
+  "kickTapGuardSeconds": 3,
+  "contractionMinimumSeconds": 5,
+  "contractionSummaryWindowMinutes": 60
+ },
+ "ranges": [
+  {
+   "key": "systolic",
+   "low": 90,
+   "high": 139,
+   "unit": "mmHg"
+  },
+  {
+   "key": "diastolic",
+   "low": 60,
+   "high": 89,
+   "unit": "mmHg"
+  },
+  {
+   "key": "heart_rate",
+   "low": 60,
+   "high": 100,
+   "unit": "bpm"
+  },
+  {
+   "key": "glucose_fasting",
+   "low": 3.5,
+   "high": 5.3,
+   "unit": "mmol/L"
+  },
+  {
+   "key": "temperature",
+   "low": 35.5,
+   "high": 37.9,
+   "unit": "°C"
+  },
+  {
+   "key": "spo2",
+   "low": 95,
+   "high": null,
+   "unit": "%"
+  }
+ ],
+ "warningSigns": [
+  {
+   "code": "reduced_movement",
+   "journeys": [
+    "pregnancy"
+   ],
+   "title": {
+    "en": "Reduced or no baby movements",
+    "ms": "Pergerakan bayi berkurang atau tiada",
+    "zh": "胎動減少或沒有胎動",
+    "ta": "குழந்தையின் அசைவு குறைவு அல்லது இல்லை"
+   },
+   "advice": {
+    "en": "Contact your hospital labour ward or obstetric team now for a check.",
+    "ms": "Hubungi wad bersalin hospital atau pasukan obstetrik anda sekarang untuk pemeriksaan.",
+    "zh": "請立即聯絡醫院產房或您的產科團隊進行檢查。",
+    "ta": "உடனே உங்கள் மருத்துவமனை பிரசவ வார்டு அல்லது மகப்பேறு குழுவைத் தொடர்புகொண்டு பரிசோதனை செய்யுங்கள்."
+   }
+  },
+  {
+   "code": "heavy_bleeding",
+   "journeys": [
+    "pregnancy",
+    "postpartum",
+    "general",
+    "preconception"
+   ],
+   "title": {
+    "en": "Heavy vaginal bleeding",
+    "ms": "Pendarahan faraj yang banyak",
+    "zh": "陰道大量出血",
+    "ta": "அதிக யோனி இரத்தப்போக்கு"
+   },
+   "advice": {
+    "en": "Go to the nearest hospital emergency department or labour ward now.",
+    "ms": "Pergi ke jabatan kecemasan atau wad bersalin hospital yang terdekat sekarang.",
+    "zh": "請立即前往最近的醫院急診室或產房。",
+    "ta": "உடனே அருகிலுள்ள மருத்துவமனை அவசர சிகிச்சைப் பிரிவு அல்லது பிரசவ வார்டுக்குச் செல்லுங்கள்."
+   }
+  },
+  {
+   "code": "headache_vision",
+   "journeys": [
+    "pregnancy",
+    "postpartum"
+   ],
+   "title": {
+    "en": "Severe headache with blurred vision or flashing lights",
+    "ms": "Sakit kepala teruk dengan penglihatan kabur atau nampak cahaya berkelip",
+    "zh": "劇烈頭痛並伴有視力模糊或閃光",
+    "ta": "கண் மங்கல் அல்லது ஒளிர்வுடன் கடுமையான தலைவலி"
+   },
+   "advice": {
+    "en": "Seek urgent medical review today.",
+    "ms": "Dapatkan pemeriksaan perubatan segera hari ini.",
+    "zh": "請於今天盡快就醫檢查。",
+    "ta": "இன்றே அவசர மருத்துவ பரிசோதனை பெறுங்கள்."
+   }
+  },
+  {
+   "code": "sudden_swelling",
+   "journeys": [
+    "pregnancy",
+    "postpartum"
+   ],
+   "title": {
+    "en": "Sudden swelling of the face, hands or feet",
+    "ms": "Bengkak secara tiba-tiba pada muka, tangan atau kaki",
+    "zh": "臉部、手部或腳部突然腫脹",
+    "ta": "முகம், கைகள் அல்லது கால்களில் திடீர் வீக்கம்"
+   },
+   "advice": {
+    "en": "Contact your care team today for a blood pressure check.",
+    "ms": "Hubungi pasukan penjagaan anda hari ini untuk pemeriksaan tekanan darah.",
+    "zh": "請於今天聯絡您的醫療團隊檢查血壓。",
+    "ta": "இரத்த அழுத்தப் பரிசோதனைக்கு இன்றே உங்கள் மருத்துவக் குழுவைத் தொடர்புகொள்ளுங்கள்."
+   }
+  },
+  {
+   "code": "abdominal_pain",
+   "journeys": [
+    "pregnancy",
+    "postpartum",
+    "general",
+    "preconception"
+   ],
+   "title": {
+    "en": "Severe or constant abdominal pain",
+    "ms": "Sakit perut yang teruk atau berterusan",
+    "zh": "劇烈或持續的腹痛",
+    "ta": "கடுமையான அல்லது தொடர்ச்சியான வயிற்று வலி"
+   },
+   "advice": {
+    "en": "Seek urgent medical care.",
+    "ms": "Dapatkan rawatan perubatan segera.",
+    "zh": "請盡快就醫。",
+    "ta": "அவசர மருத்துவ உதவி பெறுங்கள்."
+   }
+  },
+  {
+   "code": "fluid_leak",
+   "journeys": [
+    "pregnancy"
+   ],
+   "title": {
+    "en": "Watery fluid leaking from the vagina",
+    "ms": "Cecair berair keluar dari faraj",
+    "zh": "陰道有水狀液體流出",
+    "ta": "யோனியிலிருந்து நீர் போன்ற திரவம் கசிதல்"
+   },
+   "advice": {
+    "en": "Contact your hospital labour ward now.",
+    "ms": "Hubungi wad bersalin hospital anda sekarang.",
+    "zh": "請立即聯絡醫院產房。",
+    "ta": "உடனே உங்கள் மருத்துவமனை பிரசவ வார்டைத் தொடர்புகொள்ளுங்கள்."
+   }
+  },
+  {
+   "code": "fever",
+   "journeys": [
+    "pregnancy",
+    "postpartum",
+    "general",
+    "preconception"
+   ],
+   "title": {
+    "en": "Fever or feeling very unwell",
+    "ms": "Demam atau berasa sangat tidak sihat",
+    "zh": "發燒或感到非常不適",
+    "ta": "காய்ச்சல் அல்லது மிகவும் உடல்நலக்குறைவு"
+   },
+   "advice": {
+    "en": "Contact your care team today.",
+    "ms": "Hubungi pasukan penjagaan anda hari ini.",
+    "zh": "請於今天聯絡您的醫療團隊。",
+    "ta": "இன்றே உங்கள் மருத்துவக் குழுவைத் தொடர்புகொள்ளுங்கள்."
+   }
+  },
+  {
+   "code": "breathing",
+   "journeys": [
+    "pregnancy",
+    "postpartum",
+    "general",
+    "preconception"
+   ],
+   "title": {
+    "en": "Difficulty breathing or chest pain",
+    "ms": "Sukar bernafas atau sakit dada",
+    "zh": "呼吸困難或胸痛",
+    "ta": "மூச்சுத் திணறல் அல்லது நெஞ்சு வலி"
+   },
+   "advice": {
+    "en": "Call 999 or go to the nearest emergency department now.",
+    "ms": "Hubungi 999 atau pergi ke jabatan kecemasan yang terdekat sekarang.",
+    "zh": "請立即撥打999或前往最近的急診室。",
+    "ta": "உடனே 999 ஐ அழையுங்கள் அல்லது அருகிலுள்ள அவசர சிகிச்சைப் பிரிவுக்குச் செல்லுங்கள்."
+   }
+  },
+  {
+   "code": "fainting",
+   "journeys": [
+    "pregnancy",
+    "postpartum",
+    "general",
+    "preconception"
+   ],
+   "title": {
+    "en": "Fainting or loss of consciousness",
+    "ms": "Pengsan atau hilang kesedaran",
+    "zh": "昏倒或失去意識",
+    "ta": "மயக்கம் அல்லது சுயநினைவு இழப்பு"
+   },
+   "advice": {
+    "en": "Call 999 or go to the nearest emergency department now.",
+    "ms": "Hubungi 999 atau pergi ke jabatan kecemasan yang terdekat sekarang.",
+    "zh": "請立即撥打999或前往最近的急診室。",
+    "ta": "உடனே 999 ஐ அழையுங்கள் அல்லது அருகிலுள்ள அவசர சிகிச்சைப் பிரிவுக்குச் செல்லுங்கள்."
+   }
+  }
+ ],
+ "symptoms": [
+  {
+   "code": "nausea",
+   "label": {
+    "en": "Nausea",
+    "ms": "Loya",
+    "zh": "噁心",
+    "ta": "குமட்டல்"
+   }
+  },
+  {
+   "code": "vomiting",
+   "label": {
+    "en": "Vomiting",
+    "ms": "Muntah",
+    "zh": "嘔吐",
+    "ta": "வாந்தி"
+   }
+  },
+  {
+   "code": "headache",
+   "label": {
+    "en": "Headache",
+    "ms": "Sakit kepala",
+    "zh": "頭痛",
+    "ta": "தலைவலி"
+   }
+  },
+  {
+   "code": "back_pain",
+   "label": {
+    "en": "Back pain",
+    "ms": "Sakit belakang",
+    "zh": "背痛",
+    "ta": "முதுகுவலி"
+   }
+  },
+  {
+   "code": "cramps",
+   "label": {
+    "en": "Cramps",
+    "ms": "Kekejangan perut",
+    "zh": "腹部痙攣",
+    "ta": "வயிற்றுப் பிடிப்பு"
+   }
+  },
+  {
+   "code": "fatigue",
+   "label": {
+    "en": "Tiredness",
+    "ms": "Keletihan",
+    "zh": "疲倦",
+    "ta": "சோர்வு"
+   }
+  },
+  {
+   "code": "heartburn",
+   "label": {
+    "en": "Heartburn",
+    "ms": "Pedih ulu hati",
+    "zh": "胃灼熱",
+    "ta": "நெஞ்செரிச்சல்"
+   }
+  },
+  {
+   "code": "mild_swelling",
+   "label": {
+    "en": "Mild swelling",
+    "ms": "Bengkak ringan",
+    "zh": "輕微水腫",
+    "ta": "லேசான வீக்கம்"
+   }
+  },
+  {
+   "code": "constipation",
+   "label": {
+    "en": "Constipation",
+    "ms": "Sembelit",
+    "zh": "便秘",
+    "ta": "மலச்சிக்கல்"
+   }
+  },
+  {
+   "code": "breast_tenderness",
+   "label": {
+    "en": "Breast tenderness",
+    "ms": "Payudara sakit",
+    "zh": "乳房脹痛",
+    "ta": "மார்பக வலி"
+   }
+  },
+  {
+   "code": "dizziness",
+   "label": {
+    "en": "Dizziness",
+    "ms": "Pening",
+    "zh": "頭暈",
+    "ta": "தலைச்சுற்றல்"
+   }
+  },
+  {
+   "code": "poor_sleep",
+   "label": {
+    "en": "Poor sleep",
+    "ms": "Sukar tidur",
+    "zh": "睡眠不佳",
+    "ta": "தூக்கமின்மை"
+   }
+  },
+  {
+   "code": "bloating",
+   "label": {
+    "en": "Bloating",
+    "ms": "Kembung",
+    "zh": "腹脹",
+    "ta": "வயிறு உப்புசம்"
+   }
+  },
+  {
+   "code": "acne",
+   "label": {
+    "en": "Acne",
+    "ms": "Jerawat",
+    "zh": "痘痘",
+    "ta": "முகப்பரு"
+   }
+  },
+  {
+   "code": "other",
+   "label": {
+    "en": "Other",
+    "ms": "Lain-lain",
+    "zh": "其他",
+    "ta": "மற்றவை"
+   }
+  }
+ ],
+ "vaccines": [
+  {
+   "key": "influenza",
+   "startWeek": 0,
+   "endWeek": 42,
+   "postpartum": false,
+   "name": {
+    "en": "Influenza (flu)",
+    "ms": "Influenza (selesema)",
+    "zh": "流感疫苗",
+    "ta": "இன்ஃப்ளுயன்ஸா (காய்ச்சல்)"
+   },
+   "window": {
+    "en": "Any trimester, during flu season",
+    "ms": "Mana-mana trimester, semasa musim selesema",
+    "zh": "任何孕期，流感季節期間",
+    "ta": "எந்த மூன்று மாதத்திலும், காய்ச்சல் பருவத்தில்"
+   },
+   "description": {
+    "en": "Recommended in pregnancy during flu season; earlier is better than waiting.",
+    "ms": "Disyorkan semasa hamil pada musim selesema; lebih awal lebih baik.",
+    "zh": "建議在流感季節懷孕期間接種，越早越好。",
+    "ta": "காய்ச்சல் பருவத்தில் கர்ப்ப காலத்தில் பரிந்துரைக்கப்படுகிறது; காத்திருப்பதைவிட முன்கூட்டியே போடுவது நல்லது."
+   }
+  },
+  {
+   "key": "covid19",
+   "startWeek": 0,
+   "endWeek": 42,
+   "postpartum": false,
+   "name": {
+    "en": "COVID-19",
+    "ms": "COVID-19",
+    "zh": "COVID-19 疫苗",
+    "ta": "COVID-19"
+   },
+   "window": {
+    "en": "Any trimester",
+    "ms": "Mana-mana trimester",
+    "zh": "任何孕期",
+    "ta": "எந்த மூன்று மாதத்திலும்"
+   },
+   "description": {
+    "en": "The current vaccine can be given in any trimester.",
+    "ms": "Vaksin semasa boleh diberi pada mana-mana trimester.",
+    "zh": "可於任何孕期接種最新疫苗。",
+    "ta": "தற்போதைய தடுப்பூசியை எந்த மூன்று மாதத்திலும் போடலாம்."
+   }
+  },
+  {
+   "key": "tdap",
+   "startWeek": 27,
+   "endWeek": 36,
+   "postpartum": false,
+   "name": {
+    "en": "Tdap (whooping cough)",
+    "ms": "Tdap (batuk kokol)",
+    "zh": "百日咳混合疫苗 (Tdap)",
+    "ta": "Tdap (கக்குவான் இருமல்)"
+   },
+   "window": {
+    "en": "27–36 weeks, every pregnancy",
+    "ms": "27–36 minggu, setiap kehamilan",
+    "zh": "懷孕27至36週，每次懷孕",
+    "ta": "27–36 வாரங்கள், ஒவ்வொரு கர்ப்பத்திலும்"
+   },
+   "description": {
+    "en": "One dose in each pregnancy to pass protection to the baby.",
+    "ms": "Satu dos setiap kehamilan untuk memberi perlindungan kepada bayi.",
+    "zh": "每次懷孕接種一劑，將保護傳給寶寶。",
+    "ta": "குழந்தைக்குப் பாதுகாப்பு கிடைக்க ஒவ்வொரு கர்ப்பத்திலும் ஒரு டோஸ்."
+   }
+  },
+  {
+   "key": "rsv",
+   "startWeek": 32,
+   "endWeek": 36,
+   "postpartum": false,
+   "name": {
+    "en": "RSV vaccine",
+    "ms": "Vaksin RSV",
+    "zh": "呼吸道融合病毒 (RSV) 疫苗",
+    "ta": "RSV தடுப்பூசி"
+   },
+   "window": {
+    "en": "32–36 weeks, if offered",
+    "ms": "32–36 minggu, jika ditawarkan",
+    "zh": "懷孕32至36週（如有提供）",
+    "ta": "32–36 வாரங்கள், வழங்கப்பட்டால்"
+   },
+   "description": {
+    "en": "Timing and availability depend on local guidance; ask your care team.",
+    "ms": "Masa dan ketersediaan bergantung pada garis panduan tempatan; tanya pasukan penjagaan anda.",
+    "zh": "接種時間與供應視本地指引而定，請諮詢您的醫療團隊。",
+    "ta": "நேரமும் கிடைப்பதும் உள்ளூர் வழிகாட்டுதலைப் பொறுத்தது; உங்கள் மருத்துவக் குழுவிடம் கேளுங்கள்."
+   }
+  },
+  {
+   "key": "mmr_varicella",
+   "startWeek": 0,
+   "endWeek": 0,
+   "postpartum": true,
+   "name": {
+    "en": "MMR / varicella (if not immune)",
+    "ms": "MMR / varisela (jika tiada imuniti)",
+    "zh": "麻疹腮腺炎德國麻疹／水痘疫苗（如無免疫力）",
+    "ta": "MMR / சின்னம்மை (நோயெதிர்ப்பு இல்லையெனில்)"
+   },
+   "window": {
+    "en": "After delivery",
+    "ms": "Selepas bersalin",
+    "zh": "產後",
+    "ta": "பிரசவத்திற்குப் பிறகு"
+   },
+   "description": {
+    "en": "Live vaccines are not given in pregnancy; usually offered after delivery.",
+    "ms": "Vaksin hidup tidak diberi semasa hamil; biasanya ditawarkan selepas bersalin.",
+    "zh": "懷孕期間不接種活疫苗，通常於產後提供。",
+    "ta": "உயிருள்ள தடுப்பூசிகள் கர்ப்ப காலத்தில் போடப்படுவதில்லை; பொதுவாக பிரசவத்திற்குப் பிறகு வழங்கப்படும்."
+   }
+  }
+ ],
+ "education": {
+  "kicks": {
+   "en": "Tap once each time you feel your baby move. A burst of kicks close together counts as one. If you notice fewer movements than usual, contact your care team.",
+   "ms": "Ketik sekali setiap kali anda merasa bayi bergerak. Beberapa tendangan yang berturut-turut dikira sebagai satu. Jika pergerakan kurang daripada biasa, hubungi pasukan penjagaan anda.",
+   "zh": "每次感覺到寶寶活動時點一下。連續幾下的踢動算作一次。如果胎動比平常少，請聯絡您的醫療團隊。",
+   "ta": "உங்கள் குழந்தை அசைவதை உணரும் ஒவ்வொரு முறையும் ஒருமுறை தட்டுங்கள். அடுத்தடுத்து வரும் பல உதைகள் ஒன்றாகக் கணக்கிடப்படும். வழக்கத்தைவிட அசைவுகள் குறைவாக இருந்தால், உங்கள் மருத்துவக் குழுவைத் தொடர்புகொள்ளுங்கள்."
+  },
+  "contractions": {
+   "en": "Tap when a contraction starts and again when it ends. The app shows how long they last and how far apart they are. Follow your care team's instructions on when to go to hospital.",
+   "ms": "Ketik apabila kontraksi bermula dan ketik lagi apabila ia tamat. Aplikasi menunjukkan tempoh dan jarak antara kontraksi. Ikut arahan pasukan penjagaan anda tentang bila perlu ke hospital.",
+   "zh": "宮縮開始時點一下，結束時再點一下。應用程式會顯示每次宮縮的長度和間隔。何時前往醫院，請依照您的醫療團隊的指示。",
+   "ta": "சுருக்கம் தொடங்கும்போது ஒருமுறையும் முடியும்போது மீண்டும் ஒருமுறையும் தட்டுங்கள். அவை எவ்வளவு நேரம் நீடிக்கின்றன, எவ்வளவு இடைவெளியில் வருகின்றன என்பதை ஆப் காட்டும். மருத்துவமனைக்கு எப்போது செல்ல வேண்டும் என்பதற்கு உங்கள் மருத்துவக் குழுவின் அறிவுரையைப் பின்பற்றுங்கள்."
+  },
+  "calories": {
+   "en": "This target is an estimate from your profile, not a prescription. Your doctor or dietitian can set a target for you.",
+   "ms": "Sasaran ini ialah anggaran daripada profil anda, bukan preskripsi. Doktor atau pakar pemakanan anda boleh menetapkan sasaran untuk anda.",
+   "zh": "此目標是根據您的個人資料估算，並非醫療處方。您的醫生或營養師可以為您設定目標。",
+   "ta": "இந்த இலக்கு உங்கள் சுயவிவரத்திலிருந்து கணக்கிடப்பட்ட மதிப்பீடு மட்டுமே, மருத்துவப் பரிந்துரை அல்ல. உங்கள் மருத்துவர் அல்லது உணவியல் நிபுணர் உங்களுக்கான இலக்கை அமைக்கலாம்."
+  },
+  "cycle": {
+   "en": "Predictions are estimates based on the periods you log. They are not a reliable method of contraception or a guarantee of fertility.",
+   "ms": "Ramalan ialah anggaran berdasarkan haid yang anda rekodkan. Ia bukan kaedah pencegahan kehamilan yang boleh dipercayai atau jaminan kesuburan.",
+   "zh": "預測是根據您記錄的月經估算，並不是可靠的避孕方法，也不保證受孕。",
+   "ta": "கணிப்புகள் நீங்கள் பதிவு செய்யும் மாதவிடாய்களை அடிப்படையாகக் கொண்ட மதிப்பீடுகள் மட்டுமே. அவை நம்பகமான கருத்தடை முறையோ கருவுறுதலுக்கான உத்தரவாதமோ அல்ல."
+  },
+  "growth": {
+   "en": "These numbers come from your scan reports. Your doctor will explain what they mean for you and your baby.",
+   "ms": "Nombor ini diambil daripada laporan imbasan anda. Doktor anda akan menerangkan maksudnya untuk anda dan bayi.",
+   "zh": "這些數值來自您的超聲波報告。您的醫生會向您解釋它們對您和寶寶的意義。",
+   "ta": "இந்த எண்கள் உங்கள் ஸ்கேன் அறிக்கைகளிலிருந்து வருகின்றன. உங்களுக்கும் உங்கள் குழந்தைக்கும் இவற்றின் பொருள் என்ன என்பதை உங்கள் மருத்துவர் விளக்குவார்."
+  }
+ }
+}

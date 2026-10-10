@@ -1,34 +1,515 @@
 {
   "@@locale": "en",
-  "appTitle": "Maternal",
-  "navHome": "Home",
-  "navCalendar": "Calendar",
-  "navCreate": "Create",
-  "navCalories": "Calories",
-  "navProfile": "Profile",
-  "createTitle": "What would you like to add?",
-  "createHealthLog": "Health log",
-  "createSymptoms": "Symptoms",
-  "createPeriod": "Period",
-  "createMeal": "Meal",
-  "createPregnancyRecord": "Pregnancy record",
-  "createVaccine": "Vaccine",
-  "createAppointment": "Appointment",
-  "createDocument": "Medical document",
-  "comingSoon": "Coming soon. This part is planned for a later step.",
-  "soonBadge": "Soon",
-  "homeGreeting": "Hello, {name}",
-  "@homeGreeting": {
+  "aboutRegulatory": "Development build for clinical workflow design. Not a registered medical device under the Medical Device Act 2012 (Act 737).",
+  "accessLogExplainer": "Every time you open a patient record it is logged. Patients and administrators can review this.",
+  "accessLogTitle": "My access log",
+  "accessLogViewed": "Viewed record {id}",
+  "@accessLogViewed": {
+    "placeholders": {
+      "id": {
+        "type": "String"
+      }
+    }
+  },
+  "actionAccept": "Accept",
+  "actionAdd": "Add",
+  "actionBabyDelivered": "Baby delivered",
+  "actionBack": "Back",
+  "actionCancel": "Cancel",
+  "actionConfirm": "Confirm",
+  "actionConnect": "Connect",
+  "actionContinue": "Continue",
+  "actionDecline": "Decline",
+  "actionDecrease": "Decrease",
+  "actionDisconnect": "Disconnect",
+  "actionEndPostpartum": "Move to general care",
+  "actionFinish": "Finish",
+  "actionGoHome": "Go to Home",
+  "actionImPregnant": "I'm pregnant",
+  "actionIncrease": "Increase",
+  "actionNextDay": "Next day",
+  "actionNextMonth": "Next month",
+  "actionNotNow": "Not now",
+  "actionOk": "OK",
+  "actionPreviousDay": "Previous day",
+  "actionPreviousMonth": "Previous month",
+  "actionSave": "Save",
+  "actionSendCode": "Send code",
+  "actionSignOut": "Sign out",
+  "actionToday": "Back to today",
+  "actionUnderstood": "I understand",
+  "actionUndoLast": "Undo last",
+  "actionVerify": "Verify",
+  "activityActive": "Very active",
+  "activityEmpty": "Your recent records will appear here.",
+  "activityLight": "Lightly active",
+  "activityModerate": "Moderately active",
+  "activitySedentary": "Mostly sitting",
+  "addAppointmentTitle": "Add appointment",
+  "addDocumentTitle": "Add document",
+  "addFoodTitle": "Add food",
+  "addHealthLogTitle": "Add health log",
+  "addMilestoneTitle": "Add milestone",
+  "addNoteTitle": "Add a note",
+  "addUltrasoundTitle": "Add scan results",
+  "ageYears": "{age} years",
+  "@ageYears": {
+    "placeholders": {
+      "age": {
+        "type": "int"
+      }
+    }
+  },
+  "alertCount": "{count, plural, =1{1 alert} other{{count} alerts}}",
+  "@alertCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "alertWarningSign": "Warning sign: {name}",
+  "@alertWarningSign": {
     "placeholders": {
       "name": {
         "type": "String"
       }
     }
   },
-  "homeGreetingNoName": "Hello",
-  "pregnancyOverview": "Pregnancy overview",
-  "weeksDays": "{weeks} weeks {days} days",
-  "@weeksDays": {
+  "alertsExplainer": "Readings outside the configured ranges and warning signs logged in the last {days} days.",
+  "@alertsExplainer": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "alertsNone": "Nothing needs review right now.",
+  "alertsToReview": "Alerts to review",
+  "answerNo": "No",
+  "answerYes": "Yes",
+  "appName": "Maternal Care",
+  "appearanceDark": "Dark",
+  "appearanceExplainer": "Light mode is the default. Choose Dark for night use, or follow your phone setting.",
+  "appearanceLight": "Light",
+  "appearanceSystem": "Same as phone",
+  "appointmentDefaultPurpose": "Appointment",
+  "appointmentsNoneToday": "No appointments today.",
+  "appointmentsNoneUpcoming": "No upcoming appointments.",
+  "appointmentsTitle": "Appointments",
+  "assistantHomeHint": "AI answers in English, BM, 中文 or தமிழ். Educational, not a diagnosis.",
+  "assistantInputHint": "Type your question",
+  "assistantLanguage": "Answer in",
+  "assistantNotConnected": "The AI assistant is not connected in this demo build, so it cannot answer yet. For anything urgent, use the warning signs in Symptoms or call your care team.",
+  "assistantSend": "Send",
+  "assistantTitle": "Ask a question",
+  "assistantUseDetails": "Use my pregnancy details",
+  "assistantUseDetailsHelp": "Off: nothing from your records is sent. On: only your stage (for example 32 weeks) is shared, never your name.",
+  "atGestation": "at {ga}",
+  "@atGestation": {
+    "placeholders": {
+      "ga": {
+        "type": "String"
+      }
+    }
+  },
+  "authAccountNotFound": "No account found. Create an account instead.",
+  "authInvalidCode": "That code is not right. Please check and try again.",
+  "authInvalidIdentifier": "Please enter a valid phone number or email.",
+  "babiesMore": "More",
+  "babiesSingle": "Single",
+  "babiesTriplets": "Triplets",
+  "babiesTwins": "Twins",
+  "babyParameters": "Baby's measurements",
+  "bluetoothBody": "Connect compatible health and wearable devices, such as blood pressure monitors.",
+  "bluetoothTitle": "Bluetooth devices",
+  "callDoctor": "Call {name}",
+  "@callDoctor": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "callEmergency": "Call {number}",
+  "@callEmergency": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "callManually": "Could not open the dialer. Please call {number}.",
+  "@callManually": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "calorieAnalysis": "On the {days} days you logged, you ate {average} kcal on average, about {percent}% of your target. Ask your care team what is right for you.",
+  "@calorieAnalysis": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "average": {
+        "type": "String"
+      },
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "calorieAnalysisNoTarget": "On the {days} days you logged, you ate {average} kcal on average.",
+  "@calorieAnalysisNoTarget": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      },
+      "average": {
+        "type": "String"
+      }
+    }
+  },
+  "calorieAnalysisTooFew": "Log at least three days to see a summary.",
+  "calorieChartSummary": "Calories per day for the last {range} days; {logged} days logged.",
+  "@calorieChartSummary": {
+    "placeholders": {
+      "range": {
+        "type": "int"
+      },
+      "logged": {
+        "type": "int"
+      }
+    }
+  },
+  "calorieHistory": "History",
+  "calorieNoData": "No food logged in this period. Start logging food or connect your watch.",
+  "calorieNoTargetBody": "Add your date of birth, height and weight to see an estimated daily target.",
+  "calorieNoTargetTitle": "No target yet",
+  "calorieTarget": "Daily target",
+  "careTeamEmpty": "No doctors linked yet.",
+  "careTeamIntro": "Doctors here can see the records you share. Remove access at any time.",
+  "channelEmail": "Email",
+  "channelPhone": "Phone",
+  "chartBandNote": "The shaded band is the typical range from your care team's settings.",
+  "chartSummary": "Chart of {name}: {count} readings, latest {latest}.",
+  "@chartSummary": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      },
+      "latest": {
+        "type": "String"
+      }
+    }
+  },
+  "chartTargetLineNote": "The dashed line is your daily target.",
+  "clinicalSummary": "Clinical summary",
+  "colGestation": "Gestation",
+  "colScan": "Scan",
+  "contentPendingReview": "This schedule is demo content pending review by a qualified clinician against Malaysian guidance. Always follow your care team.",
+  "contentVersion": "Clinical content version {version}",
+  "@contentVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "contractionAvgDuration": "Average length",
+  "contractionAvgInterval": "Average time apart",
+  "contractionDuration": "Lasted {duration}",
+  "@contractionDuration": {
+    "placeholders": {
+      "duration": {
+        "type": "String"
+      }
+    }
+  },
+  "contractionEmpty": "Contractions you time will appear here.",
+  "contractionGap": "{gap} after the previous one",
+  "@contractionGap": {
+    "placeholders": {
+      "gap": {
+        "type": "String"
+      }
+    }
+  },
+  "contractionHistory": "History",
+  "contractionLastHour": "{count, plural, =0{No contractions in the last hour} =1{1 contraction in the last hour} other{{count} contractions in the last hour}}",
+  "@contractionLastHour": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "contractionStart": "Contraction started",
+  "contractionStop": "Contraction ended",
+  "contractionTapToStop": "Tap when it ends",
+  "contractionTitle": "Contraction timer",
+  "contractionTooShort": "That was only a few seconds, so it was not saved.",
+  "createAppointment": "Appointment",
+  "createAskAi": "Ask AI",
+  "createContractions": "Contractions",
+  "createDocument": "Document",
+  "createFood": "Food",
+  "createGroupCare": "Care",
+  "createGroupHealth": "Health",
+  "createGroupNutrition": "Nutrition",
+  "createGroupPregnancy": "Pregnancy",
+  "createHealthLog": "Health log",
+  "createKickCounter": "Kick counter",
+  "createMedication": "Medication",
+  "createMilestone": "Milestone",
+  "createPeriod": "Period",
+  "createSymptoms": "Symptoms",
+  "createTitle": "What would you like to add?",
+  "createUltrasound": "Scan results",
+  "createVaccine": "Vaccine",
+  "createWater": "Water",
+  "cycleAverageLength": "Cycle about {days} days",
+  "@cycleAverageLength": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "cycleBasedOnTypical": "Based on a typical cycle",
+  "cycleDaysLate": "{days, plural, =1{1 day later than expected} other{{days} days later than expected}}",
+  "@cycleDaysLate": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "cycleFertileWindow": "Estimated fertile window: {start} – {end}",
+  "@cycleFertileWindow": {
+    "placeholders": {
+      "start": {
+        "type": "String"
+      },
+      "end": {
+        "type": "String"
+      }
+    }
+  },
+  "cycleInDays": "{days, plural, =0{Expected today} =1{In 1 day} other{In {days} days}}",
+  "@cycleInDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "cycleIrregularWarning": "Your cycles have varied a lot, so these estimates may be less accurate.",
+  "cycleLogToday": "Log period",
+  "cycleNextPeriod": "Next period",
+  "cycleNoData": "Log the days of your period. After two periods we can estimate your next one.",
+  "cycleNoEstimate": "Log your period to see an estimate.",
+  "cycleOvulation": "Estimated ovulation: {date}",
+  "@cycleOvulation": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "cyclePausedInPregnancy": "Cycle predictions are paused during pregnancy. Your period history is kept.",
+  "cyclePeriodLength": "Period about {days} days",
+  "@cyclePeriodLength": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "cycleStale": "Your expected period is more than a cycle late. Log your latest period to update the estimates.",
+  "dayAppointments": "Appointments",
+  "dayHealthLogs": "Health logs",
+  "dayNotes": "Notes",
+  "dayPeriod": "Period",
+  "daySymptoms": "Symptoms",
+  "daysPastDue": "{days, plural, =1{1 day past the due date} other{{days} days past the due date}}",
+  "@daysPastDue": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "daysToGo": "{days, plural, =0{Due today} =1{1 day to go} other{{days} days to go}}",
+  "@daysToGo": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "deliveredConfirmBody": "We will close this pregnancy on {date} and start postpartum care. Your pregnancy records stay in your history.",
+  "@deliveredConfirmBody": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "deliveredConfirmTitle": "Congratulations!",
+  "deliveredOn": "Delivered on {date}",
+  "@deliveredOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "deliveredSaved": "Postpartum care started.",
+  "demoModeBody": "You are seeing clearly labelled demo data. Nothing is sent to a server, and records reset when the app restarts.",
+  "demoModeTitle": "Demo mode",
+  "demoUseCyclePatient": "Aina (cycle)",
+  "demoUseDoctor": "Dr. Chua (doctor)",
+  "demoUsePatient": "Gwen (pregnant)",
+  "devicesDemoNote": "This build uses demo devices and demo readings. Real Health Connect and Bluetooth sync is added in the wearables stage.",
+  "devicesTitle": "Connected devices",
+  "disclaimer": "This app supports, but does not replace, care from your doctor. It does not diagnose. Clinical content is pending review by a qualified clinician.",
+  "docBloodTest": "Blood test",
+  "docHospital": "Hospital document",
+  "docOther": "Other",
+  "docPrescription": "Prescription",
+  "docUltrasound": "Ultrasound",
+  "docVaccination": "Vaccination record",
+  "doctorGreeting": "Good day, {name}",
+  "@doctorGreeting": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "doctorNavDashboard": "Dashboard",
+  "doctorNavPatients": "Patients",
+  "doctorPendingBody": "An administrator is checking your MMC registration. You will be able to see linked patients once it is approved.",
+  "doctorPendingTitle": "Waiting for verification",
+  "documentSearchEmpty": "No documents match.",
+  "documentSearchHint": "Search titles and text in documents",
+  "documentStorageNote": "In this demo the file stays on your phone. In the full app it is encrypted and stored privately, and only your linked doctors can open it.",
+  "documentsEmpty": "No documents yet.",
+  "documentsTitle": "Medical documents",
+  "dueDateGaPreview": "That means you are {ga} today.",
+  "@dueDateGaPreview": {
+    "placeholders": {
+      "ga": {
+        "type": "String"
+      }
+    }
+  },
+  "dueDateHelper": "From your doctor or scan report.",
+  "dueDateInvalidBody": "The saved due date ({date}) does not match an ongoing pregnancy, so we are not showing weeks or a countdown.",
+  "@dueDateInvalidBody": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "dueDateInvalidTitle": "Please check your due date",
+  "dueDateTooFarFuture": "This date is more than 40 weeks away. Please check it.",
+  "dueDateTooFarPast": "This date is too far in the past for an ongoing pregnancy. Please check it.",
+  "dueOn": "Due {date}",
+  "@dueOn": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "emergencyNumberNote": "In an emergency in Malaysia, call {number}.",
+  "@emergencyNumberNote": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "errorEnterNumber": "Please enter a number.",
+  "errorOutOfRange": "Please enter a value between {min} and {max}.",
+  "@errorOutOfRange": {
+    "placeholders": {
+      "min": {
+        "type": "String"
+      },
+      "max": {
+        "type": "String"
+      }
+    }
+  },
+  "errorRequired": "Please fill this in.",
+  "estimateLabel": "Estimate",
+  "fetalAc": "Abdominal circumference",
+  "fetalAfi": "Amniotic fluid index",
+  "fetalBpd": "Biparietal diameter",
+  "fetalCrl": "Crown-rump length",
+  "fetalEfw": "Estimated weight",
+  "fetalFhr": "Fetal heart rate",
+  "fetalFl": "Femur length",
+  "fetalHc": "Head circumference",
+  "fetalNt": "Nuchal translucency",
+  "fieldActivityLevel": "Activity level",
+  "fieldAllergies": "Allergies",
+  "fieldBloodGroup": "Blood group",
+  "fieldCalories": "Calories",
+  "fieldCategory": "Category",
+  "fieldClinic": "Clinic or hospital",
+  "fieldClinicHospital": "Clinic or hospital",
+  "fieldDate": "Date",
+  "fieldDateOfBirth": "Date of birth",
+  "fieldDescription": "Description",
+  "fieldDiastolic": "Diastolic (lower)",
+  "fieldDoctor": "Doctor",
+  "fieldDocumentDate": "Date on the document",
+  "fieldDueDate": "Expected due date",
+  "fieldEmail": "Email",
+  "fieldFlow": "Flow",
+  "fieldFoodName": "Food or drink",
+  "fieldFullName": "Full name",
+  "fieldGlucoseContext": "When was it measured?",
+  "fieldHeight": "Height",
+  "fieldMeal": "Meal",
+  "fieldMeasurement": "What are you recording?",
+  "fieldMedicalHistory": "Medical history",
+  "fieldMilestone": "Milestone",
+  "fieldMmcHelper": "Checked by an administrator before you can see patient data.",
+  "fieldMmcNumber": "MMC registration number",
+  "fieldNote": "Note",
+  "fieldNotesOptional": "Notes (optional)",
+  "fieldNumberOfBabies": "Number of babies",
+  "fieldOtp": "One-time code",
+  "fieldPhone": "Phone number",
+  "fieldPhoneOrEmail": "Phone or email",
+  "fieldPortion": "Portion",
+  "fieldPrePregnancyWeight": "Pre-pregnancy weight",
+  "fieldPreferredLanguage": "Preferred language",
+  "fieldPurpose": "Purpose",
+  "fieldScanType": "Scan type",
+  "fieldSeverity": "How strong?",
+  "fieldSystolic": "Systolic (upper)",
+  "fieldTime": "Time",
+  "fieldTitle": "Title",
+  "filterPending": "Request",
+  "flowHeavy": "Heavy",
+  "flowLight": "Light",
+  "flowMedium": "Medium",
+  "flowNone": "None",
+  "flowSpotting": "Spotting",
+  "gaWeeksDays": "{weeks, plural, =1{1 week} other{{weeks} weeks}} {days, plural, =0{0 days} =1{1 day} other{{days} days}}",
+  "@gaWeeksDays": {
     "placeholders": {
       "weeks": {
         "type": "int"
@@ -38,253 +519,490 @@
       }
     }
   },
-  "dueDateLabel": "Due date {date}",
-  "@dueDateLabel": {
+  "glucoseAfterMeal": "After a meal",
+  "glucoseFasting": "Fasting",
+  "glucoseRandom": "Other time",
+  "gravidaPara": "Gravida / para",
+  "growthCompareScans": "Compare scans",
+  "growthNoScans": "No scans recorded yet.",
+  "healthConnectBody": "Bring in steps, heart rate, sleep and other data your phone or watch already records.",
+  "healthConnectRationale": "We read only the data types you allow, and only after you agree. You can disconnect at any time.",
+  "healthConnectTitle": "Health Connect",
+  "homeGreeting": "Hi, {name}",
+  "@homeGreeting": {
     "placeholders": {
-      "date": {
+      "name": {
         "type": "String"
       }
     }
   },
-  "daysToGo": "{count, plural, =0{Due today} =1{1 day to go} other{{count} days to go}}",
-  "@daysToGo": {
+  "homeNextAppointment": "Upcoming appointment",
+  "homeRecentActivity": "Latest health activity",
+  "homeTabBaby": "Baby",
+  "homeTabMother": "Mother",
+  "homeTodaysHealth": "Today's health",
+  "homeTodaysTasks": "Today's tasks",
+  "intimacyPrivateNote": "Private: only you can see this unless you choose to share it in Privacy.",
+  "journeyGeneral": "Women's health",
+  "journeyPostpartum": "Postpartum",
+  "journeyPregnancy": "Pregnant",
+  "kcalBurntNotConnected": "Calories burnt: connect a watch or Health Connect",
+  "kcalConsumed": "eaten",
+  "kcalOver": "{kcal} kcal over target",
+  "@kcalOver": {
+    "placeholders": {
+      "kcal": {
+        "type": "String"
+      }
+    }
+  },
+  "kcalRemaining": "{kcal} kcal remaining",
+  "@kcalRemaining": {
+    "placeholders": {
+      "kcal": {
+        "type": "String"
+      }
+    }
+  },
+  "kickCounterTitle": "Kick counter",
+  "kickGuarded": "Counted as the same movement as your last tap.",
+  "kickTapButton": "Tap for each movement",
+  "kicksChartSummary": "Bar chart of movements per hour today. Total {count}.",
+  "@kicksChartSummary": {
     "placeholders": {
       "count": {
         "type": "int"
       }
     }
   },
-  "daysPastDue": "{count, plural, =1{1 day past due date} other{{count} days past due date}}",
-  "@daysPastDue": {
+  "kicksCount": "{count}",
+  "@kicksCount": {
     "placeholders": {
       "count": {
         "type": "int"
       }
     }
   },
+  "kicksPastDays": "Previous days",
+  "kicksPerHourTitle": "Movements per hour today",
+  "kicksTodayCount": "{count, plural, =0{No movements counted today} =1{1 movement today} other{{count} movements today}}",
+  "@kicksTodayCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "languageSwitchLabel": "App language",
+  "lastKickAt": "Last movement at {time}",
+  "@lastKickAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "lastNDays": "{days} days",
+  "@lastNDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "legendAppointment": "Appointment",
+  "legendLogged": "Health log",
+  "legendMedication": "Medication taken",
+  "legendPeriod": "Period",
+  "linkActive": "Can see your shared records",
+  "linkPending": "Waiting for the doctor to accept",
+  "loginChangeIdentifier": "Use a different phone or email",
+  "loginIntro": "Enter your phone number or email. We will send you a one-time code.",
+  "loginRecoveryHint": "Can't receive codes on this phone or email? Contact your clinic to recover your account.",
+  "loginTitle": "Sign in",
+  "macroCarbs": "Carbs",
+  "macroFat": "Fat",
+  "macroProtein": "Protein",
+  "macroSummary": "P {protein} g · C {carbs} g · F {fat} g",
+  "@macroSummary": {
+    "placeholders": {
+      "protein": {
+        "type": "String"
+      },
+      "carbs": {
+        "type": "String"
+      },
+      "fat": {
+        "type": "String"
+      }
+    }
+  },
+  "mealBreakfast": "Breakfast",
+  "mealDinner": "Dinner",
+  "mealDrinks": "Drinks",
+  "mealLunch": "Lunch",
+  "mealSnacks": "Snacks",
+  "medicationSafetyNote": "Only add medicines as prescribed by your doctor. This list is a reminder, not medical advice.",
+  "medicationsNoneToday": "No doses scheduled today.",
+  "medicationsTitle": "Medications",
+  "medicationsToday": "Today",
+  "menuAbout": "About",
+  "menuAppearance": "Appearance",
+  "menuCareTeam": "My care team",
+  "menuEmergencyContact": "Emergency contact",
+  "menuNotifications": "Notifications",
+  "menuPersonalInfo": "Personal information",
+  "menuPregnancyInfo": "Pregnancy information",
+  "menuPrivacy": "Privacy and data",
+  "milestoneHint": "e.g. Felt first kicks",
+  "moodGood": "Good",
+  "moodGreat": "Great",
+  "moodLow": "Low",
+  "moodOkay": "Okay",
+  "moodVeryLow": "Very low",
+  "navCalendar": "Calendar",
+  "navCalories": "Calories",
+  "navCreate": "Create",
+  "navHome": "Home",
+  "navProfile": "Profile",
+  "noData": "No data yet",
+  "noDataTapToAdd": "No data yet. Tap to add.",
+  "noReadingsInPeriod": "No readings in this period.",
+  "noReadingsYet": "No readings yet.",
+  "nothingLogged": "Nothing recorded.",
+  "notifAppointments": "Appointments",
+  "notifDoctorMessages": "Messages from my doctor",
+  "notifHealthLogs": "Health log reminders",
+  "notifLockScreenDetails": "Show details on lock screen",
+  "notifLockScreenHelp": "Off by default to protect your privacy.",
+  "notifMedication": "Medication",
+  "notifMilestones": "Pregnancy milestones",
+  "notifVaccines": "Vaccines",
+  "notificationsRationale": "We use notifications to remind you about appointments, health logs and important pregnancy milestones.",
+  "obsActivity": "Steps",
+  "obsBloodGlucose": "Blood glucose",
+  "obsBloodPressure": "Blood pressure",
+  "obsHeartRate": "Heart rate",
+  "obsMood": "Mood",
+  "obsSleep": "Sleep",
+  "obsSpo2": "Oxygen (SpO2)",
+  "obsTemperature": "Temperature",
+  "obsWater": "Water",
+  "obsWeight": "Weight",
+  "onboardingBodySubtitle": "Used for weight and calorie estimates. You can change it later.",
+  "onboardingBodyTitle": "Your body",
+  "onboardingDemoCode": "Demo build: use code {code}.",
+  "@onboardingDemoCode": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "onboardingDoctorDoneSubtitle": "An administrator will verify your registration before you can see any patient data.",
+  "onboardingDoctorDoneTitle": "Almost there",
+  "onboardingDoneSubtitle": "Everything you record from now on is kept together in one place.",
+  "onboardingDoneTitle": "Your profile is ready",
+  "onboardingNotPregnantInfo": "We will set up cycle tracking and general women's health. You can start a pregnancy later from your profile.",
+  "onboardingPersonalSubtitle": "This helps us personalize your care.",
+  "onboardingPersonalTitle": "About you",
+  "onboardingPregnancySubtitle": "This shapes your home screen. You can change it any time.",
+  "onboardingPregnancyTitle": "Are you currently pregnant?",
+  "onboardingRoleSubtitle": "Choose one. You can only see what your role allows.",
+  "onboardingRoleTitle": "Who is using the app?",
+  "onboardingStepOf": "Step {current} of {total}",
+  "@onboardingStepOf": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "onboardingVerifySubtitle": "Choose phone or email and we will send a one-time code.",
+  "onboardingVerifyTitle": "Verify your account",
+  "otpSentTo": "Code sent to {destination}",
+  "@otpSentTo": {
+    "placeholders": {
+      "destination": {
+        "type": "String"
+      }
+    }
+  },
+  "outsideRangeBody": "Your reading is saved. It is outside the typical range in your care team's settings. If you feel unwell or notice any warning signs, contact your care team. This is not a diagnosis.",
+  "outsideRangeTitle": "Reading outside the typical range",
+  "painMild": "Mild",
+  "painModerate": "Moderate",
+  "painSevere": "Severe",
+  "past": "Past",
+  "patientId": "Patient ID",
+  "patientSearchEmpty": "No patients match.",
+  "patientSearchHint": "Search name, ID, phone or due date",
+  "percentileFromReport": "Percentile {value} (from report)",
+  "@percentileFromReport": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "periodDayTitle": "Period and cycle log",
+  "permissionsBody": "The app asks for notifications, Bluetooth, camera or photos only when you first use a feature that needs them. You can change these at any time in your phone settings.",
+  "permissionsTitle": "Permissions",
+  "portionHint": "e.g. 1 plate, 250 ml",
+  "postpartumSince": "{weeks} weeks {days} days since delivery",
+  "@postpartumSince": {
+    "placeholders": {
+      "weeks": {
+        "type": "int"
+      },
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "pregnancyStartInfo": "Saving will start a new pregnancy in your record. Your earlier history stays.",
+  "privacyIntro": "Your health records belong to you. Only doctors you link with can see them, and only the parts you choose to share.",
+  "purposeHint": "e.g. Antenatal check",
+  "rangeAbove": "Above range",
+  "rangeBelow": "Below range",
+  "rangeWithin": "In range",
+  "readingsTitle": "Readings",
+  "recentFoods": "Recent foods",
+  "reminderAppointmentToday": "Your appointment ({purpose}) is today at {time}.",
+  "@reminderAppointmentToday": {
+    "placeholders": {
+      "purpose": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "reminderAppointmentTomorrow": "Your appointment ({purpose}) is tomorrow at {time}.",
+  "@reminderAppointmentTomorrow": {
+    "placeholders": {
+      "purpose": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "reminderLogBloodPressure": "Remember to record today's blood pressure.",
+  "reminderMedication": "{count, plural, =1{1 dose still to take today.} other{{count} doses still to take today.}}",
+  "@reminderMedication": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "reminderVaccineDue": "Your next vaccination may be due: {name}. Check with your care team.",
+  "@reminderVaccineDue": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "remindersEmpty": "No reminders right now.",
+  "remindersPushNote": "Phone notifications use general wording, such as \"You have a new reminder\", so health details never show on your lock screen.",
+  "remindersTitle": "Reminders",
+  "riskFactors": "Risk factors",
+  "roleDoctor": "Doctor / Admin",
+  "roleDoctorHint": "Review your patients after verification",
+  "rolePatient": "Patient",
+  "rolePatientHint": "Track pregnancy, cycle and health",
+  "savedMessage": "Saved",
+  "scanTypeDefault": "Ultrasound",
+  "scanTypeHint": "e.g. Growth scan",
+  "shareCycle": "Period and cycle",
+  "shareDocuments": "Medical documents",
+  "shareIntimacy": "Sexual activity",
+  "shareNutrition": "Food and calories",
+  "sharePregnancy": "Pregnancy and scans",
+  "shareVitals": "Health logs and vital signs",
+  "sharingTitle": "Shared with my doctors",
+  "signOutConfirm": "Sign out of this device?",
+  "ssoContinueWith": "Continue with {provider}",
+  "@ssoContinueWith": {
+    "placeholders": {
+      "provider": {
+        "type": "String"
+      }
+    }
+  },
+  "ssoDemoBody": "{provider} sign-in is not set up in this demo build. In the real app this opens the {provider} sign-in page. Choose a demo account:",
+  "@ssoDemoBody": {
+    "placeholders": {
+      "provider": {
+        "type": "String"
+      }
+    }
+  },
+  "ssoDemoNewPerson": "New person (creates an account)",
+  "ssoDemoTitle": "Demo: {provider} sign-in",
+  "@ssoDemoTitle": {
+    "placeholders": {
+      "provider": {
+        "type": "String"
+      }
+    }
+  },
+  "ssoNote": "We only receive your name and email. Your health records stay in this app.",
+  "ssoOr": "or",
+  "statAlerts": "Alerts to review",
+  "statAverage": "Average",
+  "statHighest": "Highest",
+  "statLowest": "Lowest",
+  "statNewRequests": "New patient requests",
+  "statTodaysAppointments": "Today's appointments",
+  "statTotalPatients": "Patients",
+  "statusConnected": "Connected",
+  "statusNotConnected": "Not connected",
+  "symptomLogged": "Symptom",
+  "symptomsEmpty": "No symptoms recorded.",
+  "symptomsHistoryTitle": "Recent symptoms",
+  "symptomsLogTitle": "Log symptoms",
+  "symptomsTitle": "Symptoms",
+  "syncedReadings": "{count, plural, =0{No new readings} =1{1 reading synced} other{{count} readings synced}}",
+  "@syncedReadings": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "tabCycle": "Menstrual cycle",
+  "tabGrowth": "Growth",
+  "tabPregnancyTimeline": "Pregnancy",
+  "tabSummary": "Summary",
+  "tabTimeline": "Timeline",
+  "tabVitals": "Vitals",
+  "targetSetByClinician": "Set by your care team",
+  "taskCountKicks": "Count baby movements",
+  "taskDone": "Done",
+  "taskDrinkWater": "Drink water",
+  "taskNotDone": "Not done",
+  "taskTakeMedication": "Take {name} {dose}",
+  "@taskTakeMedication": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "dose": {
+        "type": "String"
+      }
+    }
+  },
+  "timelineDueDate": "Due date",
+  "timelineStart": "Pregnancy dated from",
+  "timelineTrimesterStarts": "{name} begins",
+  "@timelineTrimesterStarts": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "today": "Today",
   "trimesterFirst": "First trimester",
+  "trimesterLabel": "Trimester",
   "trimesterSecond": "Second trimester",
   "trimesterThird": "Third trimester",
-  "babiesCount": "{count, select, 1{Single} 2{Twins} 3{Triplets} other{{count} babies}}",
-  "@babiesCount": {
+  "ultrasoundCopyHint": "Copy the numbers from your scan report. Leave blank anything the report does not include.",
+  "ultrasoundNeedOneValue": "Please enter at least one measurement.",
+  "unitBpm": "bpm",
+  "unitHours": "h",
+  "unitSteps": "steps",
+  "unitWeeksShort": "weeks",
+  "upcoming": "Upcoming",
+  "uploadedBy": "Added by {name}",
+  "@uploadedBy": {
     "placeholders": {
-      "count": {
+      "name": {
         "type": "String"
       }
     }
   },
-  "setDueDatePrompt": "Add your due date in Profile to see your pregnancy progress.",
-  "cycleOverview": "Cycle overview",
-  "nextPeriodEstimate": "Next period (estimate): {date}",
-  "@nextPeriodEstimate": {
+  "vaccinationPurpose": "Vaccination: {name}",
+  "@vaccinationPurpose": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "vaccineAlreadyHad": "I have already had it – record it",
+  "vaccineBook": "Book vaccination appointment",
+  "vaccineBookHint": "Tick the box above to book.",
+  "vaccineConfirmRead": "I have read what this vaccine does and its price.",
+  "vaccineDemoPrice": "Demo price, for illustration only.",
+  "vaccineDoctorConfirms": "Your doctor will confirm at the appointment whether this vaccine is right for you.",
+  "vaccineDueNow": "Due now",
+  "vaccineGiven": "Given",
+  "vaccineGivenOn": "Given on {date}",
+  "@vaccineGivenOn": {
     "placeholders": {
       "date": {
         "type": "String"
       }
     }
   },
-  "noCycleData": "Log a period from Create to start cycle estimates.",
-  "todaysHealth": "Today's health",
-  "noData": "No data",
-  "metricWeight": "Weight",
-  "metricBloodPressure": "Blood pressure",
-  "metricHeartRate": "Heart rate",
-  "metricGlucose": "Blood glucose",
-  "metricTemperature": "Temperature",
-  "metricSpo2": "SpO2",
-  "metricSleep": "Sleep",
-  "metricWater": "Water",
-  "metricFetalMovement": "Fetal movements",
-  "metricSymptom": "Symptom",
-  "statusLow": "Low",
-  "statusNormal": "Typical",
-  "statusHigh": "High",
-  "todaysTasks": "Today's tasks",
-  "taskLogBp": "Record blood pressure",
-  "taskKicks": "Record fetal movements",
-  "taskWater": "Drink 8 glasses of water",
-  "taskLogMeal": "Log your meals",
-  "recentActivity": "Latest health activity",
-  "noActivity": "Nothing logged yet. Tap Create to add your first entry.",
-  "warningSigns": "Warning signs",
-  "warningSignsIntro": "Seek medical advice if you notice any of these. This app does not diagnose.",
-  "disclaimer": "Prototype for clinical workflow design. Not a registered medical device.",
-  "healthLogTitle": "Add health log",
-  "measurement": "Measurement",
-  "systolic": "Systolic (mmHg)",
-  "diastolic": "Diastolic (mmHg)",
-  "valueWithUnit": "Value ({unit})",
-  "@valueWithUnit": {
+  "vaccineHistory": "Vaccination history",
+  "vaccineHistoryEmpty": "No vaccinations recorded.",
+  "vaccineNoDescription": "Your clinic has not added a description yet.",
+  "vaccinePending": "Pending",
+  "vaccinePriceAt": "At {clinic}",
+  "@vaccinePriceAt": {
     "placeholders": {
-      "unit": {
+      "clinic": {
         "type": "String"
       }
     }
   },
-  "noteOptional": "Note (optional)",
-  "save": "Save",
-  "cancel": "Cancel",
-  "delete": "Delete",
-  "invalidNumber": "Enter a valid number",
-  "required": "Required",
-  "saved": "Saved",
-  "quickKick": "Add 1 kick",
-  "kicksToday": "{count} kicks today",
-  "@kicksToday": {
+  "vaccinePriceLabel": "Price",
+  "vaccinePriceUnknown": "Ask your clinic for the price.",
+  "vaccineTapForDetails": "Details and price",
+  "vaccineWhatItDoes": "What it does",
+  "vaccineWhen": "When",
+  "vaccinesTitle": "Vaccines",
+  "verificationStatus": "Verification",
+  "verified": "Verified",
+  "versionLabel": "Version {version}",
+  "@versionLabel": {
     "placeholders": {
-      "count": {
-        "type": "int"
-      }
-    }
-  },
-  "symptomTitle": "Log a symptom",
-  "symptomCommon": "Common",
-  "symptomWarning": "Needs medical attention",
-  "symptomLogged": "Symptom logged",
-  "sym_nausea": "Nausea",
-  "sym_fatigue": "Fatigue",
-  "sym_backPain": "Back pain",
-  "sym_heartburn": "Heartburn",
-  "sym_cramps": "Cramps",
-  "sym_headache": "Headache",
-  "sym_reducedMovements": "Reduced or no fetal movements",
-  "sym_bleeding": "Vaginal bleeding",
-  "sym_severeHeadacheVision": "Severe headache with vision changes",
-  "sym_suddenSwelling": "Sudden swelling of face, hands or feet",
-  "sym_severeAbdominalPain": "Severe or persistent abdominal pain",
-  "sym_fluidLeak": "Watery vaginal discharge or fluid leak",
-  "sym_feverUnwell": "Fever or feeling very unwell",
-  "act_reducedMovements": "Contact your hospital labour ward or obstetric team immediately.",
-  "act_bleeding": "Go to the nearest hospital emergency department or labour ward now.",
-  "act_severeHeadacheVision": "Seek urgent medical review today.",
-  "act_suddenSwelling": "Contact your care team today for a blood pressure and urine check.",
-  "act_severeAbdominalPain": "Seek urgent medical attention.",
-  "act_fluidLeak": "Contact your hospital labour ward immediately.",
-  "act_feverUnwell": "Contact your care team the same day.",
-  "periodTitle": "Log period",
-  "periodStart": "Start date",
-  "periodEnd": "End date (optional)",
-  "flow": "FlowLevel",
-  "flow_spotting": "Spotting",
-  "flow_light": "Light",
-  "flow_medium": "Medium",
-  "flow_heavy": "Heavy",
-  "endBeforeStart": "End date can't be before the start date",
-  "legendPeriod": "Period",
-  "legendPredicted": "Predicted period",
-  "legendFertile": "Fertile window",
-  "legendOvulation": "Ovulation",
-  "avgCycle": "Average cycle {days} days",
-  "@avgCycle": {
-    "placeholders": {
-      "days": {
-        "type": "int"
-      }
-    }
-  },
-  "avgPeriod": "Average period {days} days",
-  "@avgPeriod": {
-    "placeholders": {
-      "days": {
-        "type": "int"
-      }
-    }
-  },
-  "estimatesNote": "Predictions are estimates, not medical facts. Don't rely on them for contraception.",
-  "irregularNote": "Your cycles have varied significantly. Predictions may be less accurate.",
-  "dayEmpty": "Nothing recorded on this day.",
-  "logPeriodThisDay": "Log period starting this day",
-  "pregnancyTimeline": "Pregnancy timeline",
-  "milestoneWeek": "Week {week}",
-  "@milestoneWeek": {
-    "placeholders": {
-      "week": {
-        "type": "int"
-      }
-    }
-  },
-  "ms_firstTrimesterEnds": "First trimester ends",
-  "ms_halfway": "Halfway point",
-  "ms_thirdTrimester": "Third trimester begins",
-  "ms_fullTerm": "Full term",
-  "ms_dueDate": "Due date",
-  "calorieTarget": "Daily target",
-  "consumed": "Consumed",
-  "remaining": "Remaining",
-  "overBy": "Over by {kcal} kcal",
-  "@overBy": {
-    "placeholders": {
-      "kcal": {
-        "type": "int"
-      }
-    }
-  },
-  "kcalValue": "{kcal} kcal",
-  "@kcalValue": {
-    "placeholders": {
-      "kcal": {
-        "type": "int"
-      }
-    }
-  },
-  "meal_breakfast": "Breakfast",
-  "meal_lunch": "Lunch",
-  "meal_dinner": "Dinner",
-  "meal_snack": "Snacks",
-  "meal_drink": "Drinks",
-  "addFood": "Add food",
-  "foodName": "Food name",
-  "portion": "Portion (optional)",
-  "caloriesKcal": "Calories (kcal)",
-  "proteinG": "Protein (g)",
-  "carbsG": "Carbs (g)",
-  "fatG": "Fat (g)",
-  "macros": "Protein {p} g · Carbs {c} g · Fat {f} g",
-  "@macros": {
-    "placeholders": {
-      "p": {
-        "type": "String"
-      },
-      "c": {
-        "type": "String"
-      },
-      "f": {
+      "version": {
         "type": "String"
       }
     }
   },
-  "targetEstimateNote": "This target is an estimate from your profile, not a medical prescription. Your doctor or dietitian can set your target in Profile.",
-  "targetCustomNote": "Target set by your care team.",
-  "nothingLogged": "Nothing logged",
-  "profileTitle": "Profile",
-  "fullName": "Full name",
-  "dateOfBirth": "Date of birth",
-  "heightCm": "Height (cm)",
-  "preWeightKg": "Pre-pregnancy weight (kg)",
-  "pregnantQuestion": "Are you currently pregnant?",
-  "yes": "Yes",
-  "no": "No",
-  "expectedDueDate": "Expected due date",
-  "numberOfBabies": "Number of babies",
-  "activityLevel": "Activity level",
-  "act_low": "Low",
-  "act_light": "Light",
-  "act_moderate": "Moderate",
-  "act_high": "High",
-  "customCalorieTarget": "Calorie target from your care team (kcal, optional)",
-  "role": "Role",
-  "rolePatient": "Patient",
-  "roleDoctor": "Doctor / Admin",
-  "language": "Language",
-  "saveProfile": "Save profile",
-  "selectDate": "Select date",
-  "privacyNote": "In this early version your data stays only on this device and is not yet encrypted. Don't enter real patient data.",
-  "doctorDashboard": "Doctor dashboard",
-  "totalPatients": "Patients",
-  "todaysAppointments": "Today's appointments",
-  "alertsToReview": "Alerts to review",
-  "patients": "Patients",
-  "searchPatients": "Search by name, ID or phone",
-  "doctorDemoNote": "Demo data. Patient records will come from the clinic server in a later step.",
-  "noMatches": "No matching patients"
+  "warningSignLogNow": "I have this now — log it",
+  "warningSignsIntro": "If you have any of these, get help now. Do not wait for your next appointment.",
+  "warningSignsTitle": "Warning signs",
+  "waterTodayMl": "{amount} ml today",
+  "@waterTodayMl": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "welcomeCreateAccount": "Create an account",
+  "welcomeDemoHint": "Demo build: sign in as demo.patient@example.com (Gwen, pregnant), demo.cycle@example.com (Aina, cycle tracking) or demo.doctor@example.com, with code {code}. Demo data resets when the app restarts.",
+  "@welcomeDemoHint": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "welcomeSignIn": "I already have an account",
+  "welcomeTagline": "Your pregnancy, cycle and women's health record, shared with your care team.",
+  "yourDoctors": "Your doctors"
 }
