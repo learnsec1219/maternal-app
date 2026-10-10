@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../features/settings/locale_controller.dart';
-import '../theme/app_theme.dart';
 import '../util/l10n.dart';
 
 class SectionTitle extends StatelessWidget {
@@ -73,81 +70,6 @@ class StatusPill extends StatelessWidget {
     child: Text(
       text,
       style: TextStyle(fontSize: 11, fontWeight: FontWeight.w700, color: fg),
-    ),
-  );
-}
-
-/// Top-right language control: [ 中文 | EN | BM ].
-class LanguageSwitcher extends ConsumerWidget {
-  const LanguageSwitcher({super.key});
-
-  static const _labels = {'zh': '中文', 'en': 'EN', 'ms': 'BM'};
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final current = ref.watch(localeProvider);
-    return Semantics(
-      label: context.l10n.language,
-      child: Container(
-        margin: const EdgeInsets.only(right: 12),
-        padding: const EdgeInsets.all(3),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(99),
-          border: Border.all(color: AppColors.line),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            for (final locale in supportedAppLocales)
-              _LangChip(
-                label: _labels[locale.languageCode]!,
-                selected: locale.languageCode == current.languageCode,
-                onTap: () => ref.read(localeProvider.notifier).set(locale),
-              ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _LangChip extends StatelessWidget {
-  const _LangChip({
-    required this.label,
-    required this.selected,
-    required this.onTap,
-  });
-
-  final String label;
-  final bool selected;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) => Semantics(
-    button: true,
-    selected: selected,
-    child: InkWell(
-      borderRadius: BorderRadius.circular(99),
-      onTap: onTap,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 180),
-        constraints: const BoxConstraints(minWidth: 40, minHeight: 32),
-        alignment: Alignment.center,
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        decoration: BoxDecoration(
-          color: selected ? AppColors.rose : Colors.transparent,
-          borderRadius: BorderRadius.circular(99),
-        ),
-        child: Text(
-          label,
-          style: TextStyle(
-            fontSize: 13,
-            fontWeight: FontWeight.w600,
-            color: selected ? Colors.white : AppColors.muted,
-          ),
-        ),
-      ),
     ),
   );
 }

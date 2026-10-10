@@ -3,12 +3,41 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/storage/local_store.dart';
 
-/// Languages offered in the switcher, in display order.
-const supportedAppLocales = [
-  Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant', countryCode: 'TW'),
-  Locale('en'),
-  Locale('ms'),
+/// A language offered in the switcher.
+class AppLanguage {
+  const AppLanguage(this.locale, {required this.short, required this.native});
+
+  final Locale locale;
+
+  /// Label inside the switcher's circle.
+  final String short;
+
+  /// The language's name in that language, for screen readers.
+  final String native;
+}
+
+/// Languages in switcher order.
+const appLanguages = [
+  AppLanguage(
+    Locale.fromSubtags(
+      languageCode: 'zh',
+      scriptCode: 'Hant',
+      countryCode: 'TW',
+    ),
+    short: '中文',
+    native: '繁體中文',
+  ),
+  AppLanguage(Locale('en'), short: 'EN', native: 'English'),
+  AppLanguage(Locale('ms'), short: 'BM', native: 'Bahasa Melayu'),
+  AppLanguage(Locale('ta'), short: 'தமிழ்', native: 'தமிழ்'),
 ];
+
+final supportedAppLocales = [for (final l in appLanguages) l.locale];
+
+AppLanguage languageFor(Locale locale) => appLanguages.firstWhere(
+  (l) => l.locale.languageCode == locale.languageCode,
+  orElse: () => appLanguages[1],
+);
 
 final localeProvider = NotifierProvider<LocaleController, Locale>(
   LocaleController.new,
