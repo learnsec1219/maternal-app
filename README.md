@@ -12,7 +12,7 @@ This is the first working skeleton, rebuilt from the original HTML prototype.
 - **Calories:** daily target (estimate, or a target set by the care team), consumed and remaining, meals with macros.
 - **Profile:** personal, body and pregnancy details, activity level, patient / doctor role.
 - **Doctor dashboard:** summary stats and a searchable patient list using demo data.
-- **Languages:** English, Traditional Chinese, Bahasa Melayu, switchable from the top-right.
+- **Languages:** English, Traditional Chinese, Bahasa Melayu and Tamil, picked from a chat-bubble menu at the top-right.
 
 Data is stored only on the device for now and is **not encrypted**. Don't enter real patient data until the security step is done.
 
@@ -44,7 +44,7 @@ lib/
     domain/                 models and pure logic (gestation, cycle predictions, calorie targets)
     application/            Riverpod state controllers
     presentation/           screens and forms
-  l10n/                     app_en.arb, app_zh.arb, app_ms.arb (all UI text)
+  l10n/                     app_en.arb, app_zh.arb, app_ms.arb, app_ta.arb (all UI text)
 ```
 
 To add or change text, edit the `.arb` files in `lib/l10n/`; Flutter regenerates the code on build.

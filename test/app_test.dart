@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -47,14 +48,41 @@ void main() {
     expect(find.text('Health log'), findsOneWidget);
   });
 
-  testWidgets('language switcher changes the interface', (tester) async {
+  testWidgets('language bubble switches between all four languages', (
+    tester,
+  ) async {
     await pumpApp(tester);
-    await tester.tap(find.text('BM'));
-    await tester.pumpAndSettle();
+
+    Future<void> pick(String code) async {
+      await tester.tap(find.byKey(const Key('language-switcher')));
+      // The water keeps rippling while open, so pump past the opening only.
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 800));
+      await tester.tap(find.byKey(Key('language-$code')));
+      await tester.pumpAndSettle();
+      expect(find.byKey(Key('language-$code')), findsNothing);
+    }
+
+    await pick('ms');
     expect(find.text('Utama'), findsWidgets);
-    await tester.tap(find.text('中文'));
-    await tester.pumpAndSettle();
+    await pick('ta');
+    expect(find.text('முகப்பு'), findsWidgets);
+    await pick('zh');
     expect(find.text('首頁'), findsWidgets);
+    await pick('en');
+    expect(find.text('Home'), findsWidgets);
+  });
+
+  testWidgets('tapping outside closes the language bubble', (tester) async {
+    await pumpApp(tester);
+    await tester.tap(find.byKey(const Key('language-switcher')));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 800));
+    expect(find.byKey(const Key('language-ta')), findsOneWidget);
+    await tester.tapAt(const Offset(20, 500));
+    await tester.pumpAndSettle();
+    expect(find.byKey(const Key('language-ta')), findsNothing);
+    expect(find.text('Home'), findsWidgets);
   });
 
   testWidgets('pregnant profile shows gestational age on Home', (tester) async {
