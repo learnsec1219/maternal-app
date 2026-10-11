@@ -1,13 +1,16 @@
+import 'dart:async';
+
+import 'package:clock/clock.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/integrations/integration_config.dart';
 import '../../core/integrations/totp.dart';
 import '../../core/integrations/verification.dart';
+import '../../core/theme/app_theme.dart';
 import '../../core/util/l10n.dart';
 import '../../core/widgets/common.dart';
 import '../../data/demo_store.dart';
-import '../profile/connections_page.dart';
 
 /// How a one-time code reaches the person.
 enum CodeMethod {
@@ -26,6 +29,11 @@ class CodeFlow {
   CodeMethod? method;
   String target = '';
 
+  /// When an email code stops working; null for the other methods.
+  DateTime? expiresAt;
+
+  bool get expired => expiresAt != null && clock.now().isAfter(expiresAt!);
+
   bool get sent => method != null;
 
   static bool isEmail(String id) => id.contains('@');
@@ -40,6 +48,7 @@ class CodeFlow {
     String? totpSecret,
   }) async {
     target = id;
+    expiresAt = null;
     final cfg = ref.read(integrationConfigProvider);
     final v = ref.read(verificationProvider);
     if (totpSecret != null) {
@@ -49,6 +58,7 @@ class CodeFlow {
     } else if (cfg.hasEmail) {
       await v.sendEmailCode(id);
       method = CodeMethod.email;
+      expiresAt = clock.now().add(emailCodeLife);
     } else {
       method = CodeMethod.demo;
     }
@@ -65,7 +75,7 @@ class CodeFlow {
       CodeMethod.email =>
         ref.read(verificationProvider).checkEmailCode(target, c),
       CodeMethod.totp =>
-        totpSecret != null && Totp.verify(totpSecret, c, DateTime.now()),
+        totpSecret != null && Totp.verify(totpSecret, c, clock.now()),
       null => false,
     };
   }
@@ -73,6 +83,7 @@ class CodeFlow {
   void reset() {
     method = null;
     target = '';
+    expiresAt = null;
   }
 }
 
@@ -111,19 +122,92 @@ String verifyErrorText(BuildContext context, Object e) {
   return l.authSendFailed('$e');
 }
 
-/// Small link to the Connections page, for testers on the sign-in screens.
-class ConnectionsLink extends StatelessWidget {
-  const ConnectionsLink({super.key});
+/// Seconds left on an email code, counting down to 0. When time runs out it
+/// says so and offers to send a new code.
+class CodeCountdown extends StatefulWidget {
+  const CodeCountdown({super.key, required this.flow, required this.onResend});
+  final CodeFlow flow;
+  final VoidCallback? onResend;
 
   @override
-  Widget build(BuildContext context) => Center(
-    child: TextButton.icon(
-      key: const Key('open-connections'),
-      onPressed: () => Navigator.of(
-        context,
-      ).push(MaterialPageRoute<void>(builder: (_) => const ConnectionsPage())),
-      icon: const Icon(Icons.hub_outlined, size: 18),
-      label: Text(context.l10n.connectionsTitle),
-    ),
-  );
+  State<CodeCountdown> createState() => _CodeCountdownState();
+}
+
+class _CodeCountdownState extends State<CodeCountdown> {
+  Timer? _tick;
+
+  @override
+  void initState() {
+    super.initState();
+    _start();
+  }
+
+  void _start() {
+    _tick?.cancel();
+    _tick = Timer.periodic(const Duration(seconds: 1), (_) {
+      if (mounted) setState(() {});
+      if (widget.flow.expired) _tick?.cancel();
+    });
+  }
+
+  @override
+  void didUpdateWidget(CodeCountdown old) {
+    super.didUpdateWidget(old);
+    // A new code was sent: count down again.
+    if (!(_tick?.isActive ?? false) && !widget.flow.expired) _start();
+  }
+
+  @override
+  void dispose() {
+    _tick?.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l = context.l10n, p = context.pal;
+    final end = widget.flow.expiresAt;
+    if (end == null) return const SizedBox.shrink();
+    final left = end.difference(clock.now()).inSeconds.clamp(0, 999);
+    if (left <= 0 || widget.flow.expired) {
+      return Padding(
+        padding: const EdgeInsets.only(bottom: 10),
+        child: Row(
+          children: [
+            Icon(Icons.timer_off_outlined, color: p.alert, size: 20),
+            const SizedBox(width: 8),
+            Expanded(
+              child: Text(
+                l.otpExpired,
+                key: const Key('otp-expired'),
+                style: TextStyle(color: p.alert),
+              ),
+            ),
+            TextButton(
+              key: const Key('otp-resend'),
+              onPressed: widget.onResend,
+              child: Text(l.otpResend),
+            ),
+          ],
+        ),
+      );
+    }
+    final mm = left ~/ 60, ss = (left % 60).toString().padLeft(2, '0');
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: Row(
+        children: [
+          Icon(Icons.timer_outlined, color: p.rose, size: 20),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              l.otpExpiresIn('$mm:$ss'),
+              key: const Key('otp-countdown'),
+              style: const TextStyle(fontWeight: FontWeight.w600),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }

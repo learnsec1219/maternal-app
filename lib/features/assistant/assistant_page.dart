@@ -14,8 +14,6 @@ import '../../data/models.dart';
 import '../../data/session.dart';
 import '../../domain/health_rules.dart';
 import '../../l10n/app_localizations.dart';
-import '../patient/patient_data.dart';
-import '../profile/connections_page.dart';
 import '../settings/locale_controller.dart';
 
 class _Msg {
@@ -228,13 +226,6 @@ class _AssistantPageState extends ConsumerState<AssistantPage> {
                       onPressed: () => _retry(m),
                       child: Text(cl.actionRetry),
                     ),
-                    if (m.error == AssistantError.notConfigured ||
-                        m.error == AssistantError.badKey)
-                      TextButton(
-                        onPressed: () =>
-                            pushPage(context, const ConnectionsPage()),
-                        child: Text(cl.connectionsTitle),
-                      ),
                   ],
                 ),
               ] else

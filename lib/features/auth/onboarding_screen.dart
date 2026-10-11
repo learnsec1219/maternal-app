@@ -112,6 +112,10 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
       if (_verified) _go(1);
       return;
     }
+    if (_flow.expired) {
+      setState(() => _error = l.otpExpired);
+      return;
+    }
     setState(() => _busy = true);
     var ok = false;
     try {
@@ -283,6 +287,19 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                 keyboardType: TextInputType.number,
               ),
               CodeNote(flow: _flow, demoAccount: false),
+              CodeCountdown(
+                flow: _flow,
+                onResend: _busy
+                    ? null
+                    : () {
+                        setState(() {
+                          _flow.reset();
+                          _code.clear();
+                          _error = null;
+                        });
+                        _verifyStep();
+                      },
+              ),
             ],
             if (_busy)
               const Padding(

@@ -225,7 +225,7 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get assistantBadKey =>
-      'AI சேவை Gemini API சாவியை ஏற்கவில்லை. சுயவிவரம் > இணைப்புகள் பகுதியில் சாவியைச் சரிபார்க்கவும்.';
+      'AI சேவை செயலியின் சாவியை ஏற்கவில்லை. செயலியின் நிர்வாகியைத் தொடர்பு கொள்ளவும்.';
 
   @override
   String get assistantBlocked =>
@@ -256,7 +256,7 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get assistantNotConfigured =>
-      'AI உதவியாளர் பதிலளிக்க Gemini API சாவி தேவை. சுயவிவரம் > இணைப்புகள் பகுதியில் சேர்க்கவும், அல்லது செயலி நிர்வாகியிடம் அதைச் செயலியில் சேர்க்கச் சொல்லவும்.';
+      'இந்தப் பதிப்பில் AI உதவியாளர் இன்னும் அமைக்கப்படவில்லை. செயலியின் நிர்வாகியைத் தொடர்பு கொள்ளவும்.';
 
   @override
   String get assistantSend => 'அனுப்பு';
@@ -285,7 +285,7 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get authEmailNotSetUp =>
-      'உண்மையான மின்னஞ்சல் குறியீடுகள் இன்னும் அமைக்கப்படவில்லை (இணைப்புகள்).';
+      'இந்தப் பதிப்பில் மின்னஞ்சல் குறியீடுகள் இன்னும் அமைக்கப்படவில்லை.';
 
   @override
   String get authInvalidCode =>
@@ -461,44 +461,6 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get colScan => 'ஸ்கேன்';
-
-  @override
-  String get connectionsAiBody =>
-      'aistudio.google.com > Get API key இல் இலவசச் சாவியை உருவாக்கவும். மாதிரியை gemini-flash-latest ஆகவே விடலாம்.';
-
-  @override
-  String get connectionsAiTitle => 'AI உதவியாளர் (Google Gemini)';
-
-  @override
-  String get connectionsBuiltIn => 'இந்தச் செயலியில் உள்ளமைந்தது';
-
-  @override
-  String get connectionsEmailBody =>
-      'EmailJS இல் ஒரு Gmail சேவையைச் சேர்த்து, \"To\" இல் to_email உம் செய்தியில் passcode உம் உள்ள மின்னஞ்சல் வார்ப்புருவை உருவாக்கவும். Account > Security இல் \"Allow EmailJS API for non-browser applications\" ஐ இயக்கி, தனிப்பட்ட சாவியையும் நகலெடுக்கவும்.';
-
-  @override
-  String get connectionsEmailTitle =>
-      'மின்னஞ்சல் குறியீடுகள் (EmailJS + Gmail)';
-
-  @override
-  String get connectionsGoogleBody =>
-      'Google Cloud இலிருந்து Web client ID. உள்நுழைவுக்கு இந்தச் செயலியின் package பெயர் மற்றும் SHA-1 உடன் ஒரு Android client உம் அங்கே தேவை.';
-
-  @override
-  String get connectionsGoogleTitle => 'Google உள்நுழைவு';
-
-  @override
-  String get connectionsIntro =>
-      'AI உதவியாளர், மின்னஞ்சல் குறியீடுகள் மற்றும் Google உள்நுழைவுக்கான சாவிகள். இங்கே தட்டச்சு செய்யும் சாவிகள் இந்தத் தொலைபேசியில் மட்டுமே இருக்கும்; செயலியில் உள்ளவற்றுக்குப் பதிலாகப் பயன்படும். உள்ளமைந்த சாவியைப் பயன்படுத்தப் பெட்டியைக் காலியாக விடவும்.';
-
-  @override
-  String get connectionsMissing => 'அமைக்கப்படவில்லை';
-
-  @override
-  String get connectionsSetHere => 'இந்தத் தொலைபேசியில் அமைக்கப்பட்டது';
-
-  @override
-  String get connectionsTitle => 'இணைப்புகள்';
 
   @override
   String get contentPendingReview =>
@@ -1539,6 +1501,17 @@ class AppLocalizationsTa extends AppLocalizations {
   String get onboardingVerifyTitle => 'உங்கள் கணக்கைச் சரிபார்க்கவும்';
 
   @override
+  String get otpExpired => 'இந்தக் குறியீடு காலாவதியானது. புதியதை அனுப்பவும்.';
+
+  @override
+  String otpExpiresIn(String time) {
+    return 'குறியீடு $time இல் காலாவதியாகும்';
+  }
+
+  @override
+  String get otpResend => 'புதிய குறியீடு அனுப்பு';
+
+  @override
   String otpSentTo(String destination) {
     return '$destination-க்குக் குறியீடு அனுப்பப்பட்டது';
   }
@@ -1586,6 +1559,18 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get permissionsTitle => 'அனுமதிகள்';
+
+  @override
+  String get photoChange => 'சுயவிவரப் படத்தை மாற்று';
+
+  @override
+  String get photoChoose => 'கேலரியிலிருந்து தேர்ந்தெடு';
+
+  @override
+  String get photoRemove => 'படத்தை நீக்கு';
+
+  @override
+  String get photoSaved => 'சுயவிவரப் படம் புதுப்பிக்கப்பட்டது';
 
   @override
   String get portionHint => 'எ.கா. 1 தட்டு, 250 ml';

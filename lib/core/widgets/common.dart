@@ -162,7 +162,7 @@ class Pill extends StatelessWidget {
   Widget build(BuildContext context) {
     final p = context.pal;
     // Never wider than half the screen, so it fits beside a title in a row;
-    // a long label (e.g. in Tamil) wraps onto a second line instead.
+    // a long label (e.g. in Tamil) shrinks to fit on one line.
     return Container(
       constraints: BoxConstraints(
         maxWidth: MediaQuery.sizeOf(context).width * .5,
@@ -172,10 +172,8 @@ class Pill extends StatelessWidget {
         color: background ?? p.roseSoft,
         borderRadius: BorderRadius.circular(12),
       ),
-      child: Text(
+      child: OneLine(
         icon == null ? text : '$icon $text',
-        maxLines: 2,
-        overflow: TextOverflow.ellipsis,
         style: TextStyle(
           fontSize: 12,
           fontWeight: FontWeight.w600,
@@ -346,7 +344,7 @@ class SelectChip extends StatelessWidget {
           onTap: onTap,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 8),
-            child: Text(
+            child: OneLine(
               label,
               style: TextStyle(
                 fontSize: 13.5,
@@ -388,6 +386,36 @@ class TileIcon extends StatelessWidget {
   );
 }
 
+/// Text that always stays on one line: in a long language or with large
+/// system text it shrinks to fit the space instead of wrapping.
+class OneLine extends StatelessWidget {
+  const OneLine(
+    this.text, {
+    super.key,
+    this.style,
+    this.textAlign,
+    this.alignment = AlignmentDirectional.centerStart,
+  });
+
+  final String text;
+  final TextStyle? style;
+  final TextAlign? textAlign;
+  final AlignmentGeometry alignment;
+
+  @override
+  Widget build(BuildContext context) => FittedBox(
+    fit: BoxFit.scaleDown,
+    alignment: alignment,
+    child: Text(
+      text,
+      maxLines: 1,
+      softWrap: false,
+      textAlign: textAlign,
+      style: style,
+    ),
+  );
+}
+
 /// Full-width primary button.
 class PrimaryButton extends StatelessWidget {
   const PrimaryButton(
@@ -411,7 +439,7 @@ class PrimaryButton extends StatelessWidget {
       onPressed: onPressed,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 4),
-        child: Text(label, textAlign: TextAlign.center),
+        child: OneLine(label, alignment: Alignment.center),
       ),
     ),
   );
@@ -424,12 +452,16 @@ class GhostButton extends StatelessWidget {
     super.key,
     required this.onPressed,
     this.icon,
+    this.leading,
     this.color,
   });
 
   final String label;
   final VoidCallback? onPressed;
   final IconData? icon;
+
+  /// Shown before the label instead of [icon], e.g. a brand logo.
+  final Widget? leading;
   final Color? color;
 
   @override
@@ -446,11 +478,11 @@ class GhostButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            if (icon != null) ...[
-              Icon(icon, size: 20),
+            if (leading != null || icon != null) ...[
+              leading ?? Icon(icon, size: 20),
               const SizedBox(width: 10),
             ],
-            Flexible(child: Text(label, textAlign: TextAlign.center)),
+            Flexible(child: OneLine(label, alignment: Alignment.center)),
           ],
         ),
       ),
@@ -475,7 +507,7 @@ class TonalButton extends StatelessWidget {
         minimumSize: const Size(0, 40),
       ),
       onPressed: onPressed,
-      child: Text(label, textAlign: TextAlign.center),
+      child: OneLine(label, alignment: Alignment.center),
     );
   }
 }
@@ -538,42 +570,41 @@ class ListRow extends StatelessWidget {
           border: divider ? Border(top: BorderSide(color: p.line)) : null,
         ),
         padding: const EdgeInsets.symmetric(vertical: 11, horizontal: 2),
-        child: Row(
-          children: [
-            if (leading != null) ...[leading!, const SizedBox(width: 12)],
-            Expanded(
-              flex: 3,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      color: strike ? p.muted : null,
-                      decoration: strike ? TextDecoration.lineThrough : null,
+        child: LayoutBuilder(
+          builder: (context, box) => Row(
+            children: [
+              if (leading != null) ...[leading!, const SizedBox(width: 12)],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    OneLine(
+                      title,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        color: strike ? p.muted : null,
+                        decoration: strike ? TextDecoration.lineThrough : null,
+                      ),
                     ),
-                  ),
-                  if (subtitle != null)
-                    Text(
-                      subtitle!,
-                      style: TextStyle(fontSize: 12.5, color: p.muted),
-                    ),
-                ],
-              ),
-            ),
-            if (trailing != null) ...[
-              const SizedBox(width: 8),
-              // Long trailing text (dates, pills) shrinks instead of overflowing.
-              Flexible(
-                flex: 2,
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: FittedBox(fit: BoxFit.scaleDown, child: trailing!),
+                    if (subtitle != null)
+                      Text(
+                        subtitle!,
+                        style: TextStyle(fontSize: 12.5, color: p.muted),
+                      ),
+                  ],
                 ),
               ),
+              if (trailing != null) ...[
+                const SizedBox(width: 8),
+                // Long trailing text (dates, pills) shrinks instead of
+                // overflowing, and never takes the title's room.
+                ConstrainedBox(
+                  constraints: BoxConstraints(maxWidth: box.maxWidth * .4),
+                  child: FittedBox(fit: BoxFit.scaleDown, child: trailing!),
+                ),
+              ],
             ],
-          ],
+          ),
         ),
       ),
     );
@@ -630,7 +661,7 @@ class PageScaffold extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
       leading: leading,
-      title: Text(title, maxLines: 2),
+      title: OneLine(title),
       actions: [
         ...actions,
         if (showLanguage) const LanguageSwitcher(),

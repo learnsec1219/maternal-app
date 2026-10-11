@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:clock/clock.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:maternal/core/integrations/gemini_client.dart';
@@ -8,6 +10,10 @@ import 'package:maternal/core/integrations/google_auth.dart';
 import 'package:maternal/core/integrations/totp.dart';
 import 'package:maternal/core/integrations/verification.dart';
 import 'package:maternal/core/integrations/watch_service.dart';
+import 'package:maternal/core/widgets/common.dart';
+import 'package:maternal/features/patient/patient_data.dart';
+import 'package:maternal/features/profile/profile_photo.dart';
+import 'package:maternal/features/shell/patient_shell.dart';
 
 import 'test_app.dart';
 
@@ -47,6 +53,46 @@ class FakeGoogle implements GoogleAuth {
 
   @override
   Future<void> signOut() async => signOuts++;
+}
+
+class FakePhotos implements PhotoSource {
+  int picks = 0;
+
+  @override
+  Future<String?> pickFromGallery(String personId) async =>
+      '/tmp/photo_${personId}_${++picks}.jpg';
+}
+
+/// Labels on buttons, rows, tiles and chips that wrapped onto a second line.
+List<String> wrappedLabels(WidgetTester tester) {
+  final out = <String>[];
+  for (final type in [ListRow, CreateTile, ButtonStyleButton, SelectChip]) {
+    final texts = find.descendant(
+      of: find.byWidgetPredicate(
+        (w) =>
+            w.runtimeType == type ||
+            (type == ButtonStyleButton && w is ButtonStyleButton),
+      ),
+      matching: find.byType(RichText),
+    );
+    for (final e in texts.evaluate()) {
+      final rp = e.renderObject! as RenderParagraph;
+      if (!rp.hasSize || rp.maxLines != 1) {
+        if (rp.hasSize) {
+          final one = TextPainter(
+            text: rp.text,
+            textDirection: TextDirection.ltr,
+            textScaler: rp.textScaler,
+            maxLines: 1,
+          )..layout();
+          if (rp.size.height > one.height * 1.5) {
+            out.add(rp.text.toPlainText());
+          }
+        }
+      }
+    }
+  }
+  return out;
 }
 
 void main() {
@@ -356,4 +402,149 @@ void main() {
     expect(find.byKey(const Key('signup-email')), findsOneWidget);
     expect(find.text('Phone'), findsNothing);
   });
+
+  testWidgets('email codes count down from 90 seconds and then expire', (
+    tester,
+  ) async {
+    var now = DateTime(2026, 10, 6, 9);
+    await withClock(Clock(() => now), () async {
+      final v = FakeVerification();
+      await pumpApp(
+        tester,
+        prefs: const {
+          'integration.EMAILJS_SERVICE_ID': 'service_x',
+          'integration.EMAILJS_TEMPLATE_ID': 'template_x',
+          'integration.EMAILJS_PUBLIC_KEY': 'public_x',
+        },
+        overrides: [verificationProvider.overrideWithValue(v)],
+      );
+      await tapAndSettle(tester, find.text('I already have an account'));
+      await tester.enterText(
+        find.byKey(const Key('login-id')),
+        'new.mum@gmail.com',
+      );
+      await tapAndSettle(tester, find.byKey(const Key('login-submit')));
+      expect(find.text('Code expires in 1:30'), findsOneWidget);
+      now = now.add(const Duration(seconds: 25));
+      await tester.pump(const Duration(seconds: 1));
+      expect(find.text('Code expires in 1:05'), findsOneWidget);
+      // Past 90 seconds the right code no longer works.
+      now = now.add(const Duration(seconds: 70));
+      await tester.pump(const Duration(seconds: 1));
+      expect(find.byKey(const Key('otp-expired')), findsOneWidget);
+      await tester.enterText(find.byKey(const Key('login-code')), '654321');
+      await tapAndSettle(tester, find.byKey(const Key('login-submit')));
+      expect(find.byKey(const Key('login-submit')), findsOneWidget);
+      // A new code starts the countdown again.
+      await tapAndSettle(tester, find.byKey(const Key('otp-resend')));
+      expect(v.emails, ['new.mum@gmail.com', 'new.mum@gmail.com']);
+      expect(find.text('Code expires in 1:30'), findsOneWidget);
+    });
+  });
+
+  testWidgets('the Google button shows the Google logo', (tester) async {
+    await pumpApp(tester);
+    expect(
+      find.descendant(
+        of: find.byKey(const Key('google-sign-in')),
+        matching: find.image(const AssetImage('assets/branding/google-g.png')),
+      ),
+      findsOneWidget,
+    );
+    expect(find.byKey(const Key('open-connections')), findsNothing);
+  });
+
+  testWidgets('a gallery photo becomes the profile photo and stays', (
+    tester,
+  ) async {
+    final photos = FakePhotos();
+    await pumpApp(
+      tester,
+      signedIn: 'p1',
+      overrides: [photoSourceProvider.overrideWithValue(photos)],
+    );
+    await tapAndSettle(tester, find.byKey(const Key('nav-profile')));
+    expect(find.text('Connections'), findsNothing);
+    await tapAndSettle(tester, find.byKey(const Key('profile-photo')));
+    await tapAndSettle(tester, find.byKey(const Key('photo-gallery')));
+    Avatar avatar() => tester.widget<Avatar>(
+      find.descendant(
+        of: find.byKey(const Key('profile-photo')),
+        matching: find.byType(Avatar),
+      ),
+    );
+    expect(avatar().photoUrl, '/tmp/photo_p1_1.jpg');
+    // Signing out and in again keeps it.
+    await tester.scrollUntilVisible(
+      find.byKey(const Key('sign-out')),
+      300,
+      scrollable: find.descendant(
+        of: find.byKey(const Key('profile-list')),
+        matching: find.byType(Scrollable),
+      ),
+    );
+    await tapAndSettle(tester, find.byKey(const Key('sign-out')));
+    await tapAndSettle(tester, find.byKey(const Key('sign-out-confirm')));
+    await tapAndSettle(tester, find.text('I already have an account'));
+    await tester.enterText(
+      find.byKey(const Key('login-id')),
+      'demo.patient@example.com',
+    );
+    await tapAndSettle(tester, find.byKey(const Key('login-submit')));
+    await tester.enterText(find.byKey(const Key('login-code')), '123456');
+    await tapAndSettle(tester, find.byKey(const Key('login-submit')));
+    await tapAndSettle(tester, find.byKey(const Key('nav-profile')));
+    expect(avatar().photoUrl, '/tmp/photo_p1_1.jpg');
+  });
+
+  for (final lang in ['en', 'ms', 'zh', 'ta']) {
+    testWidgets('buttons, rows and tiles stay on one line ($lang)', (
+      tester,
+    ) async {
+      await pumpApp(
+        tester,
+        language: lang,
+        size: const Size(320, 568),
+        textScale: 1.3,
+      );
+      expect(wrappedLabels(tester), isEmpty);
+      await tester.drag(find.byType(ListView).first, const Offset(0, -2000));
+      await tester.pumpAndSettle();
+      expect(wrappedLabels(tester), isEmpty);
+    });
+
+    testWidgets('profile and Create labels stay on one line ($lang)', (
+      tester,
+    ) async {
+      await pumpApp(
+        tester,
+        signedIn: 'p1',
+        language: lang,
+        size: const Size(320, 568),
+        textScale: 1.3,
+      );
+      await tester.tap(find.byKey(const Key('nav-create')));
+      await tester.pumpAndSettle();
+      for (var i = 0; i < 6; i++) {
+        expect(wrappedLabels(tester), isEmpty);
+        await tester.drag(
+          find.byKey(const Key('create-sheet')),
+          const Offset(0, -300),
+        );
+        await tester.pumpAndSettle();
+      }
+      await tester.tapAt(const Offset(10, 10));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const Key('nav-profile')));
+      await tester.pumpAndSettle();
+      for (var i = 0; i < 8; i++) {
+        expect(wrappedLabels(tester), isEmpty);
+        await tester.drag(
+          find.byKey(const Key('profile-list')),
+          const Offset(0, -300),
+        );
+        await tester.pumpAndSettle();
+      }
+    });
+  }
 }

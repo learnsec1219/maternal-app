@@ -225,7 +225,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get assistantBadKey =>
-      'The AI service refused the Gemini API key. Check the key in Profile > Connections.';
+      'The AI service refused the app\'s key. Please contact the app\'s administrator.';
 
   @override
   String get assistantBlocked =>
@@ -257,7 +257,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get assistantNotConfigured =>
-      'The AI assistant needs a Gemini API key before it can answer. Add one in Profile > Connections, or ask the app\'s administrator to build it into the app.';
+      'The AI assistant is not set up in this version of the app yet. Please contact the app\'s administrator.';
 
   @override
   String get assistantSend => 'Send';
@@ -286,7 +286,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get authEmailNotSetUp =>
-      'Real email codes are not set up yet (Connections).';
+      'Email codes are not set up in this version of the app yet.';
 
   @override
   String get authInvalidCode =>
@@ -460,43 +460,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get colScan => 'Scan';
-
-  @override
-  String get connectionsAiBody =>
-      'Create a free key at aistudio.google.com > Get API key. The model can stay as gemini-flash-latest.';
-
-  @override
-  String get connectionsAiTitle => 'AI assistant (Google Gemini)';
-
-  @override
-  String get connectionsBuiltIn => 'Built into this app';
-
-  @override
-  String get connectionsEmailBody =>
-      'In EmailJS, add a Gmail service and an email template whose \"To\" is to_email and whose message shows passcode. Turn on \"Allow EmailJS API for non-browser applications\" under Account > Security, and copy the private key too.';
-
-  @override
-  String get connectionsEmailTitle => 'Email codes (EmailJS + Gmail)';
-
-  @override
-  String get connectionsGoogleBody =>
-      'The Web client ID from Google Cloud. Sign-in also needs an Android client there with this app\'s package name and SHA-1.';
-
-  @override
-  String get connectionsGoogleTitle => 'Google sign-in';
-
-  @override
-  String get connectionsIntro =>
-      'Keys for the AI assistant, email codes and Google sign-in. Keys typed here stay on this phone and replace the ones built into the app. Leave a box empty to use the built-in key.';
-
-  @override
-  String get connectionsMissing => 'Not set';
-
-  @override
-  String get connectionsSetHere => 'Set on this phone';
-
-  @override
-  String get connectionsTitle => 'Connections';
 
   @override
   String get contentPendingReview =>
@@ -1532,6 +1495,17 @@ class AppLocalizationsEn extends AppLocalizations {
   String get onboardingVerifyTitle => 'Verify your account';
 
   @override
+  String get otpExpired => 'This code has expired. Please send a new one.';
+
+  @override
+  String otpExpiresIn(String time) {
+    return 'Code expires in $time';
+  }
+
+  @override
+  String get otpResend => 'Send a new code';
+
+  @override
   String otpSentTo(String destination) {
     return 'Code sent to $destination';
   }
@@ -1578,6 +1552,18 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get permissionsTitle => 'Permissions';
+
+  @override
+  String get photoChange => 'Change profile photo';
+
+  @override
+  String get photoChoose => 'Choose from gallery';
+
+  @override
+  String get photoRemove => 'Remove photo';
+
+  @override
+  String get photoSaved => 'Profile photo updated';
 
   @override
   String get portionHint => 'e.g. 1 plate, 250 ml';

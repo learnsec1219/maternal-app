@@ -5,7 +5,6 @@ import '../../core/util/l10n.dart';
 import '../../core/widgets/common.dart';
 import '../../data/demo_store.dart';
 import '../settings/language_switcher.dart';
-import 'code_flow.dart';
 import 'google_button.dart';
 import 'login_screen.dart';
 import 'onboarding_screen.dart';
@@ -39,9 +38,9 @@ class WelcomeScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            Text(
+            OneLine(
               l.appName,
-              textAlign: TextAlign.center,
+              alignment: Alignment.center,
               style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w700),
             ),
             const SizedBox(height: 8),
@@ -72,7 +71,6 @@ class WelcomeScreen extends StatelessWidget {
               l.welcomeDemoHint(DemoAccounts.code),
               title: l.demoModeTitle,
             ),
-            const ConnectionsLink(),
             const Disclaimer(),
           ],
         ),

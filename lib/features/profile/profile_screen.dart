@@ -13,7 +13,7 @@ import '../calendar/calendar_screen.dart';
 import '../patient/patient_data.dart';
 import '../records/care_pages.dart';
 import '../records/health_pages.dart';
-import 'connections_page.dart';
+import 'profile_photo.dart';
 import 'security_page.dart';
 import 'settings_pages.dart';
 
@@ -58,18 +58,18 @@ class ProfileScreen extends ConsumerWidget {
             if (context.mounted) showToast(context, l.deliveredSaved);
           }
         },
-        child: Text(l.actionBabyDelivered, textAlign: TextAlign.center),
+        child: OneLine(l.actionBabyDelivered, alignment: Alignment.center),
       ),
       Journey.postpartum => OutlinedButton(
         onPressed: () {
           me.journey = Journey.general;
           store.updateProfile(me);
         },
-        child: Text(l.actionEndPostpartum, textAlign: TextAlign.center),
+        child: OneLine(l.actionEndPostpartum, alignment: Alignment.center),
       ),
       Journey.general => OutlinedButton(
         onPressed: () => pushPage(context, const PregnancyInfoPage()),
-        child: Text(l.actionImPregnant, textAlign: TextAlign.center),
+        child: OneLine(l.actionImPregnant, alignment: Alignment.center),
       ),
     };
 
@@ -97,7 +97,7 @@ class ProfileScreen extends ConsumerWidget {
                 color: p.roseTint,
                 child: Column(
                   children: [
-                    Avatar(me.name, size: 80, photoUrl: me.photoUrl),
+                    EditableAvatar(me: me),
                     const SizedBox(height: 8),
                     Text(
                       me.name,
@@ -174,11 +174,6 @@ class ProfileScreen extends ConsumerWidget {
                   const SecurityPage(),
                 ),
                 (Icons.shield_outlined, l.menuPrivacy, const PrivacyPage()),
-                (
-                  Icons.hub_outlined,
-                  l.connectionsTitle,
-                  const ConnectionsPage(),
-                ),
                 (Icons.info_outline_rounded, l.menuAbout, const AboutPage()),
               ]),
               const SignOutButton(),

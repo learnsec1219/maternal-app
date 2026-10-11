@@ -216,7 +216,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get appointmentsTitle => '預約';
 
   @override
-  String get assistantBadKey => 'AI 服務拒絕了這個 Gemini API 金鑰。請到「個人檔案 > 連線」檢查金鑰。';
+  String get assistantBadKey => 'AI 服務拒絕了應用程式的金鑰，請聯絡應用程式管理員。';
 
   @override
   String get assistantBlocked => 'AI 服務沒有回答這個問題。請換個方式再問一次。';
@@ -243,8 +243,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get assistantNewChat => '新對話';
 
   @override
-  String get assistantNotConfigured =>
-      'AI 助理需要 Gemini API 金鑰才能回答。請在「個人檔案 > 連線」中加入，或請應用程式管理員將其內建於應用程式。';
+  String get assistantNotConfigured => '此版本的應用程式尚未設定 AI 助理，請聯絡應用程式管理員。';
 
   @override
   String get assistantSend => '傳送';
@@ -271,7 +270,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get authAuthenticatorHelp => '請輸入驗證器應用程式為 Maternal 顯示的 6 位數代碼。';
 
   @override
-  String get authEmailNotSetUp => '尚未設定真實的電郵驗證碼（連線）。';
+  String get authEmailNotSetUp => '此版本的應用程式尚未設定電郵驗證碼。';
 
   @override
   String get authInvalidCode => '驗證碼不正確，請檢查後再試。';
@@ -434,43 +433,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get colScan => '檢查';
-
-  @override
-  String get connectionsAiBody =>
-      '在 aistudio.google.com > Get API key 建立免費金鑰。模型可保留為 gemini-flash-latest。';
-
-  @override
-  String get connectionsAiTitle => 'AI 助理（Google Gemini）';
-
-  @override
-  String get connectionsBuiltIn => '已內建於此應用程式';
-
-  @override
-  String get connectionsEmailBody =>
-      '在 EmailJS 中加入 Gmail 服務，並建立電郵範本：「To」填 to_email，內容顯示 passcode。在 Account > Security 開啟「Allow EmailJS API for non-browser applications」，並複製私密金鑰。';
-
-  @override
-  String get connectionsEmailTitle => '電郵驗證碼（EmailJS + Gmail）';
-
-  @override
-  String get connectionsGoogleBody =>
-      'Google Cloud 的網頁用戶端 ID。登入也需要在該處建立包含本應用程式套件名稱與 SHA-1 的 Android 用戶端。';
-
-  @override
-  String get connectionsGoogleTitle => 'Google 登入';
-
-  @override
-  String get connectionsIntro =>
-      'AI 助理、電郵驗證碼與 Google 登入所需的金鑰。在此輸入的金鑰只保存在這部手機，並取代應用程式內建的金鑰。留空即使用內建金鑰。';
-
-  @override
-  String get connectionsMissing => '尚未設定';
-
-  @override
-  String get connectionsSetHere => '已在此手機設定';
-
-  @override
-  String get connectionsTitle => '連線';
 
   @override
   String get contentPendingReview => '此時間表為示範內容，尚待合格臨床人員依馬來西亞指引審核。請一律遵從您的醫療團隊。';
@@ -1418,6 +1380,17 @@ class AppLocalizationsZh extends AppLocalizations {
   String get onboardingVerifyTitle => '驗證您的帳戶';
 
   @override
+  String get otpExpired => '此驗證碼已失效，請重新寄送。';
+
+  @override
+  String otpExpiresIn(String time) {
+    return '驗證碼將於 $time 後失效';
+  }
+
+  @override
+  String get otpResend => '重新寄送';
+
+  @override
   String otpSentTo(String destination) {
     return '驗證碼已傳送至 $destination';
   }
@@ -1464,6 +1437,18 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get permissionsTitle => '權限';
+
+  @override
+  String get photoChange => '更換個人照片';
+
+  @override
+  String get photoChoose => '從相簿選擇';
+
+  @override
+  String get photoRemove => '移除照片';
+
+  @override
+  String get photoSaved => '已更新個人照片';
 
   @override
   String get portionHint => '例如：1 盤、250 毫升';

@@ -40,7 +40,12 @@ class GoogleButton extends ConsumerWidget {
         GhostButton(
           l.googleContinue,
           key: const Key('google-sign-in'),
-          icon: Icons.account_circle_outlined,
+          leading: Image.asset(
+            'assets/branding/google-g.png',
+            width: 20,
+            height: 20,
+            semanticLabel: 'Google',
+          ),
           onPressed: () => signInWithGoogle(context, ref),
         ),
       ],

@@ -495,7 +495,7 @@ abstract class AppLocalizations {
   /// No description provided for @assistantBadKey.
   ///
   /// In en, this message translates to:
-  /// **'The AI service refused the Gemini API key. Check the key in Profile > Connections.'**
+  /// **'The AI service refused the app\'s key. Please contact the app\'s administrator.'**
   String get assistantBadKey;
 
   /// No description provided for @assistantBlocked.
@@ -549,7 +549,7 @@ abstract class AppLocalizations {
   /// No description provided for @assistantNotConfigured.
   ///
   /// In en, this message translates to:
-  /// **'The AI assistant needs a Gemini API key before it can answer. Add one in Profile > Connections, or ask the app\'s administrator to build it into the app.'**
+  /// **'The AI assistant is not set up in this version of the app yet. Please contact the app\'s administrator.'**
   String get assistantNotConfigured;
 
   /// No description provided for @assistantSend.
@@ -597,7 +597,7 @@ abstract class AppLocalizations {
   /// No description provided for @authEmailNotSetUp.
   ///
   /// In en, this message translates to:
-  /// **'Real email codes are not set up yet (Connections).'**
+  /// **'Email codes are not set up in this version of the app yet.'**
   String get authEmailNotSetUp;
 
   /// No description provided for @authInvalidCode.
@@ -875,72 +875,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Scan'**
   String get colScan;
-
-  /// No description provided for @connectionsAiBody.
-  ///
-  /// In en, this message translates to:
-  /// **'Create a free key at aistudio.google.com > Get API key. The model can stay as gemini-flash-latest.'**
-  String get connectionsAiBody;
-
-  /// No description provided for @connectionsAiTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'AI assistant (Google Gemini)'**
-  String get connectionsAiTitle;
-
-  /// No description provided for @connectionsBuiltIn.
-  ///
-  /// In en, this message translates to:
-  /// **'Built into this app'**
-  String get connectionsBuiltIn;
-
-  /// No description provided for @connectionsEmailBody.
-  ///
-  /// In en, this message translates to:
-  /// **'In EmailJS, add a Gmail service and an email template whose \"To\" is to_email and whose message shows passcode. Turn on \"Allow EmailJS API for non-browser applications\" under Account > Security, and copy the private key too.'**
-  String get connectionsEmailBody;
-
-  /// No description provided for @connectionsEmailTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Email codes (EmailJS + Gmail)'**
-  String get connectionsEmailTitle;
-
-  /// No description provided for @connectionsGoogleBody.
-  ///
-  /// In en, this message translates to:
-  /// **'The Web client ID from Google Cloud. Sign-in also needs an Android client there with this app\'s package name and SHA-1.'**
-  String get connectionsGoogleBody;
-
-  /// No description provided for @connectionsGoogleTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Google sign-in'**
-  String get connectionsGoogleTitle;
-
-  /// No description provided for @connectionsIntro.
-  ///
-  /// In en, this message translates to:
-  /// **'Keys for the AI assistant, email codes and Google sign-in. Keys typed here stay on this phone and replace the ones built into the app. Leave a box empty to use the built-in key.'**
-  String get connectionsIntro;
-
-  /// No description provided for @connectionsMissing.
-  ///
-  /// In en, this message translates to:
-  /// **'Not set'**
-  String get connectionsMissing;
-
-  /// No description provided for @connectionsSetHere.
-  ///
-  /// In en, this message translates to:
-  /// **'Set on this phone'**
-  String get connectionsSetHere;
-
-  /// No description provided for @connectionsTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Connections'**
-  String get connectionsTitle;
 
   /// No description provided for @contentPendingReview.
   ///
@@ -2652,6 +2586,24 @@ abstract class AppLocalizations {
   /// **'Verify your account'**
   String get onboardingVerifyTitle;
 
+  /// No description provided for @otpExpired.
+  ///
+  /// In en, this message translates to:
+  /// **'This code has expired. Please send a new one.'**
+  String get otpExpired;
+
+  /// No description provided for @otpExpiresIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Code expires in {time}'**
+  String otpExpiresIn(String time);
+
+  /// No description provided for @otpResend.
+  ///
+  /// In en, this message translates to:
+  /// **'Send a new code'**
+  String get otpResend;
+
   /// No description provided for @otpSentTo.
   ///
   /// In en, this message translates to:
@@ -2735,6 +2687,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Permissions'**
   String get permissionsTitle;
+
+  /// No description provided for @photoChange.
+  ///
+  /// In en, this message translates to:
+  /// **'Change profile photo'**
+  String get photoChange;
+
+  /// No description provided for @photoChoose.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose from gallery'**
+  String get photoChoose;
+
+  /// No description provided for @photoRemove.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove photo'**
+  String get photoRemove;
+
+  /// No description provided for @photoSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile photo updated'**
+  String get photoSaved;
 
   /// No description provided for @portionHint.
   ///

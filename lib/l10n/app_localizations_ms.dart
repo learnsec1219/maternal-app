@@ -219,7 +219,7 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get assistantBadKey =>
-      'Perkhidmatan AI menolak kunci API Gemini. Semak kunci di Profil > Sambungan.';
+      'Perkhidmatan AI menolak kunci aplikasi. Sila hubungi pentadbir aplikasi.';
 
   @override
   String get assistantBlocked =>
@@ -251,7 +251,7 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get assistantNotConfigured =>
-      'Pembantu AI memerlukan kunci API Gemini sebelum boleh menjawab. Tambahkannya di Profil > Sambungan, atau minta pentadbir aplikasi memasukkannya ke dalam aplikasi.';
+      'Pembantu AI belum disediakan dalam versi aplikasi ini. Sila hubungi pentadbir aplikasi.';
 
   @override
   String get assistantSend => 'Hantar';
@@ -280,7 +280,7 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get authEmailNotSetUp =>
-      'Kod e-mel sebenar belum disediakan (Sambungan).';
+      'Kod e-mel belum disediakan dalam versi aplikasi ini.';
 
   @override
   String get authInvalidCode =>
@@ -455,43 +455,6 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get colScan => 'Imbasan';
-
-  @override
-  String get connectionsAiBody =>
-      'Cipta kunci percuma di aistudio.google.com > Get API key. Model boleh kekal gemini-flash-latest.';
-
-  @override
-  String get connectionsAiTitle => 'Pembantu AI (Google Gemini)';
-
-  @override
-  String get connectionsBuiltIn => 'Terbina dalam aplikasi ini';
-
-  @override
-  String get connectionsEmailBody =>
-      'Dalam EmailJS, tambah perkhidmatan Gmail dan templat e-mel dengan \"To\" ialah to_email dan mesej memaparkan passcode. Hidupkan \"Allow EmailJS API for non-browser applications\" di Account > Security, dan salin juga kunci peribadi.';
-
-  @override
-  String get connectionsEmailTitle => 'Kod e-mel (EmailJS + Gmail)';
-
-  @override
-  String get connectionsGoogleBody =>
-      'ID klien Web dari Google Cloud. Log masuk juga memerlukan klien Android di sana dengan nama pakej dan SHA-1 aplikasi ini.';
-
-  @override
-  String get connectionsGoogleTitle => 'Log masuk Google';
-
-  @override
-  String get connectionsIntro =>
-      'Kunci untuk pembantu AI, kod e-mel dan log masuk Google. Kunci yang ditaip di sini kekal dalam telefon ini dan menggantikan kunci terbina dalam aplikasi. Biarkan kotak kosong untuk guna kunci terbina dalam.';
-
-  @override
-  String get connectionsMissing => 'Belum ditetapkan';
-
-  @override
-  String get connectionsSetHere => 'Ditetapkan pada telefon ini';
-
-  @override
-  String get connectionsTitle => 'Sambungan';
 
   @override
   String get contentPendingReview =>
@@ -1477,6 +1440,18 @@ class AppLocalizationsMs extends AppLocalizations {
   String get onboardingVerifyTitle => 'Sahkan akaun anda';
 
   @override
+  String get otpExpired =>
+      'Kod ini telah tamat tempoh. Sila hantar kod baharu.';
+
+  @override
+  String otpExpiresIn(String time) {
+    return 'Kod tamat dalam $time';
+  }
+
+  @override
+  String get otpResend => 'Hantar kod baharu';
+
+  @override
   String otpSentTo(String destination) {
     return 'Kod dihantar ke $destination';
   }
@@ -1523,6 +1498,18 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get permissionsTitle => 'Kebenaran';
+
+  @override
+  String get photoChange => 'Tukar foto profil';
+
+  @override
+  String get photoChoose => 'Pilih dari galeri';
+
+  @override
+  String get photoRemove => 'Buang foto';
+
+  @override
+  String get photoSaved => 'Foto profil dikemas kini';
 
   @override
   String get portionHint => 'cth. 1 pinggan, 250 ml';

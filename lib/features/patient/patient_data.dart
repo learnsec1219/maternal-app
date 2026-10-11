@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -282,7 +284,8 @@ const obsLimits = <ObsType, List<double>>{
   ObsType.mood: [1, 5],
 };
 
-/// Round avatar: the person's photo when there is one, else their initial.
+/// Round avatar: the person's photo (a web address or a file on this phone)
+/// when there is one, else their initial.
 class Avatar extends StatelessWidget {
   const Avatar(this.name, {super.key, this.size = 40, this.photoUrl});
   final String name;
@@ -295,14 +298,23 @@ class Avatar extends StatelessWidget {
     final ch = name.isEmpty ? '?' : String.fromCharCode(name.runes.first);
     final letter = _letter(p, ch);
     if (photoUrl == null || photoUrl!.isEmpty) return letter;
+    final url = photoUrl!;
     return ClipOval(
-      child: Image.network(
-        photoUrl!,
-        width: size,
-        height: size,
-        fit: BoxFit.cover,
-        errorBuilder: (_, _, _) => letter,
-      ),
+      child: url.startsWith('http')
+          ? Image.network(
+              url,
+              width: size,
+              height: size,
+              fit: BoxFit.cover,
+              errorBuilder: (_, _, _) => letter,
+            )
+          : Image.file(
+              File(url),
+              width: size,
+              height: size,
+              fit: BoxFit.cover,
+              errorBuilder: (_, _, _) => letter,
+            ),
     );
   }
 

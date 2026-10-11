@@ -80,7 +80,20 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     );
   }
 
+  Future<void> _resend() async {
+    setState(() {
+      _flow.reset();
+      _code.clear();
+      _error = null;
+    });
+    await _send();
+  }
+
   Future<void> _verify() async {
+    if (_flow.expired) {
+      setState(() => _error = context.l10n.otpExpired);
+      return;
+    }
     var ok = false;
     await _run(() async {
       ok = await _flow.check(ref, _code.text, totpSecret: _totpSecret);
@@ -136,6 +149,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             keyboardType: TextInputType.number,
           ),
           CodeNote(flow: _flow, demoAccount: _demoAccount),
+          CodeCountdown(flow: _flow, onResend: _busy ? null : _resend),
         ],
         if (_error != null) InfoBanner(_error!, tone: Tone.alert),
         if (_busy)
@@ -171,7 +185,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           l.loginRecoveryHint,
           style: TextStyle(color: p.muted, fontSize: 12.5, height: 1.5),
         ),
-        const ConnectionsLink(),
         AppCard(
           color: p.sky,
           margin: EdgeInsets.zero,

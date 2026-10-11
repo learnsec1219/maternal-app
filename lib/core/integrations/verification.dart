@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:clock/clock.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 
@@ -25,6 +26,9 @@ abstract class VerificationService {
   bool checkEmailCode(String email, String code);
 }
 
+/// How long an email code can be used after it is sent.
+const emailCodeLife = Duration(seconds: 90);
+
 final verificationProvider = Provider<VerificationService>(
   (ref) => LiveVerification(ref.watch(integrationConfigProvider)),
 );
@@ -46,7 +50,7 @@ class LiveVerification implements VerificationService {
       throw const VerifyException(VerifyError.notConfigured);
     }
     final code = (Random.secure().nextInt(900000) + 100000).toString();
-    final expires = DateTime.now().add(const Duration(minutes: 10));
+    final expires = clock.now().add(emailCodeLife);
     final privateKey = config[IntegrationKey.emailJsPrivateKey];
     final http.Response res;
     try {
@@ -67,7 +71,10 @@ class LiveVerification implements VerificationService {
                 'app_name': 'Maternal',
                 'time':
                     '${expires.hour.toString().padLeft(2, '0')}:'
-                    '${expires.minute.toString().padLeft(2, '0')}',
+                    '${expires.minute.toString().padLeft(2, '0')}:'
+                    '${expires.second.toString().padLeft(2, '0')}',
+                'minutes': '1.5',
+                'seconds': '${emailCodeLife.inSeconds}',
               },
             }),
           )
@@ -87,7 +94,7 @@ class LiveVerification implements VerificationService {
   @override
   bool checkEmailCode(String email, String code) {
     final sent = _emailCodes[email.toLowerCase()];
-    if (sent == null || DateTime.now().isAfter(sent.$2)) return false;
+    if (sent == null || clock.now().isAfter(sent.$2)) return false;
     final ok = sent.$1 == code.trim();
     if (ok) _emailCodes.remove(email.toLowerCase());
     return ok;

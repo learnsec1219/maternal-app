@@ -14,6 +14,7 @@ import '../../data/models.dart';
 import '../../domain/health_rules.dart';
 import '../assistant/assistant_page.dart';
 import '../patient/patient_data.dart';
+import '../profile/profile_photo.dart';
 import '../records/care_pages.dart';
 import '../records/health_pages.dart';
 import '../records/pregnancy_pages.dart';
@@ -46,7 +47,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         padding: const EdgeInsets.only(top: 6, bottom: 12),
         child: Row(
           children: [
-            Avatar(me.name, size: 44, photoUrl: me.photoUrl),
+            Avatar(me.name, size: 44, photoUrl: photoOf(ref, me)),
             const SizedBox(width: 10),
             Expanded(
               child: Column(
@@ -543,7 +544,7 @@ class _MetricTile extends StatelessWidget {
                   TileIcon(st.icon, background: st.tint(p), size: 28),
                   const SizedBox(width: 8),
                   Expanded(
-                    child: Text(
+                    child: OneLine(
                       l.obs(type),
                       style: const TextStyle(
                         fontSize: 13,

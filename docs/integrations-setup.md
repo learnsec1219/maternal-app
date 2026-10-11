@@ -3,14 +3,9 @@
 The app works without any of these services: it falls back to the demo
 code `123456` and tells the person the service is not set up. Sign-in is by
 email (one-time code) or Google; there are no phone or SMS codes. Each service
-needs its own free account, and the keys reach the app in one of two ways:
-
-- **Built into the APK.** Add each value as a repository secret
-  (GitHub > Settings > Secrets and variables > Actions > New repository
-  secret) with the exact name below. The next CI build bakes them in.
-- **Typed on the phone.** Profile > Connections (also linked from the
-  sign-in screens). Values typed there stay on that phone and win over the
-  built-in ones. This is the quickest way to test.
+needs its own free account. Add each key as a repository secret (GitHub >
+Settings > Secrets and variables > Actions > New repository secret) with the
+exact name below; the next CI build bakes it into the APK.
 
 Keys built into an APK can be pulled out of it. That is fine for testing; a
 production release should move the Gemini call and code sending behind the
@@ -49,7 +44,8 @@ card before answering when a question mentions a warning sign.
    Account > Security; never commit it, since the repository is public.
 
 The person types their email on the sign-in or sign-up screen, the app sends
-a 6-digit code there, and the code works for 10 minutes.
+a 6-digit code there, and the code works for 90 seconds; the screen counts
+down and offers a new code when it runs out.
 
 ## 3. Google sign-in
 

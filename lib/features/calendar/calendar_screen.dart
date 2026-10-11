@@ -65,10 +65,8 @@ class TabTitleBar extends StatelessWidget {
         Expanded(
           child: Semantics(
             header: true,
-            child: Text(
+            child: OneLine(
               title,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
               style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
             ),
           ),

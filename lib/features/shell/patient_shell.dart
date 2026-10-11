@@ -450,7 +450,7 @@ class CreateTile extends StatelessWidget {
               Icon(icon, size: 22, color: context.pal.ink),
               const SizedBox(width: 10),
               Expanded(
-                child: Text(
+                child: OneLine(
                   label,
                   style: const TextStyle(
                     fontSize: 14,

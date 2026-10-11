@@ -100,7 +100,7 @@
   "appointmentsNoneToday": "No appointments today.",
   "appointmentsNoneUpcoming": "No upcoming appointments.",
   "appointmentsTitle": "Appointments",
-  "assistantBadKey": "The AI service refused the Gemini API key. Check the key in Profile > Connections.",
+  "assistantBadKey": "The AI service refused the app's key. Please contact the app's administrator.",
   "assistantBlocked": "The AI service did not answer this question. Please ask it another way.",
   "assistantEducational": "Educational information",
   "assistantFailed": "The answer could not be loaded. Please try again.",
@@ -109,7 +109,7 @@
   "assistantLanguage": "Answer in",
   "assistantNetwork": "Could not reach the AI service. Check your internet connection and try again.",
   "assistantNewChat": "New conversation",
-  "assistantNotConfigured": "The AI assistant needs a Gemini API key before it can answer. Add one in Profile > Connections, or ask the app's administrator to build it into the app.",
+  "assistantNotConfigured": "The AI assistant is not set up in this version of the app yet. Please contact the app's administrator.",
   "assistantSend": "Send",
   "assistantThinking": "Thinking...",
   "assistantTitle": "Ask a question",
@@ -124,7 +124,7 @@
     }
   },
   "authAuthenticatorHelp": "Enter the 6-digit code that your authenticator app shows for Maternal.",
-  "authEmailNotSetUp": "Real email codes are not set up yet (Connections).",
+  "authEmailNotSetUp": "Email codes are not set up in this version of the app yet.",
   "authInvalidCode": "That code is not right. Please check and try again.",
   "authInvalidIdentifier": "Please enter a valid email address.",
   "authNoAccountYet": "Verified. There is no account yet, so let's create one.",
@@ -266,17 +266,6 @@
   "clinicalSummary": "Clinical summary",
   "colGestation": "Gestation",
   "colScan": "Scan",
-  "connectionsAiBody": "Create a free key at aistudio.google.com > Get API key. The model can stay as gemini-flash-latest.",
-  "connectionsAiTitle": "AI assistant (Google Gemini)",
-  "connectionsBuiltIn": "Built into this app",
-  "connectionsEmailBody": "In EmailJS, add a Gmail service and an email template whose \"To\" is to_email and whose message shows passcode. Turn on \"Allow EmailJS API for non-browser applications\" under Account > Security, and copy the private key too.",
-  "connectionsEmailTitle": "Email codes (EmailJS + Gmail)",
-  "connectionsGoogleBody": "The Web client ID from Google Cloud. Sign-in also needs an Android client there with this app's package name and SHA-1.",
-  "connectionsGoogleTitle": "Google sign-in",
-  "connectionsIntro": "Keys for the AI assistant, email codes and Google sign-in. Keys typed here stay on this phone and replace the ones built into the app. Leave a box empty to use the built-in key.",
-  "connectionsMissing": "Not set",
-  "connectionsSetHere": "Set on this phone",
-  "connectionsTitle": "Connections",
   "contentPendingReview": "This schedule is demo content pending review by a qualified clinician against Malaysian guidance. Always follow your care team.",
   "contentVersion": "Clinical content version {version}",
   "@contentVersion": {
@@ -832,6 +821,16 @@
   },
   "onboardingVerifySubtitle": "Enter your email and we will send a one-time code.",
   "onboardingVerifyTitle": "Verify your account",
+  "otpExpired": "This code has expired. Please send a new one.",
+  "otpExpiresIn": "Code expires in {time}",
+  "@otpExpiresIn": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "otpResend": "Send a new code",
   "otpSentTo": "Code sent to {destination}",
   "@otpSentTo": {
     "placeholders": {
@@ -860,6 +859,10 @@
   "periodDayTitle": "Period and cycle log",
   "permissionsBody": "The app asks for notifications, Bluetooth, camera or photos only when you first use a feature that needs them. You can change these at any time in your phone settings.",
   "permissionsTitle": "Permissions",
+  "photoChange": "Change profile photo",
+  "photoChoose": "Choose from gallery",
+  "photoRemove": "Remove photo",
+  "photoSaved": "Profile photo updated",
   "portionHint": "e.g. 1 plate, 250 ml",
   "postpartumSince": "{weeks} weeks {days} days since delivery",
   "@postpartumSince": {
