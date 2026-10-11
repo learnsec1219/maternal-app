@@ -53,10 +53,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  OneLine(
                     l.homeGreeting(me.name.split(' ').first),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.w700,
@@ -116,10 +114,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       onTap: () => pushPage(context, const AssistantPage()),
       child: Row(
         children: [
-          TileIcon(
-            Icons.chat_bubble_outline_rounded,
-            background: p.sky,
-            size: 42,
+          Container(
+            width: 42,
+            height: 42,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(14),
+            ),
+            child: const AiLogo(size: 30),
           ),
           const SizedBox(width: 12),
           Expanded(

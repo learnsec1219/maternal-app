@@ -257,6 +257,7 @@ class CreateSheet extends ConsumerWidget {
       background: bg,
       onTap: () => open(page),
       tileKey: Key(key),
+      leading: key == 'create-ai' ? const AiLogo(size: 24) : null,
     );
 
     final groups = <(String, List<CreateTile>)>[
@@ -425,9 +426,13 @@ class CreateTile extends StatelessWidget {
     required this.background,
     required this.onTap,
     this.tileKey,
+    this.leading,
   });
 
   final IconData icon;
+
+  /// Shown instead of [icon], e.g. the AI logo.
+  final Widget? leading;
   final String label;
   final Color background;
   final VoidCallback onTap;
@@ -447,7 +452,7 @@ class CreateTile extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
           child: Row(
             children: [
-              Icon(icon, size: 22, color: context.pal.ink),
+              leading ?? Icon(icon, size: 22, color: context.pal.ink),
               const SizedBox(width: 10),
               Expanded(
                 child: OneLine(

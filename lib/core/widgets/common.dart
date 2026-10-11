@@ -386,6 +386,21 @@ class TileIcon extends StatelessWidget {
   );
 }
 
+/// The AI assistant's logo.
+class AiLogo extends StatelessWidget {
+  const AiLogo({super.key, this.size = 24});
+  final double size;
+
+  @override
+  Widget build(BuildContext context) => Image.asset(
+    'assets/branding/ai-logo.png',
+    key: const Key('ai-logo'),
+    width: size,
+    height: size,
+    excludeFromSemantics: true,
+  );
+}
+
 /// Text that always stays on one line: in a long language or with large
 /// system text it shrinks to fit the space instead of wrapping.
 class OneLine extends StatelessWidget {

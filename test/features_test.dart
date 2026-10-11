@@ -4,9 +4,12 @@ import 'package:clock/clock.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:http/http.dart' as http;
+import 'package:http/testing.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:maternal/core/integrations/gemini_client.dart';
 import 'package:maternal/core/integrations/google_auth.dart';
+import 'package:maternal/core/integrations/integration_config.dart';
 import 'package:maternal/core/integrations/totp.dart';
 import 'package:maternal/core/integrations/verification.dart';
 import 'package:maternal/core/integrations/watch_service.dart';
@@ -547,4 +550,101 @@ void main() {
       }
     });
   }
+
+  group('Gemini answers', () {
+    const cfg = IntegrationConfig({IntegrationKey.geminiApiKey: 'k'});
+    http.Response ok(String text) => http.Response.bytes(
+      utf8.encode(
+        jsonEncode({
+          'candidates': [
+            {
+              'content': {
+                'parts': [
+                  {'text': text},
+                ],
+              },
+            },
+          ],
+        }),
+      ),
+      200,
+      headers: {'content-type': 'application/json; charset=utf-8'},
+    );
+    const turns = [ChatTurn(fromUser: true, text: '懷孕期間運動安全嗎？')];
+
+    test('work without sharing profile details', () async {
+      final bodies = <Map<String, dynamic>>[];
+      final c = GeminiClient(
+        cfg,
+        client: MockClient((r) async {
+          bodies.add(jsonDecode(r.body) as Map<String, dynamic>);
+          return ok('適量運動通常是安全的。');
+        }),
+      );
+      expect(await c.answer(language: 'zh', turns: turns), '適量運動通常是安全的。');
+      final rules = jsonEncode(bodies.single['systemInstruction']);
+      expect(rules, contains('You know nothing about her personally.'));
+      expect(rules, isNot(contains('About her')));
+    });
+
+    test('try another model when one is busy or retired', () async {
+      final asked = <String>[];
+      final c = GeminiClient(
+        cfg,
+        client: MockClient((r) async {
+          asked.add(r.url.path);
+          return asked.length == 1
+              ? http.Response(
+                  '{"error":{"code":503,"message":"overloaded"}}',
+                  503,
+                )
+              : ok('Yes.');
+        }),
+      )..retryDelay = Duration.zero;
+      expect(await c.answer(language: 'en', turns: turns), 'Yes.');
+      expect(asked.length, 2);
+      expect(asked.first, contains('gemini-flash-latest'));
+      expect(asked.last, contains('gemini-2.5-flash'));
+    });
+
+    test('a refused key is reported straight away', () async {
+      var calls = 0;
+      final c = GeminiClient(
+        cfg,
+        client: MockClient((r) async {
+          calls++;
+          return http.Response(
+            '{"error":{"code":400,"message":"API key not valid.",'
+            '"status":"INVALID_ARGUMENT"}}',
+            400,
+          );
+        }),
+      )..retryDelay = Duration.zero;
+      await expectLater(
+        c.answer(language: 'en', turns: turns),
+        throwsA(
+          isA<AssistantException>().having(
+            (e) => e.error,
+            'error',
+            AssistantError.badKey,
+          ),
+        ),
+      );
+      expect(calls, 1);
+    });
+  });
+
+  testWidgets('the AI logo is on Home and the Create sheet', (tester) async {
+    await pumpApp(tester, signedIn: 'p1');
+    expect(find.byKey(const Key('ai-logo')), findsWidgets);
+    await tester.tap(find.byKey(const Key('nav-create')));
+    await tester.pumpAndSettle();
+    expect(
+      find.descendant(
+        of: find.byKey(const Key('create-ai')),
+        matching: find.byKey(const Key('ai-logo')),
+      ),
+      findsOneWidget,
+    );
+  });
 }

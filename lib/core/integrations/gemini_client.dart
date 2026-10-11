@@ -16,9 +16,16 @@ class ChatTurn {
 enum AssistantError { notConfigured, badKey, network, blocked, failed }
 
 class AssistantException implements Exception {
-  const AssistantException(this.error, [this.detail = '']);
+  const AssistantException(
+    this.error, [
+    this.detail = '',
+    this.tryAnotherModel = false,
+  ]);
   final AssistantError error;
   final String detail;
+
+  /// The model was busy, rate-limited or not found: another may work.
+  final bool tryAnotherModel;
 
   @override
   String toString() => 'AssistantException($error, $detail)';
@@ -72,14 +79,15 @@ class GeminiClient implements AssistantClient {
     if (!config.hasGemini) {
       throw const AssistantException(AssistantError.notConfigured);
     }
-    final model = config[IntegrationKey.geminiModel].isEmpty
-        ? 'gemini-flash-latest'
-        : config[IntegrationKey.geminiModel];
-    final uri = Uri.https(
-      'generativelanguage.googleapis.com',
-      '/v1beta/models/$model:generateContent',
-    );
-    final body = {
+    final chosen = config[IntegrationKey.geminiModel].trim();
+    // When a model is busy, rate-limited or retired, try the next one.
+    final models = {
+      if (chosen.isNotEmpty) chosen,
+      'gemini-flash-latest',
+      'gemini-2.5-flash',
+      'gemini-2.0-flash',
+    }.toList();
+    final body = jsonEncode({
       'systemInstruction': {
         'parts': [
           {'text': assistantRules(language, aboutMe)},
@@ -94,8 +102,29 @@ class GeminiClient implements AssistantClient {
             ],
           },
       ],
-      'generationConfig': {'temperature': 0.4, 'maxOutputTokens': 1024},
-    };
+      'generationConfig': {'temperature': 0.4, 'maxOutputTokens': 2048},
+    });
+    AssistantException? last;
+    for (final model in models) {
+      try {
+        return await _ask(model, body);
+      } on AssistantException catch (e) {
+        last = e;
+        if (!e.tryAnotherModel) rethrow;
+        await Future<void>.delayed(retryDelay);
+      }
+    }
+    throw last!;
+  }
+
+  /// Pause before trying the next model; zero in tests.
+  Duration retryDelay = const Duration(milliseconds: 800);
+
+  Future<String> _ask(String model, String body) async {
+    final uri = Uri.https(
+      'generativelanguage.googleapis.com',
+      '/v1beta/models/$model:generateContent',
+    );
     final http.Response res;
     try {
       res = await _http
@@ -105,7 +134,7 @@ class GeminiClient implements AssistantClient {
               'Content-Type': 'application/json',
               'x-goog-api-key': config[IntegrationKey.geminiApiKey],
             },
-            body: jsonEncode(body),
+            body: body,
           )
           .timeout(const Duration(seconds: 45));
     } on Exception catch (e) {
@@ -115,15 +144,30 @@ class GeminiClient implements AssistantClient {
     try {
       j = jsonDecode(utf8.decode(res.bodyBytes)) as Map<String, dynamic>;
     } on FormatException {
-      throw AssistantException(AssistantError.failed, 'HTTP ${res.statusCode}');
+      throw AssistantException(
+        AssistantError.failed,
+        '$model HTTP ${res.statusCode}',
+        res.statusCode >= 500,
+      );
     }
     if (res.statusCode != 200) {
-      final msg = (j['error'] as Map?)?['message']?.toString() ?? '';
+      final err = j['error'] as Map? ?? const {};
+      final msg = err['message']?.toString() ?? '';
+      final status = err['status']?.toString() ?? '';
+      final keyProblem =
+          res.statusCode == 401 ||
+          res.statusCode == 403 ||
+          status == 'PERMISSION_DENIED' ||
+          status == 'UNAUTHENTICATED' ||
+          msg.toLowerCase().contains('api key');
       throw AssistantException(
-        res.statusCode == 400 || res.statusCode == 401 || res.statusCode == 403
-            ? AssistantError.badKey
-            : AssistantError.failed,
-        'HTTP ${res.statusCode} $msg',
+        keyProblem ? AssistantError.badKey : AssistantError.failed,
+        '$model HTTP ${res.statusCode} $msg'.trim(),
+
+        !keyProblem &&
+            (res.statusCode == 404 ||
+                res.statusCode == 429 ||
+                res.statusCode >= 500),
       );
     }
     final candidates = j['candidates'] as List? ?? const [];
@@ -137,9 +181,20 @@ class GeminiClient implements AssistantClient {
         if (p is Map && p['text'] is String && p['thought'] != true) p['text'],
     ].join().trim();
     if (text.isEmpty) {
+      final block = (j['promptFeedback'] as Map?)?['blockReason'];
+      final finish =
+          (candidates.isEmpty ? null : candidates.first as Map)?['finishReason']
+              ?.toString() ??
+          '';
+      final blocked =
+          block != null ||
+          const {'SAFETY', 'PROHIBITED_CONTENT', 'BLOCKLIST'}.contains(finish);
+      // An empty answer for any other reason (e.g. the model ran out of room
+      // while thinking) is worth one more try on another model.
       throw AssistantException(
-        AssistantError.blocked,
-        '${(j['promptFeedback'] as Map?)?['blockReason'] ?? ''}',
+        blocked ? AssistantError.blocked : AssistantError.failed,
+        '$model ${block ?? finish}'.trim(),
+        !blocked,
       );
     }
     return text;

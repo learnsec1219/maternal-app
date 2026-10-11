@@ -24,6 +24,9 @@ class _Msg {
   final List<String> urgent;
   String text = '';
   AssistantError? error;
+
+  /// What the service said, shown small under the error to help support.
+  String errorDetail = '';
   bool pending = false;
 }
 
@@ -122,9 +125,13 @@ class _AssistantPageState extends ConsumerState<AssistantPage> {
         ..text = out
         ..error = null;
     } on AssistantException catch (e) {
-      ai.error = e.error;
-    } catch (_) {
-      ai.error = AssistantError.failed;
+      ai
+        ..error = e.error
+        ..errorDetail = e.detail;
+    } catch (e) {
+      ai
+        ..error = AssistantError.failed
+        ..errorDetail = '$e';
     }
     if (!mounted) return;
     setState(() {
@@ -202,7 +209,16 @@ class _AssistantPageState extends ConsumerState<AssistantPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Pill(cl.assistantEducational, background: p.sky),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const AiLogo(size: 20),
+                  const SizedBox(width: 6),
+                  Flexible(
+                    child: Pill(cl.assistantEducational, background: p.sky),
+                  ),
+                ],
+              ),
               const SizedBox(height: 6),
               if (m.pending)
                 Row(
@@ -219,6 +235,17 @@ class _AssistantPageState extends ConsumerState<AssistantPage> {
                 )
               else if (m.error != null) ...[
                 Text(_errorText(m.error!), style: TextStyle(color: p.alert)),
+                if (m.errorDetail.isNotEmpty)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 4),
+                    child: Text(
+                      m.errorDetail,
+                      key: const Key('assistant-error-detail'),
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(color: p.muted, fontSize: 11.5),
+                    ),
+                  ),
                 Wrap(
                   spacing: 4,
                   children: [
