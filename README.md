@@ -49,6 +49,15 @@ lib/
 
 To add or change text, edit the `.arb` files in `lib/l10n/`; Flutter regenerates the code on build.
 
+## Branding
+
+The official logo is a mother cradling her baby, with a heart between them, in the app's soft rose palette.
+
+- `assets/branding/maternal-logo.png`: full logo with the "Maternal" wordmark (1024 x 1024).
+- `assets/branding/maternal-icon.png`: icon mark only, the master for the app icons (1024 x 1024).
+
+The Android launcher icons (including the adaptive icon) and the iOS app icons are generated from the icon master.
+
 ## Next steps
 
 Onboarding and login, vaccines, appointments and documents, encrypted local database, backend and doctor access, notifications, wearables / Health Connect, then Play Store release.

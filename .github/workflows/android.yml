@@ -28,8 +28,35 @@ jobs:
       - run: flutter analyze
       - run: flutter test
 
+      # Service keys come from repository secrets (Settings > Secrets and
+      # variables > Actions). A missing secret just leaves that service off;
+      # testers can also type keys in the app's Connections page. The EmailJS
+      # service, template and public key are public identifiers (EmailJS puts
+      # them in web pages too), so they have defaults here; the private key
+      # and the Gemini key stay secret.
       - name: Build debug APK
-        run: flutter build apk --debug
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          EMAILJS_SERVICE_ID: ${{ secrets.EMAILJS_SERVICE_ID || 'service_8l7jip2' }}
+          EMAILJS_TEMPLATE_ID: ${{ secrets.EMAILJS_TEMPLATE_ID || 'template_yodm97g' }}
+          EMAILJS_PUBLIC_KEY: ${{ secrets.EMAILJS_PUBLIC_KEY || 'qXjfse8hSPIzWm_lb' }}
+          EMAILJS_PRIVATE_KEY: ${{ secrets.EMAILJS_PRIVATE_KEY }}
+          GOOGLE_SERVER_CLIENT_ID: ${{ secrets.GOOGLE_SERVER_CLIENT_ID }}
+        run: |
+          flutter build apk --debug \
+            --dart-define=GEMINI_API_KEY="$GEMINI_API_KEY" \
+            --dart-define=EMAILJS_SERVICE_ID="$EMAILJS_SERVICE_ID" \
+            --dart-define=EMAILJS_TEMPLATE_ID="$EMAILJS_TEMPLATE_ID" \
+            --dart-define=EMAILJS_PUBLIC_KEY="$EMAILJS_PUBLIC_KEY" \
+            --dart-define=EMAILJS_PRIVATE_KEY="$EMAILJS_PRIVATE_KEY" \
+            --dart-define=GOOGLE_SERVER_CLIENT_ID="$GOOGLE_SERVER_CLIENT_ID"
+
+      # The SHA-1 here must match the Android OAuth client in Google Cloud,
+      # or Google sign-in fails with error 28444.
+      - name: Show APK signing fingerprint
+        run: |
+          APKSIGNER=$(ls "$ANDROID_HOME"/build-tools/*/apksigner | sort -V | tail -1)
+          "$APKSIGNER" verify --print-certs build/app/outputs/flutter-apk/app-debug.apk | grep -E "SHA-1|SHA-256|DN"
 
       - uses: actions/upload-artifact@v4
         with:

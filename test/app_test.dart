@@ -1,60 +1,138 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:maternal/app.dart';
-import 'package:maternal/core/storage/local_store.dart';
-import 'package:maternal/core/util/clock.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-Future<void> pumpApp(
-  WidgetTester tester, {
-  Map<String, Object> prefs = const {},
-}) async {
-  SharedPreferences.setMockInitialValues(prefs);
-  final sp = await SharedPreferences.getInstance();
-  await tester.pumpWidget(
-    ProviderScope(
-      overrides: [
-        sharedPreferencesProvider.overrideWithValue(sp),
-        todayProvider.overrideWithValue(DateTime(2026, 10, 6)),
-      ],
-      child: const MaternalApp(),
-    ),
-  );
-  await tester.pumpAndSettle();
-}
+import 'test_app.dart';
 
 void main() {
   setUpAll(() => initializeDateFormatting());
 
-  testWidgets('shows the five-tab navigation and switches tabs', (
-    tester,
-  ) async {
+  testWidgets('starts on the welcome screen, not Home', (tester) async {
     await pumpApp(tester);
-    for (final label in ['Home', 'Calendar', 'Create', 'Calories', 'Profile']) {
-      expect(find.text(label), findsWidgets);
-    }
-    await tester.tap(find.text('Calories').last);
-    await tester.pumpAndSettle();
-    expect(find.text('Daily target'), findsOneWidget);
+    expect(find.text('Create an account'), findsOneWidget);
+    expect(find.text('Continue with Google'), findsOneWidget);
+    expect(find.textContaining('Phone'), findsNothing);
+    expect(find.text('Home'), findsNothing);
   });
 
-  testWidgets('Create opens the action sheet', (tester) async {
+  testWidgets('signs in with the demo account and code', (tester) async {
     await pumpApp(tester);
-    await tester.tap(find.text('Create'));
+    await tapAndSettle(tester, find.text('I already have an account'));
+    await tester.enterText(
+      find.byKey(const Key('login-id')),
+      'demo.patient@example.com',
+    );
+    await tapAndSettle(tester, find.byKey(const Key('login-submit')));
+    await tester.enterText(find.byKey(const Key('login-code')), '123456');
+    await tapAndSettle(tester, find.byKey(const Key('login-submit')));
+    expect(find.text('Hi, Gwen'), findsOneWidget);
+    expect(find.text('32 weeks 4 days'), findsOneWidget);
+  });
+
+  testWidgets('a wrong code is refused', (tester) async {
+    await pumpApp(tester);
+    await tapAndSettle(tester, find.text('I already have an account'));
+    await tester.enterText(
+      find.byKey(const Key('login-id')),
+      'demo.patient@example.com',
+    );
+    await tapAndSettle(tester, find.byKey(const Key('login-submit')));
+    await tester.enterText(find.byKey(const Key('login-code')), '000000');
+    await tapAndSettle(tester, find.byKey(const Key('login-submit')));
+    expect(
+      find.text('That code is not right. Please check and try again.'),
+      findsOneWidget,
+    );
+    expect(find.text('Hi, Gwen'), findsNothing);
+  });
+
+  testWidgets('Create shows the grouped actions', (tester) async {
+    await pumpApp(tester, signedIn: 'p1');
+    await tapAndSettle(tester, find.byKey(const Key('nav-create')));
+    for (final t in [
+      'Health',
+      'Pregnancy',
+      'Care',
+      'Nutrition',
+      'Health log',
+      'Symptoms',
+      'Medication',
+      'Kick counter',
+      'Contractions',
+      'Scan results',
+      'Milestone',
+      'Appointment',
+      'Vaccine',
+      'Document',
+      'Food',
+      'Water',
+    ]) {
+      expect(find.text(t), findsWidgets, reason: t);
+    }
+  });
+
+  testWidgets('tapping a calendar date adds a note for that day', (
+    tester,
+  ) async {
+    await pumpApp(tester, signedIn: 'p5');
+    await tapAndSettle(tester, find.text('Calendar').last);
+    for (final t in [
+      'Period',
+      'Appointment',
+      'Health log',
+      'Medication taken',
+      'Symptoms',
+    ]) {
+      expect(
+        find.descendant(
+          of: find.byKey(const Key('calendar-legend')),
+          matching: find.text(t),
+        ),
+        findsOneWidget,
+        reason: t,
+      );
+    }
+    await tapAndSettle(tester, find.byKey(const Key('day-2026-10-6')));
+    expect(find.byKey(const Key('day-sheet')), findsOneWidget);
+    await tapAndSettle(tester, find.byKey(const Key('day-add-note')));
+    await tester.enterText(
+      find.byKey(const Key('note-text')),
+      'Felt tired after work',
+    );
+    await tapAndSettle(tester, find.byKey(const Key('note-save')));
+    expect(find.text('• Felt tired after work'), findsOneWidget);
+  });
+
+  testWidgets('pregnancy timeline shows the path with a Today marker', (
+    tester,
+  ) async {
+    await pumpApp(tester, signedIn: 'p1');
+    await tapAndSettle(tester, find.text('Calendar').last);
+    expect(find.byKey(const Key('timeline-today')), findsOneWidget);
+    expect(find.text('Due date'), findsOneWidget);
+  });
+
+  testWidgets('profile has dark mode and signs out', (tester) async {
+    await pumpApp(tester, signedIn: 'p1');
+    await tapAndSettle(tester, find.text('Profile').last);
+    await tapAndSettle(tester, find.text('Appearance'));
+    await tapAndSettle(tester, find.text('Dark'));
+    final ctx = tester.element(find.text('Dark'));
+    expect(Theme.of(ctx).brightness, Brightness.dark);
+    await tester.pageBack();
     await tester.pumpAndSettle();
-    expect(find.text('What would you like to add?'), findsOneWidget);
-    expect(find.text('Health log'), findsOneWidget);
+    await tapAndSettle(tester, find.byKey(const Key('sign-out')));
+    await tapAndSettle(tester, find.byKey(const Key('sign-out-confirm')));
+    expect(find.text('Create an account'), findsOneWidget);
   });
 
   testWidgets('language bubble switches between all four languages', (
     tester,
   ) async {
-    await pumpApp(tester);
+    await pumpApp(tester, signedIn: 'p1');
 
     Future<void> pick(String code) async {
-      await tester.tap(find.byKey(const Key('language-switcher')));
+      await tester.tap(find.byKey(const Key('language-switcher')).first);
       // The water keeps rippling while open, so pump past the opening only.
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 800));
@@ -73,33 +151,9 @@ void main() {
     expect(find.text('Home'), findsWidgets);
   });
 
-  testWidgets('tapping outside closes the language bubble', (tester) async {
-    await pumpApp(tester);
-    await tester.tap(find.byKey(const Key('language-switcher')));
-    await tester.pump();
-    await tester.pump(const Duration(milliseconds: 800));
-    expect(find.byKey(const Key('language-ta')), findsOneWidget);
-    await tester.tapAt(const Offset(20, 500));
-    await tester.pumpAndSettle();
-    expect(find.byKey(const Key('language-ta')), findsNothing);
-    expect(find.text('Home'), findsWidgets);
-  });
-
-  testWidgets('pregnant profile shows gestational age on Home', (tester) async {
-    await pumpApp(
-      tester,
-      prefs: {
-        'profile': '{"name":"Aisha Tan","isPregnant":true,"dueDate":"2026-11-27T00:00:00.000","babies":1}',
-      },
-    );
-    expect(find.text('Hello, Aisha'), findsOneWidget);
-    expect(find.text('32 weeks 4 days'), findsOneWidget);
-    expect(find.text('52 days to go'), findsOneWidget);
-  });
-
-  testWidgets('doctor role shows the doctor dashboard', (tester) async {
-    await pumpApp(tester, prefs: {'profile': '{"role":"doctor"}'});
-    expect(find.text('Doctor dashboard'), findsOneWidget);
-    expect(find.text('Demo Patient A'), findsOneWidget);
+  testWidgets('doctor sees the dashboard', (tester) async {
+    await pumpApp(tester, signedIn: 'd1');
+    expect(find.text('Good day, Dr. Chua Wang Ching (Arlies)'), findsOneWidget);
+    expect(find.text('Alerts to review'), findsWidgets);
   });
 }
