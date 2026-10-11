@@ -70,6 +70,41 @@ void main() {
       expect(e.fertileStart!.isBefore(e.fertileEnd!), isTrue);
     });
 
+    test('predicts from the first two recorded periods', () {
+      final s1 = addDays(today, -30), s2 = addDays(today, -1);
+      final e = CycleEstimate.from(
+        [...period(s1, 4), ...period(s2, 4)],
+        today,
+        c,
+      );
+      expect(e.status, CycleStatus.history);
+      expect(e.recorded, 2);
+      expect(e.cycleLength, 29);
+      expect(e.upcoming.length, 6);
+      expect(e.upcoming[0].start, addDays(s2, 29));
+      expect(e.upcoming[1].start, addDays(s2, 58));
+      expect(e.upcoming[2].start, addDays(s2, 87));
+      expect(e.shiftDays, 0);
+    });
+
+    test('a period that differs from the prediction moves later months', () {
+      // Two 28-day cycles predict the third period on day 56, but it came
+      // on day 61: the next ones are re-planned from the real date.
+      final s1 = addDays(today, -62),
+          s2 = addDays(s1, 28),
+          s3 = addDays(s1, 61);
+      final e = CycleEstimate.from(
+        [...period(s1, 5), ...period(s2, 5), ...period(s3, 5)],
+        today,
+        c,
+      );
+      expect(e.shiftDays, 5);
+      // Weighted toward the newest cycle: (28*1 + 33*2) / 3 = 31.3 -> 31.
+      expect(e.cycleLength, 31);
+      expect(e.next, addDays(s3, 31));
+      expect(e.upcoming[1].start, addDays(s3, 62));
+    });
+
     test('marks a long-overdue period as stale', () {
       final e = CycleEstimate.from(period(addDays(today, -120), 4), today, c);
       expect(e.status, CycleStatus.stale);

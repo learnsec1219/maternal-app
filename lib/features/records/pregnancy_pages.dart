@@ -16,6 +16,7 @@ import '../../data/models.dart';
 import '../../domain/health_rules.dart';
 import '../patient/patient_data.dart';
 import 'health_pages.dart';
+import 'kick_button.dart';
 
 /// Tap for each movement. Taps within a few seconds count as one.
 class KickPage extends ConsumerStatefulWidget {
@@ -55,48 +56,18 @@ class _KickPageState extends ConsumerState<KickPage> {
       children: [
         InfoBanner(c.education['kicks']?.of(context.lang) ?? ''),
         Center(
-          child: Semantics(
-            button: true,
+          child: KickButton(
             label: l.kickTapButton,
-            excludeSemantics: true,
-            child: GestureDetector(
-              key: const Key('kick-tap'),
-              onTap: () {
-                final now = DateTime.now();
-                if (all.isNotEmpty && now.difference(all.first.at) < guard) {
-                  setState(() => _guarded = true);
-                  return;
-                }
-                setState(() => _guarded = false);
-                store.addKick(Kick(m.me.id, now));
-              },
-              child: Container(
-                width: 210,
-                height: 210,
-                margin: const EdgeInsets.only(top: 6, bottom: 12),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: p.roseSoft,
-                  border: Border.all(color: p.line, width: 12),
-                ),
-                alignment: Alignment.center,
-                padding: const EdgeInsets.all(20),
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: SizedBox(
-                    width: 150,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(Icons.child_care_rounded, size: 72, color: p.rose),
-                        const SizedBox(height: 6),
-                        Text(l.kickTapButton, textAlign: TextAlign.center),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            onTap: () {
+              final now = DateTime.now();
+              if (all.isNotEmpty && now.difference(all.first.at) < guard) {
+                setState(() => _guarded = true);
+                return false;
+              }
+              setState(() => _guarded = false);
+              store.addKick(Kick(m.me.id, now));
+              return true;
+            },
           ),
         ),
         Text(

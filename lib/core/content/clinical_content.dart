@@ -101,7 +101,10 @@ class ClinicalContent {
       education = {
         for (final e in (j['education'] as Map).entries)
           e.key as String: LocalText.fromJson(e.value),
-      };
+      },
+      assistant = AssistantContent(
+        (j['assistant'] as Map?)?.cast<String, dynamic>() ?? const {},
+      );
 
   static const assetPath = 'assets/content/clinical_content.json';
 
@@ -118,6 +121,7 @@ class ClinicalContent {
   final List<SymptomOption> symptoms;
   final List<VaccineSchedule> vaccines;
   final Map<String, LocalText> education;
+  final AssistantContent assistant;
 
   String symptomLabel(String code, String lang) {
     for (final s in symptoms) {
@@ -130,6 +134,40 @@ class ClinicalContent {
   }
 
   bool isWarningSign(String code) => warningSigns.any((w) => w.code == code);
+}
+
+/// Wording and safety keywords for the AI assistant page.
+class AssistantContent {
+  AssistantContent(Map<String, dynamic> j)
+    : intro = LocalText.fromJson(j['intro']),
+      disclaimer = LocalText.fromJson(j['disclaimer']),
+      urgentTitle = LocalText.fromJson(j['urgentTitle']),
+      suggestions = [
+        for (final s in j['suggestions'] as List? ?? const [])
+          LocalText.fromJson(s),
+      ],
+      redFlagKeywords = {
+        for (final e in (j['redFlagKeywords'] as Map? ?? const {}).entries)
+          e.key as String: [
+            for (final words in (e.value as Map).values)
+              for (final w in words as List) (w as String).toLowerCase(),
+          ],
+      };
+
+  final LocalText intro, disclaimer, urgentTitle;
+  final List<LocalText> suggestions;
+
+  /// Warning-sign code to keywords in every language.
+  final Map<String, List<String>> redFlagKeywords;
+
+  /// Warning-sign codes the text mentions, checked before any AI call.
+  List<String> redFlags(String text) {
+    final x = text.toLowerCase();
+    return [
+      for (final e in redFlagKeywords.entries)
+        if (e.value.any(x.contains)) e.key,
+    ];
+  }
 }
 
 /// Loaded in `main()` before the app starts.

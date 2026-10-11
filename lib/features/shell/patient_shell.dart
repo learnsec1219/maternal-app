@@ -13,16 +13,31 @@ import '../calories/food_form.dart';
 import '../home/home_screen.dart';
 import '../patient/patient_data.dart';
 import '../profile/profile_screen.dart';
+import '../profile/watch_section.dart';
 import '../records/care_pages.dart';
 import '../records/health_pages.dart';
 import '../records/pregnancy_pages.dart';
 
 /// Home, Calendar, the raised Create button, Calories and Profile.
-class PatientShell extends ConsumerWidget {
+class PatientShell extends ConsumerStatefulWidget {
   const PatientShell({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<PatientShell> createState() => _PatientShellState();
+}
+
+class _PatientShellState extends ConsumerState<PatientShell> {
+  @override
+  void initState() {
+    super.initState();
+    // Ask once whether to pair a Bluetooth watch.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) askForWatchOnce(context, ref);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final tab = ref.watch(patientTabProvider);
     return Scaffold(
       body: SafeArea(

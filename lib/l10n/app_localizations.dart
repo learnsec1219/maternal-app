@@ -174,6 +174,12 @@ abstract class AppLocalizations {
   /// **'Continue'**
   String get actionContinue;
 
+  /// No description provided for @actionCopy.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy'**
+  String get actionCopy;
+
   /// No description provided for @actionDecline.
   ///
   /// In en, this message translates to:
@@ -258,11 +264,23 @@ abstract class AppLocalizations {
   /// **'Previous month'**
   String get actionPreviousMonth;
 
+  /// No description provided for @actionRetry.
+  ///
+  /// In en, this message translates to:
+  /// **'Try again'**
+  String get actionRetry;
+
   /// No description provided for @actionSave.
   ///
   /// In en, this message translates to:
   /// **'Save'**
   String get actionSave;
+
+  /// No description provided for @actionScan.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan for devices'**
+  String get actionScan;
 
   /// No description provided for @actionSendCode.
   ///
@@ -474,6 +492,30 @@ abstract class AppLocalizations {
   /// **'Appointments'**
   String get appointmentsTitle;
 
+  /// No description provided for @assistantBadKey.
+  ///
+  /// In en, this message translates to:
+  /// **'The AI service refused the Gemini API key. Check the key in Profile > Connections.'**
+  String get assistantBadKey;
+
+  /// No description provided for @assistantBlocked.
+  ///
+  /// In en, this message translates to:
+  /// **'The AI service did not answer this question. Please ask it another way.'**
+  String get assistantBlocked;
+
+  /// No description provided for @assistantEducational.
+  ///
+  /// In en, this message translates to:
+  /// **'Educational information'**
+  String get assistantEducational;
+
+  /// No description provided for @assistantFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'The answer could not be loaded. Please try again.'**
+  String get assistantFailed;
+
   /// No description provided for @assistantHomeHint.
   ///
   /// In en, this message translates to:
@@ -492,17 +534,35 @@ abstract class AppLocalizations {
   /// **'Answer in'**
   String get assistantLanguage;
 
-  /// No description provided for @assistantNotConnected.
+  /// No description provided for @assistantNetwork.
   ///
   /// In en, this message translates to:
-  /// **'The AI assistant is not connected in this demo build, so it cannot answer yet. For anything urgent, use the warning signs in Symptoms or call your care team.'**
-  String get assistantNotConnected;
+  /// **'Could not reach the AI service. Check your internet connection and try again.'**
+  String get assistantNetwork;
+
+  /// No description provided for @assistantNewChat.
+  ///
+  /// In en, this message translates to:
+  /// **'New conversation'**
+  String get assistantNewChat;
+
+  /// No description provided for @assistantNotConfigured.
+  ///
+  /// In en, this message translates to:
+  /// **'The AI assistant needs a Gemini API key before it can answer. Add one in Profile > Connections, or ask the app\'s administrator to build it into the app.'**
+  String get assistantNotConfigured;
 
   /// No description provided for @assistantSend.
   ///
   /// In en, this message translates to:
   /// **'Send'**
   String get assistantSend;
+
+  /// No description provided for @assistantThinking.
+  ///
+  /// In en, this message translates to:
+  /// **'Thinking...'**
+  String get assistantThinking;
 
   /// No description provided for @assistantTitle.
   ///
@@ -528,11 +588,23 @@ abstract class AppLocalizations {
   /// **'at {ga}'**
   String atGestation(String ga);
 
-  /// No description provided for @authAccountNotFound.
+  /// No description provided for @authAuthenticatorHelp.
   ///
   /// In en, this message translates to:
-  /// **'No account found. Create an account instead.'**
-  String get authAccountNotFound;
+  /// **'Enter the 6-digit code that your authenticator app shows for Maternal.'**
+  String get authAuthenticatorHelp;
+
+  /// No description provided for @authCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign-in was cancelled.'**
+  String get authCancelled;
+
+  /// No description provided for @authEmailNotSetUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Real email codes are not set up yet (Connections).'**
+  String get authEmailNotSetUp;
 
   /// No description provided for @authInvalidCode.
   ///
@@ -545,6 +617,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please enter a valid phone number or email.'**
   String get authInvalidIdentifier;
+
+  /// No description provided for @authNoAccountYet.
+  ///
+  /// In en, this message translates to:
+  /// **'Verified. There is no account yet, so let\'s create one.'**
+  String get authNoAccountYet;
+
+  /// No description provided for @authSendCodeInstead.
+  ///
+  /// In en, this message translates to:
+  /// **'Send a code by SMS or email instead'**
+  String get authSendCodeInstead;
+
+  /// No description provided for @authSendFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not send or check the code. {reason}'**
+  String authSendFailed(String reason);
+
+  /// No description provided for @authSmsNotSetUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Real SMS codes and Google sign-in are not set up yet (Connections).'**
+  String get authSmsNotSetUp;
 
   /// No description provided for @babiesMore.
   ///
@@ -576,17 +672,113 @@ abstract class AppLocalizations {
   /// **'Baby\'s measurements'**
   String get babyParameters;
 
-  /// No description provided for @bluetoothBody.
+  /// No description provided for @bluetoothBattery.
   ///
   /// In en, this message translates to:
-  /// **'Connect compatible health and wearable devices, such as blood pressure monitors.'**
-  String get bluetoothBody;
+  /// **'Battery {level}%'**
+  String bluetoothBattery(int level);
+
+  /// No description provided for @bluetoothConnectFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not connect. Keep the watch close to the phone and try again.'**
+  String get bluetoothConnectFailed;
+
+  /// No description provided for @bluetoothDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Bluetooth permission was not given. Allow \"Nearby devices\" for Maternal in your phone\'s Settings > Apps, then try again.'**
+  String get bluetoothDenied;
+
+  /// No description provided for @bluetoothFindWatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Turn on Bluetooth and find my watch'**
+  String get bluetoothFindWatch;
+
+  /// No description provided for @bluetoothHasHeartRate.
+  ///
+  /// In en, this message translates to:
+  /// **'Shares heart rate'**
+  String get bluetoothHasHeartRate;
+
+  /// No description provided for @bluetoothHeartRate.
+  ///
+  /// In en, this message translates to:
+  /// **'{bpm} bpm'**
+  String bluetoothHeartRate(int bpm);
+
+  /// No description provided for @bluetoothLost.
+  ///
+  /// In en, this message translates to:
+  /// **'The watch disconnected.'**
+  String get bluetoothLost;
+
+  /// No description provided for @bluetoothNoHeartRate.
+  ///
+  /// In en, this message translates to:
+  /// **'This device does not share heart rate over Bluetooth. On many watches you can turn on \"Broadcast heart rate\" (HR broadcast) in the watch settings.'**
+  String get bluetoothNoHeartRate;
+
+  /// No description provided for @bluetoothNoneFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No devices found yet.'**
+  String get bluetoothNoneFound;
+
+  /// No description provided for @bluetoothOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Bluetooth is off. Turn it on and try again.'**
+  String get bluetoothOff;
+
+  /// No description provided for @bluetoothPromptTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect your watch?'**
+  String get bluetoothPromptTitle;
+
+  /// No description provided for @bluetoothRationale.
+  ///
+  /// In en, this message translates to:
+  /// **'To find nearby devices the app needs Bluetooth permission. It is used only to connect health devices you choose.'**
+  String get bluetoothRationale;
+
+  /// No description provided for @bluetoothReconnect.
+  ///
+  /// In en, this message translates to:
+  /// **'Reconnect {name}'**
+  String bluetoothReconnect(String name);
+
+  /// No description provided for @bluetoothScanHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep the watch awake and close to the phone. Devices that share heart rate are listed first.'**
+  String get bluetoothScanHelp;
 
   /// No description provided for @bluetoothTitle.
   ///
   /// In en, this message translates to:
   /// **'Bluetooth devices'**
   String get bluetoothTitle;
+
+  /// No description provided for @bluetoothUnsupported.
+  ///
+  /// In en, this message translates to:
+  /// **'This phone does not support Bluetooth Low Energy.'**
+  String get bluetoothUnsupported;
+
+  /// No description provided for @bluetoothWaitingForReading.
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting for a reading…'**
+  String get bluetoothWaitingForReading;
+
+  /// No description provided for @bluetoothWatchBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Pair a watch or fitness band over Bluetooth. Heart-rate readings sync straight into your Health log.'**
+  String get bluetoothWatchBody;
 
   /// No description provided for @callDoctor.
   ///
@@ -720,6 +912,78 @@ abstract class AppLocalizations {
   /// **'Scan'**
   String get colScan;
 
+  /// No description provided for @connectionsAiBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Create a free key at aistudio.google.com > Get API key. The model can stay as gemini-flash-latest.'**
+  String get connectionsAiBody;
+
+  /// No description provided for @connectionsAiTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'AI assistant (Google Gemini)'**
+  String get connectionsAiTitle;
+
+  /// No description provided for @connectionsBuiltIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Built into this app'**
+  String get connectionsBuiltIn;
+
+  /// No description provided for @connectionsEmailBody.
+  ///
+  /// In en, this message translates to:
+  /// **'In EmailJS, add a Gmail service and an email template whose \"To\" is to_email and whose message shows passcode. Turn on \"Allow EmailJS API for non-browser applications\" under Account > Security, and copy the private key too.'**
+  String get connectionsEmailBody;
+
+  /// No description provided for @connectionsEmailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Email codes (EmailJS + Gmail)'**
+  String get connectionsEmailTitle;
+
+  /// No description provided for @connectionsFirebaseBody.
+  ///
+  /// In en, this message translates to:
+  /// **'In the Firebase console, add an Android app with the package and fingerprints below, turn on Phone and Google under Authentication > Sign-in method, then copy the values from Project settings.'**
+  String get connectionsFirebaseBody;
+
+  /// No description provided for @connectionsFirebaseTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'SMS codes and Google sign-in (Firebase)'**
+  String get connectionsFirebaseTitle;
+
+  /// No description provided for @connectionsIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Keys for the AI assistant, email codes, SMS codes and Google sign-in. Keys typed here stay on this phone and replace the ones built into the app. Leave a box empty to use the built-in key.'**
+  String get connectionsIntro;
+
+  /// No description provided for @connectionsMissing.
+  ///
+  /// In en, this message translates to:
+  /// **'Not set'**
+  String get connectionsMissing;
+
+  /// No description provided for @connectionsRestartNote.
+  ///
+  /// In en, this message translates to:
+  /// **'After changing the Firebase values, close and reopen the app.'**
+  String get connectionsRestartNote;
+
+  /// No description provided for @connectionsSetHere.
+  ///
+  /// In en, this message translates to:
+  /// **'Set on this phone'**
+  String get connectionsSetHere;
+
+  /// No description provided for @connectionsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Connections'**
+  String get connectionsTitle;
+
   /// No description provided for @contentPendingReview.
   ///
   /// In en, this message translates to:
@@ -803,6 +1067,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'That was only a few seconds, so it was not saved.'**
   String get contractionTooShort;
+
+  /// No description provided for @copied.
+  ///
+  /// In en, this message translates to:
+  /// **'Copied'**
+  String get copied;
 
   /// No description provided for @createAppointment.
   ///
@@ -924,6 +1194,12 @@ abstract class AppLocalizations {
   /// **'Cycle about {days} days'**
   String cycleAverageLength(int days);
 
+  /// No description provided for @cycleBasedOnRecords.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, other{Based on the {count} periods you recorded. Each new record updates the following months.}}'**
+  String cycleBasedOnRecords(int count);
+
   /// No description provided for @cycleBasedOnTypical.
   ///
   /// In en, this message translates to:
@@ -959,6 +1235,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Log period'**
   String get cycleLogToday;
+
+  /// No description provided for @cycleNeedSecondPeriod.
+  ///
+  /// In en, this message translates to:
+  /// **'Based on a typical 28-day cycle. Record your next period and predictions will follow your own rhythm.'**
+  String get cycleNeedSecondPeriod;
 
   /// No description provided for @cycleNextPeriod.
   ///
@@ -996,11 +1278,29 @@ abstract class AppLocalizations {
   /// **'Period about {days} days'**
   String cyclePeriodLength(int days);
 
+  /// No description provided for @cycleShiftEarlier.
+  ///
+  /// In en, this message translates to:
+  /// **'{days, plural, =1{Your last period started 1 day earlier than predicted, so the next dates moved.} other{Your last period started {days} days earlier than predicted, so the next dates moved.}}'**
+  String cycleShiftEarlier(int days);
+
+  /// No description provided for @cycleShiftLater.
+  ///
+  /// In en, this message translates to:
+  /// **'{days, plural, =1{Your last period started 1 day later than predicted, so the next dates moved.} other{Your last period started {days} days later than predicted, so the next dates moved.}}'**
+  String cycleShiftLater(int days);
+
   /// No description provided for @cycleStale.
   ///
   /// In en, this message translates to:
   /// **'Your expected period is more than a cycle late. Log your latest period to update the estimates.'**
   String get cycleStale;
+
+  /// No description provided for @cycleUpcomingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Following periods (estimate)'**
+  String get cycleUpcomingTitle;
 
   /// No description provided for @dayAppointments.
   ///
@@ -1097,12 +1397,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Gwen (pregnant)'**
   String get demoUsePatient;
-
-  /// No description provided for @devicesDemoNote.
-  ///
-  /// In en, this message translates to:
-  /// **'This build uses demo devices and demo readings. Real Health Connect and Bluetooth sync is added in the wearables stage.'**
-  String get devicesDemoNote;
 
   /// No description provided for @devicesTitle.
   ///
@@ -1668,6 +1962,12 @@ abstract class AppLocalizations {
   /// **'Bring in steps, heart rate, sleep and other data your phone or watch already records.'**
   String get healthConnectBody;
 
+  /// No description provided for @healthConnectDemoNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Health Connect below still uses demo readings in this build. Bluetooth above is real.'**
+  String get healthConnectDemoNote;
+
   /// No description provided for @healthConnectRationale.
   ///
   /// In en, this message translates to:
@@ -1842,6 +2142,12 @@ abstract class AppLocalizations {
   /// **'Appointment'**
   String get legendAppointment;
 
+  /// No description provided for @legendFertile.
+  ///
+  /// In en, this message translates to:
+  /// **'Fertile window (estimate)'**
+  String get legendFertile;
+
   /// No description provided for @legendLogged.
   ///
   /// In en, this message translates to:
@@ -1859,6 +2165,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Period'**
   String get legendPeriod;
+
+  /// No description provided for @legendPredicted.
+  ///
+  /// In en, this message translates to:
+  /// **'Predicted period'**
+  String get legendPredicted;
 
   /// No description provided for @linkActive.
   ///
@@ -2574,6 +2886,18 @@ abstract class AppLocalizations {
   /// **'e.g. Growth scan'**
   String get scanTypeHint;
 
+  /// No description provided for @scanning.
+  ///
+  /// In en, this message translates to:
+  /// **'Scanning…'**
+  String get scanning;
+
+  /// No description provided for @securityTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign-in & security'**
+  String get securityTitle;
+
   /// No description provided for @shareCycle.
   ///
   /// In en, this message translates to:
@@ -2843,6 +3167,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Today'**
   String get today;
+
+  /// No description provided for @totpBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in with the 6-digit code from Google Authenticator, Microsoft Authenticator or a similar app. It works without SMS or internet.'**
+  String get totpBody;
+
+  /// No description provided for @totpCodeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Authenticator code'**
+  String get totpCodeLabel;
+
+  /// No description provided for @totpEnable.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify and turn on'**
+  String get totpEnable;
+
+  /// No description provided for @totpKeyLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Setup key'**
+  String get totpKeyLabel;
+
+  /// No description provided for @totpNoApp.
+  ///
+  /// In en, this message translates to:
+  /// **'No authenticator app found. Install Google Authenticator, then try again or type the setup key.'**
+  String get totpNoApp;
+
+  /// No description provided for @totpOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Authenticator app is on. When you sign in, enter the code it shows.'**
+  String get totpOn;
+
+  /// No description provided for @totpOpenApp.
+  ///
+  /// In en, this message translates to:
+  /// **'Open authenticator app'**
+  String get totpOpenApp;
+
+  /// No description provided for @totpSetup.
+  ///
+  /// In en, this message translates to:
+  /// **'Set up authenticator app'**
+  String get totpSetup;
+
+  /// No description provided for @totpStep1.
+  ///
+  /// In en, this message translates to:
+  /// **'1. Tap \"Open authenticator app\", or scan this QR code with another phone, or type the setup key into the app.'**
+  String get totpStep1;
+
+  /// No description provided for @totpStep2.
+  ///
+  /// In en, this message translates to:
+  /// **'2. Enter the 6-digit code the app shows.'**
+  String get totpStep2;
+
+  /// No description provided for @totpTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Authenticator app'**
+  String get totpTitle;
+
+  /// No description provided for @totpTurnOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Turn off'**
+  String get totpTurnOff;
 
   /// No description provided for @trimesterFirst.
   ///

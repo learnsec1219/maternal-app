@@ -49,6 +49,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get actionContinue => '繼續';
 
   @override
+  String get actionCopy => '複製';
+
+  @override
   String get actionDecline => '拒絕';
 
   @override
@@ -91,7 +94,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get actionPreviousMonth => '上個月';
 
   @override
+  String get actionRetry => '再試一次';
+
+  @override
   String get actionSave => '儲存';
+
+  @override
+  String get actionScan => '搜尋裝置';
 
   @override
   String get actionSendCode => '傳送驗證碼';
@@ -207,6 +216,18 @@ class AppLocalizationsZh extends AppLocalizations {
   String get appointmentsTitle => '預約';
 
   @override
+  String get assistantBadKey => 'AI 服務拒絕了這個 Gemini API 金鑰。請到「個人檔案 > 連線」檢查金鑰。';
+
+  @override
+  String get assistantBlocked => 'AI 服務沒有回答這個問題。請換個方式再問一次。';
+
+  @override
+  String get assistantEducational => '衛教資訊';
+
+  @override
+  String get assistantFailed => '無法載入回答，請再試一次。';
+
+  @override
   String get assistantHomeHint => 'AI 可用 English、BM、中文或 தமிழ் 回答。僅供衛教，並非診斷。';
 
   @override
@@ -216,11 +237,20 @@ class AppLocalizationsZh extends AppLocalizations {
   String get assistantLanguage => '回答語言';
 
   @override
-  String get assistantNotConnected =>
-      '此示範版本尚未連接 AI 助理，因此暫時無法回答。如有緊急情況，請使用「症狀」中的警示徵兆，或致電您的醫療團隊。';
+  String get assistantNetwork => '無法連線至 AI 服務。請檢查網路連線後再試一次。';
+
+  @override
+  String get assistantNewChat => '新對話';
+
+  @override
+  String get assistantNotConfigured =>
+      'AI 助理需要 Gemini API 金鑰才能回答。請在「個人檔案 > 連線」中加入，或請應用程式管理員將其內建於應用程式。';
 
   @override
   String get assistantSend => '傳送';
+
+  @override
+  String get assistantThinking => '思考中…';
 
   @override
   String get assistantTitle => '提出問題';
@@ -238,13 +268,33 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get authAccountNotFound => '找不到帳戶，請建立新帳戶。';
+  String get authAuthenticatorHelp => '請輸入驗證器應用程式為 Maternal 顯示的 6 位數代碼。';
+
+  @override
+  String get authCancelled => '已取消登入。';
+
+  @override
+  String get authEmailNotSetUp => '尚未設定真實的電郵驗證碼（連線）。';
 
   @override
   String get authInvalidCode => '驗證碼不正確，請檢查後再試。';
 
   @override
   String get authInvalidIdentifier => '請輸入有效的手機號碼或電郵。';
+
+  @override
+  String get authNoAccountYet => '已驗證。目前還沒有帳戶，我們來建立一個。';
+
+  @override
+  String get authSendCodeInstead => '改用簡訊或電郵傳送代碼';
+
+  @override
+  String authSendFailed(String reason) {
+    return '無法傳送或驗證代碼。$reason';
+  }
+
+  @override
+  String get authSmsNotSetUp => '尚未設定真實的簡訊驗證碼與 Google 登入（連線）。';
 
   @override
   String get babiesMore => '更多';
@@ -262,10 +312,66 @@ class AppLocalizationsZh extends AppLocalizations {
   String get babyParameters => '寶寶測量數據';
 
   @override
-  String get bluetoothBody => '連接相容的健康與穿戴裝置，例如血壓計。';
+  String bluetoothBattery(int level) {
+    return '電量 $level%';
+  }
+
+  @override
+  String get bluetoothConnectFailed => '無法連線。請讓手錶靠近手機後再試一次。';
+
+  @override
+  String get bluetoothDenied =>
+      '未取得藍牙權限。請到手機「設定 > 應用程式」允許 Maternal 使用「鄰近裝置」，然後再試一次。';
+
+  @override
+  String get bluetoothFindWatch => '開啟藍牙並尋找我的手錶';
+
+  @override
+  String get bluetoothHasHeartRate => '可分享心率';
+
+  @override
+  String bluetoothHeartRate(int bpm) {
+    return '每分鐘 $bpm 下';
+  }
+
+  @override
+  String get bluetoothLost => '手錶已中斷連線。';
+
+  @override
+  String get bluetoothNoHeartRate =>
+      '此裝置不會透過藍牙分享心率。許多手錶可在手錶設定中開啟「廣播心率」（HR broadcast）。';
+
+  @override
+  String get bluetoothNoneFound => '尚未找到裝置。';
+
+  @override
+  String get bluetoothOff => '藍牙已關閉。請開啟後再試一次。';
+
+  @override
+  String get bluetoothPromptTitle => '要連接您的手錶嗎？';
+
+  @override
+  String get bluetoothRationale => '為了搜尋附近的裝置，應用程式需要藍牙權限，只會用來連接您選擇的健康裝置。';
+
+  @override
+  String bluetoothReconnect(String name) {
+    return '重新連線 $name';
+  }
+
+  @override
+  String get bluetoothScanHelp => '請保持手錶開啟並靠近手機。可分享心率的裝置會排在最前面。';
 
   @override
   String get bluetoothTitle => '藍牙裝置';
+
+  @override
+  String get bluetoothUnsupported => '這部手機不支援低功耗藍牙。';
+
+  @override
+  String get bluetoothWaitingForReading => '等待讀數…';
+
+  @override
+  String get bluetoothWatchBody => '透過藍牙配對手錶或運動手環，心率數據會直接同步到您的健康紀錄。';
 
   @override
   String callDoctor(String name) {
@@ -348,6 +454,46 @@ class AppLocalizationsZh extends AppLocalizations {
   String get colScan => '檢查';
 
   @override
+  String get connectionsAiBody =>
+      '在 aistudio.google.com > Get API key 建立免費金鑰。模型可保留為 gemini-flash-latest。';
+
+  @override
+  String get connectionsAiTitle => 'AI 助理（Google Gemini）';
+
+  @override
+  String get connectionsBuiltIn => '已內建於此應用程式';
+
+  @override
+  String get connectionsEmailBody =>
+      '在 EmailJS 中加入 Gmail 服務，並建立電郵範本：「To」填 to_email，內容顯示 passcode。在 Account > Security 開啟「Allow EmailJS API for non-browser applications」，並複製私密金鑰。';
+
+  @override
+  String get connectionsEmailTitle => '電郵驗證碼（EmailJS + Gmail）';
+
+  @override
+  String get connectionsFirebaseBody =>
+      '在 Firebase 主控台新增 Android 應用程式，使用下方的套件名稱與指紋，在 Authentication > Sign-in method 開啟 Phone 和 Google，再從 Project settings 複製各項數值。';
+
+  @override
+  String get connectionsFirebaseTitle => '簡訊驗證碼與 Google 登入（Firebase）';
+
+  @override
+  String get connectionsIntro =>
+      'AI 助理、電郵驗證碼、簡訊驗證碼及 Google 登入所需的金鑰。在此輸入的金鑰只保存在這部手機，並取代應用程式內建的金鑰。留空即使用內建金鑰。';
+
+  @override
+  String get connectionsMissing => '尚未設定';
+
+  @override
+  String get connectionsRestartNote => '更改 Firebase 數值後，請關閉並重新開啟應用程式。';
+
+  @override
+  String get connectionsSetHere => '已在此手機設定';
+
+  @override
+  String get connectionsTitle => '連線';
+
+  @override
   String get contentPendingReview => '此時間表為示範內容，尚待合格臨床人員依馬來西亞指引審核。請一律遵從您的醫療團隊。';
 
   @override
@@ -396,6 +542,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get contractionTooShort => '只有幾秒鐘，因此未儲存。';
+
+  @override
+  String get copied => '已複製';
 
   @override
   String get createAppointment => '預約';
@@ -460,6 +609,16 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
+  String cycleBasedOnRecords(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '根據您記錄的 $count 次月經。每次新增紀錄都會更新之後幾個月的預測。',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get cycleBasedOnTypical => '依一般週期推算';
 
   @override
@@ -484,6 +643,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get cycleLogToday => '記錄月經';
 
   @override
+  String get cycleNeedSecondPeriod => '目前以一般 28 天週期估算。記錄下一次月經後，預測就會依照您自己的週期。';
+
+  @override
   String get cycleNextPeriod => '下次月經';
 
   @override
@@ -506,7 +668,30 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
+  String cycleShiftEarlier(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '您上次月經比預測早了 $days 天，因此之後的日期已更新。',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String cycleShiftLater(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other: '您上次月經比預測晚了 $days 天，因此之後的日期已更新。',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get cycleStale => '預期月經已延遲超過一個週期。請記錄最近一次月經以更新估算。';
+
+  @override
+  String get cycleUpcomingTitle => '之後的月經（估計）';
 
   @override
   String get dayAppointments => '預約';
@@ -563,10 +748,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get demoUsePatient => 'Gwen（懷孕中）';
-
-  @override
-  String get devicesDemoNote =>
-      '此版本使用示範裝置與示範讀數。真正的 Health Connect 與藍牙同步會在穿戴裝置階段加入。';
 
   @override
   String get devicesTitle => '已連接裝置';
@@ -866,6 +1047,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get healthConnectBody => '匯入手機或手錶已記錄的步數、心率、睡眠等資料。';
 
   @override
+  String get healthConnectDemoNote =>
+      '下方的 Health Connect 在此版本仍使用示範數據；上方的藍牙為真實連線。';
+
+  @override
   String get healthConnectRationale => '我們只會在您同意後讀取您允許的資料類型，您可隨時中斷連接。';
 
   @override
@@ -969,6 +1154,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get legendAppointment => '預約';
 
   @override
+  String get legendFertile => '易孕期（估算）';
+
+  @override
   String get legendLogged => '健康紀錄';
 
   @override
@@ -976,6 +1164,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get legendPeriod => '月經';
+
+  @override
+  String get legendPredicted => '預測月經';
 
   @override
   String get linkActive => '可查看您分享的紀錄';
@@ -1357,6 +1548,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get scanTypeHint => '例如：生長評估';
 
   @override
+  String get scanning => '搜尋中…';
+
+  @override
+  String get securityTitle => '登入與安全';
+
+  @override
   String get shareCycle => '月經與週期';
 
   @override
@@ -1502,6 +1699,43 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get today => '今天';
+
+  @override
+  String get totpBody =>
+      '使用 Google Authenticator、Microsoft Authenticator 或類似應用程式的 6 位數代碼登入，不需簡訊或網路。';
+
+  @override
+  String get totpCodeLabel => '驗證器代碼';
+
+  @override
+  String get totpEnable => '驗證並開啟';
+
+  @override
+  String get totpKeyLabel => '設定金鑰';
+
+  @override
+  String get totpNoApp => '找不到驗證器應用程式。請安裝 Google Authenticator 後再試，或輸入設定金鑰。';
+
+  @override
+  String get totpOn => '驗證器應用程式已開啟。登入時請輸入它顯示的代碼。';
+
+  @override
+  String get totpOpenApp => '開啟驗證器應用程式';
+
+  @override
+  String get totpSetup => '設定驗證器應用程式';
+
+  @override
+  String get totpStep1 => '1. 點「開啟驗證器應用程式」，或用另一部手機掃描此 QR 碼，或在應用程式中輸入設定金鑰。';
+
+  @override
+  String get totpStep2 => '2. 輸入應用程式顯示的 6 位數代碼。';
+
+  @override
+  String get totpTitle => '驗證器應用程式';
+
+  @override
+  String get totpTurnOff => '關閉';
 
   @override
   String get trimesterFirst => '第一孕期';

@@ -29,6 +29,17 @@ android {
         versionName = flutter.versionName
     }
 
+    // One debug key for every machine and CI run, so the debug APK keeps the
+    // same SHA-1 that Firebase (SMS codes, Google sign-in) is told about.
+    signingConfigs {
+        getByName("debug") {
+            storeFile = file("debug.keystore")
+            storePassword = "android"
+            keyAlias = "androiddebugkey"
+            keyPassword = "android"
+        }
+    }
+
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.

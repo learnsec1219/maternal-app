@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../core/storage/local_store.dart';
 import '../core/util/clock.dart';
 import '../core/util/dates.dart';
 import 'demo_seed.dart';
@@ -126,8 +127,31 @@ final demoStoreProvider = NotifierProvider<DemoStore, DemoData>(DemoStore.new);
 /// In-memory demo database. Data resets when the app restarts, as the
 /// demo banner says; a real build replaces this with the backend.
 class DemoStore extends Notifier<DemoData> {
+  static const _accountsKey = 'accounts.signedUp';
+
   @override
-  DemoData build() => seedDemoData(ref.read(todayProvider), DateTime.now());
+  DemoData build() {
+    final d = seedDemoData(ref.read(todayProvider), DateTime.now());
+    // People who signed up on this phone keep their account (not their
+    // records) across restarts, so they can sign in again with a real code.
+    for (final j in ref.read(localStoreProvider).readList(_accountsKey)) {
+      final p = _profileFromJson(j);
+      if (p == null || d.profiles.containsKey(p.id)) continue;
+      d.profiles[p.id] = p;
+      d.links[p.id] = LinkState.active;
+    }
+    return d;
+  }
+
+  void _saveAccount(Profile p) {
+    final store = ref.read(localStoreProvider);
+    final list = [
+      for (final j in store.readList(_accountsKey))
+        if (j['id'] != p.id) j,
+      _profileToJson(p),
+    ];
+    store.writeJson(_accountsKey, list);
+  }
 
   void _edit(void Function(DemoData d) change) {
     change(state);
@@ -146,10 +170,14 @@ class DemoStore extends Notifier<DemoData> {
   void addSymptom(SymptomEntry s) => _edit((d) => d.symptoms.add(s));
   void addDocument(MedicalDocument m) => _edit((d) => d.documents.add(m));
   void addNote(DayNote n) => _edit((d) => d.notes.add(n));
-  void addProfile(Profile p, {LinkState link = LinkState.active}) => _edit((d) {
-    d.profiles[p.id] = p;
-    if (p.role == UserRole.patient) d.links[p.id] = link;
-  });
+  void addProfile(Profile p, {LinkState link = LinkState.active}) {
+    _edit((d) {
+      d.profiles[p.id] = p;
+      if (p.role == UserRole.patient) d.links[p.id] = link;
+    });
+    if (p.role == UserRole.patient) _saveAccount(p);
+  }
+
   void updateProfile(Profile p) => _edit((d) => d.profiles[p.id] = p);
   void setLink(String personId, LinkState state) =>
       _edit((d) => d.links[personId] = state);
@@ -172,4 +200,40 @@ class DemoStore extends Notifier<DemoData> {
 
   void deleteOffer(String id) =>
       _edit((d) => d.offers.removeWhere((x) => x.id == id));
+}
+
+Map<String, dynamic> _profileToJson(Profile p) => {
+  'id': p.id,
+  'name': p.name,
+  'journey': p.journey.name,
+  'email': p.email,
+  'phone': p.phone,
+  'dob': p.dob?.toIso8601String(),
+  'height': p.height,
+  'weight': p.weight,
+  'due': p.due?.toIso8601String(),
+  'babies': p.babies,
+  'journeyStart': p.journeyStart?.toIso8601String(),
+};
+
+Profile? _profileFromJson(Map<String, dynamic> j) {
+  try {
+    DateTime? date(String k) =>
+        j[k] == null ? null : DateTime.parse(j[k] as String);
+    return Profile(
+      id: j['id'] as String,
+      name: j['name'] as String,
+      journey: Journey.values.byName(j['journey'] as String),
+      email: j['email'] as String?,
+      phone: j['phone'] as String?,
+      dob: date('dob'),
+      height: (j['height'] as num?)?.toDouble(),
+      weight: (j['weight'] as num?)?.toDouble(),
+      due: date('due'),
+      babies: (j['babies'] as num?)?.toInt() ?? 1,
+      journeyStart: date('journeyStart'),
+    );
+  } on Object {
+    return null;
+  }
 }

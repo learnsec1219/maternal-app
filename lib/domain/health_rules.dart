@@ -69,6 +69,9 @@ class CycleEstimate {
     this.periodLength = 0,
     this.irregular = false,
     this.lateDays = 0,
+    this.recorded = 0,
+    this.shiftDays = 0,
+    this.upcoming = const [],
     this.next,
     this.ovulation,
     this.fertileStart,
@@ -105,7 +108,16 @@ class CycleEstimate {
     if (lengths.length > keep) lengths = lengths.sublist(lengths.length - keep);
     final used = lengths.isEmpty
         ? cfg['defaultCycleLength']!.toInt()
-        : (lengths.reduce((a, b) => a + b) / lengths.length).round();
+        : weightedCycleLength(lengths);
+    // How far the latest recorded start was from what the earlier records
+    // predicted. Non-zero means the following predictions moved.
+    var shift = 0;
+    if (lengths.length >= 2) {
+      final before = weightedCycleLength(
+        lengths.sublist(0, lengths.length - 1),
+      );
+      shift = lengths.last - before;
+    }
     final recent = spans.length > 6 ? spans.sublist(spans.length - 6) : spans;
     final plen =
         (recent.fold<int>(0, (a, x) => a + daysBetween(x.$1, x.$2) + 1) /
@@ -123,6 +135,7 @@ class CycleEstimate {
       return CycleEstimate._(
         status: CycleStatus.stale,
         periods: spans,
+        recorded: spans.length,
         cycleLength: used,
         periodLength: plen,
         irregular: irregular,
@@ -130,6 +143,10 @@ class CycleEstimate {
       );
     }
     final ov = addDays(next, -cfg['lutealPhaseDays']!.toInt());
+    final upcoming = <PredictedCycle>[
+      for (var i = 0; i < 6; i++)
+        PredictedCycle.at(addDays(next, used * i), plen, cfg),
+    ];
     return CycleEstimate._(
       status: lengths.isEmpty ? CycleStatus.defaults : CycleStatus.history,
       periods: spans,
@@ -137,6 +154,9 @@ class CycleEstimate {
       periodLength: plen,
       irregular: irregular,
       lateDays: late,
+      recorded: spans.length,
+      shiftDays: shift,
+      upcoming: upcoming,
       next: next,
       ovulation: ov,
       fertileStart: addDays(ov, -cfg['fertileDaysBeforeOvulation']!.toInt()),
@@ -147,8 +167,48 @@ class CycleEstimate {
   final CycleStatus status;
   final List<(DateTime, DateTime)> periods;
   final int cycleLength, periodLength, lateDays;
+
+  /// Periods the person recorded.
+  final int recorded;
+
+  /// Days the latest recorded period came after (+) or before (-) the date
+  /// the earlier records predicted.
+  final int shiftDays;
+
+  /// The next six predicted cycles, starting with [next].
+  final List<PredictedCycle> upcoming;
   final bool irregular;
   final DateTime? next, ovulation, fertileStart, fertileEnd;
+}
+
+/// Average cycle length that leans on the most recent cycles (weights
+/// 1, 2, 3 ... newest last), so a changed rhythm moves predictions quickly.
+int weightedCycleLength(List<int> lengths) {
+  var sum = 0, weights = 0;
+  for (var i = 0; i < lengths.length; i++) {
+    sum += lengths[i] * (i + 1);
+    weights += i + 1;
+  }
+  return (sum / weights).round();
+}
+
+/// One predicted period with its estimated fertile window.
+class PredictedCycle {
+  PredictedCycle.at(this.start, int periodLength, Map<String, num> cfg)
+    : end = addDays(start, periodLength - 1),
+      ovulation = addDays(start, -cfg['lutealPhaseDays']!.toInt()),
+      fertileStart = addDays(
+        start,
+        -cfg['lutealPhaseDays']!.toInt() -
+            cfg['fertileDaysBeforeOvulation']!.toInt(),
+      ),
+      fertileEnd = addDays(
+        start,
+        -cfg['lutealPhaseDays']!.toInt() +
+            cfg['fertileDaysAfterOvulation']!.toInt(),
+      );
+
+  final DateTime start, end, ovulation, fertileStart, fertileEnd;
 }
 
 bool hasFlow(Flow f) => f == Flow.light || f == Flow.medium || f == Flow.heavy;

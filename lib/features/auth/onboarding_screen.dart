@@ -15,6 +15,8 @@ import '../../data/session.dart';
 import '../../domain/health_rules.dart';
 import '../settings/language_switcher.dart';
 import '../settings/locale_controller.dart';
+import '../../core/integrations/verification.dart';
+import 'code_flow.dart';
 import 'login_screen.dart';
 
 enum _Step { role, verify, personal, body, pregnancy, done }
@@ -22,10 +24,14 @@ enum _Step { role, verify, personal, body, pregnancy, done }
 /// Multi-step sign-up: role, verify phone or email, about you, body,
 /// pregnancy, done. Doctors skip body and pregnancy and wait for approval.
 class OnboardingScreen extends ConsumerStatefulWidget {
-  const OnboardingScreen({super.key, this.verifiedEmail});
+  const OnboardingScreen({super.key, this.verifiedEmail, this.verifiedPhone});
 
-  /// Set when the person came from Google or Microsoft: no code step.
+  /// Set when the person came from Google or Microsoft, or already proved
+  /// this email with a code: no code step.
   final String? verifiedEmail;
+
+  /// Set when the person already proved this phone number with an SMS code.
+  final String? verifiedPhone;
 
   @override
   ConsumerState<OnboardingScreen> createState() => _OnboardingScreenState();
@@ -34,7 +40,8 @@ class OnboardingScreen extends ConsumerStatefulWidget {
 class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   _Step _step = _Step.role;
   UserRole? _role;
-  bool _email = false, _sent = false, _verified = false;
+  bool _email = false, _verified = false, _busy = false;
+  final _flow = CodeFlow();
   String? _error;
   final _id = TextEditingController();
   final _code = TextEditingController();
@@ -54,6 +61,9 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
       _email = true;
       _verified = true;
       _id.text = widget.verifiedEmail!;
+    } else if (widget.verifiedPhone != null) {
+      _verified = true;
+      _id.text = widget.verifiedPhone!;
     }
   }
 
@@ -87,6 +97,51 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
     });
   }
 
+  Future<void> _verifyStep() async {
+    final l = context.l10n;
+    final id = _id.text.trim();
+    if (!_flow.sent) {
+      if (!isValidIdentifier(id) || _email != id.contains('@')) {
+        setState(() => _error = l.authInvalidIdentifier);
+        return;
+      }
+      setState(() {
+        _busy = true;
+        _error = null;
+      });
+      try {
+        await _flow.start(ref, id, demoAccount: false);
+        if (_flow.method == CodeMethod.sms &&
+            ref.read(verificationProvider).smsAutoVerified) {
+          _verified = true;
+        }
+      } on Object catch (e) {
+        _flow.reset();
+        if (mounted) _error = verifyErrorText(context, e);
+      }
+      if (!mounted) return;
+      setState(() => _busy = false);
+      if (_verified) _go(1);
+      return;
+    }
+    setState(() => _busy = true);
+    var ok = false;
+    try {
+      ok = await _flow.check(ref, _code.text);
+    } on Object catch (e) {
+      if (mounted) _error = verifyErrorText(context, e);
+    }
+    if (!mounted) return;
+    setState(() {
+      _busy = false;
+      if (!ok) _error ??= l.authInvalidCode;
+    });
+    if (ok) {
+      _verified = true;
+      _go(1);
+    }
+  }
+
   void _finish() {
     final today = ref.read(todayProvider);
     if (_role == UserRole.doctor) {
@@ -112,7 +167,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
       id: id,
       name: _name.text.trim(),
       email: _email ? _id.text.trim().toLowerCase() : null,
-      phone: _email ? null : _id.text.replaceAll(RegExp(r'[\s\-()]'), ''),
+      phone: _email ? null : toE164(_id.text),
       dob: _dob,
       height: _height,
       weight: _weight,
@@ -231,47 +286,35 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
               selected: _email,
               onSelected: (v) => setState(() {
                 _email = v;
-                _sent = false;
+                _flow.reset();
               }),
             ),
             AppTextField(
               label: _email ? l.fieldEmail : l.fieldPhone,
               controller: _id,
-              enabled: !_sent,
+              enabled: !_flow.sent && !_busy,
               hint: _email ? 'name@example.com' : '+60 12-345 6789',
               keyboardType: _email
                   ? TextInputType.emailAddress
                   : TextInputType.phone,
             ),
-            if (_sent)
+            if (_flow.sent) ...[
               AppTextField(
                 label: l.fieldOtp,
                 controller: _code,
                 keyboardType: TextInputType.number,
               ),
+              CodeNote(flow: _flow, demoAccount: false),
+            ],
+            if (_busy)
+              const Padding(
+                padding: EdgeInsets.all(8),
+                child: Center(child: CircularProgressIndicator()),
+              ),
             if (_error != null) InfoBanner(_error!, tone: Tone.alert),
-            InfoBanner(
-              l.onboardingDemoCode(DemoAccounts.code),
-              title: l.demoModeTitle,
-            ),
           ],
-          _sent ? l.actionVerify : l.actionSendCode,
-          () {
-            if (!_sent) {
-              final ok =
-                  isValidIdentifier(_id.text.trim()) &&
-                  (_email == _id.text.contains('@'));
-              setState(() {
-                _error = ok ? null : l.authInvalidIdentifier;
-                _sent = ok;
-              });
-            } else if (_code.text.trim() != DemoAccounts.code) {
-              setState(() => _error = l.authInvalidCode);
-            } else {
-              _verified = true;
-              _go(1);
-            }
-          },
+          _flow.sent ? l.actionVerify : l.actionSendCode,
+          _busy ? null : _verifyStep,
         );
       case _Step.personal:
         final lang = ref.watch(localeProvider).languageCode;

@@ -50,6 +50,9 @@ class AppLocalizationsMs extends AppLocalizations {
   String get actionContinue => 'Teruskan';
 
   @override
+  String get actionCopy => 'Salin';
+
+  @override
   String get actionDecline => 'Tolak';
 
   @override
@@ -92,7 +95,13 @@ class AppLocalizationsMs extends AppLocalizations {
   String get actionPreviousMonth => 'Bulan sebelumnya';
 
   @override
+  String get actionRetry => 'Cuba lagi';
+
+  @override
   String get actionSave => 'Simpan';
+
+  @override
+  String get actionScan => 'Imbas peranti';
 
   @override
   String get actionSendCode => 'Hantar kod';
@@ -209,6 +218,21 @@ class AppLocalizationsMs extends AppLocalizations {
   String get appointmentsTitle => 'Temu janji';
 
   @override
+  String get assistantBadKey =>
+      'Perkhidmatan AI menolak kunci API Gemini. Semak kunci di Profil > Sambungan.';
+
+  @override
+  String get assistantBlocked =>
+      'Perkhidmatan AI tidak menjawab soalan ini. Sila tanya dengan cara lain.';
+
+  @override
+  String get assistantEducational => 'Maklumat pendidikan';
+
+  @override
+  String get assistantFailed =>
+      'Jawapan tidak dapat dimuatkan. Sila cuba lagi.';
+
+  @override
   String get assistantHomeHint =>
       'AI menjawab dalam English, BM, 中文 atau தமிழ். Pendidikan, bukan diagnosis.';
 
@@ -219,11 +243,21 @@ class AppLocalizationsMs extends AppLocalizations {
   String get assistantLanguage => 'Jawab dalam';
 
   @override
-  String get assistantNotConnected =>
-      'Pembantu AI belum disambungkan dalam binaan demo ini, jadi ia belum boleh menjawab. Untuk perkara segera, gunakan tanda amaran dalam Simptom atau hubungi pasukan penjagaan anda.';
+  String get assistantNetwork =>
+      'Tidak dapat menghubungi perkhidmatan AI. Semak sambungan internet anda dan cuba lagi.';
+
+  @override
+  String get assistantNewChat => 'Perbualan baharu';
+
+  @override
+  String get assistantNotConfigured =>
+      'Pembantu AI memerlukan kunci API Gemini sebelum boleh menjawab. Tambahkannya di Profil > Sambungan, atau minta pentadbir aplikasi memasukkannya ke dalam aplikasi.';
 
   @override
   String get assistantSend => 'Hantar';
+
+  @override
+  String get assistantThinking => 'Sedang berfikir...';
 
   @override
   String get assistantTitle => 'Tanya soalan';
@@ -241,7 +275,15 @@ class AppLocalizationsMs extends AppLocalizations {
   }
 
   @override
-  String get authAccountNotFound => 'Akaun tidak dijumpai. Sila cipta akaun.';
+  String get authAuthenticatorHelp =>
+      'Masukkan kod 6 digit yang dipaparkan oleh aplikasi pengesah anda untuk Maternal.';
+
+  @override
+  String get authCancelled => 'Log masuk dibatalkan.';
+
+  @override
+  String get authEmailNotSetUp =>
+      'Kod e-mel sebenar belum disediakan (Sambungan).';
 
   @override
   String get authInvalidCode =>
@@ -250,6 +292,22 @@ class AppLocalizationsMs extends AppLocalizations {
   @override
   String get authInvalidIdentifier =>
       'Sila masukkan nombor telefon atau e-mel yang sah.';
+
+  @override
+  String get authNoAccountYet =>
+      'Disahkan. Belum ada akaun, jadi mari kita cipta satu.';
+
+  @override
+  String get authSendCodeInstead => 'Hantar kod melalui SMS atau e-mel';
+
+  @override
+  String authSendFailed(String reason) {
+    return 'Tidak dapat menghantar atau menyemak kod. $reason';
+  }
+
+  @override
+  String get authSmsNotSetUp =>
+      'Kod SMS sebenar dan log masuk Google belum disediakan (Sambungan).';
 
   @override
   String get babiesMore => 'Lebih';
@@ -267,11 +325,71 @@ class AppLocalizationsMs extends AppLocalizations {
   String get babyParameters => 'Ukuran bayi';
 
   @override
-  String get bluetoothBody =>
-      'Sambungkan peranti kesihatan dan boleh pakai yang serasi, seperti monitor tekanan darah.';
+  String bluetoothBattery(int level) {
+    return 'Bateri $level%';
+  }
+
+  @override
+  String get bluetoothConnectFailed =>
+      'Tidak dapat bersambung. Letakkan jam dekat dengan telefon dan cuba lagi.';
+
+  @override
+  String get bluetoothDenied =>
+      'Kebenaran Bluetooth tidak diberikan. Benarkan \"Peranti berdekatan\" untuk Maternal di Tetapan > Aplikasi telefon anda, kemudian cuba lagi.';
+
+  @override
+  String get bluetoothFindWatch => 'Hidupkan Bluetooth dan cari jam saya';
+
+  @override
+  String get bluetoothHasHeartRate => 'Berkongsi kadar denyutan jantung';
+
+  @override
+  String bluetoothHeartRate(int bpm) {
+    return '$bpm bpm';
+  }
+
+  @override
+  String get bluetoothLost => 'Jam tangan terputus sambungan.';
+
+  @override
+  String get bluetoothNoHeartRate =>
+      'Peranti ini tidak berkongsi kadar denyutan jantung melalui Bluetooth. Pada banyak jam tangan, anda boleh menghidupkan \"Broadcast heart rate\" dalam tetapan jam.';
+
+  @override
+  String get bluetoothNoneFound => 'Belum ada peranti ditemui.';
+
+  @override
+  String get bluetoothOff => 'Bluetooth dimatikan. Hidupkannya dan cuba lagi.';
+
+  @override
+  String get bluetoothPromptTitle => 'Sambungkan jam tangan anda?';
+
+  @override
+  String get bluetoothRationale =>
+      'Untuk mencari peranti berdekatan, aplikasi memerlukan kebenaran Bluetooth. Ia hanya digunakan untuk menyambung peranti kesihatan yang anda pilih.';
+
+  @override
+  String bluetoothReconnect(String name) {
+    return 'Sambung semula $name';
+  }
+
+  @override
+  String get bluetoothScanHelp =>
+      'Pastikan jam tangan aktif dan dekat dengan telefon. Peranti yang berkongsi kadar denyutan jantung disenaraikan dahulu.';
 
   @override
   String get bluetoothTitle => 'Peranti Bluetooth';
+
+  @override
+  String get bluetoothUnsupported =>
+      'Telefon ini tidak menyokong Bluetooth Low Energy.';
+
+  @override
+  String get bluetoothWaitingForReading => 'Menunggu bacaan…';
+
+  @override
+  String get bluetoothWatchBody =>
+      'Pasangkan jam tangan atau gelang kecergasan melalui Bluetooth. Bacaan kadar denyutan jantung terus disegerakkan ke Log kesihatan anda.';
 
   @override
   String callDoctor(String name) {
@@ -360,6 +478,48 @@ class AppLocalizationsMs extends AppLocalizations {
   String get colScan => 'Imbasan';
 
   @override
+  String get connectionsAiBody =>
+      'Cipta kunci percuma di aistudio.google.com > Get API key. Model boleh kekal gemini-flash-latest.';
+
+  @override
+  String get connectionsAiTitle => 'Pembantu AI (Google Gemini)';
+
+  @override
+  String get connectionsBuiltIn => 'Terbina dalam aplikasi ini';
+
+  @override
+  String get connectionsEmailBody =>
+      'Dalam EmailJS, tambah perkhidmatan Gmail dan templat e-mel dengan \"To\" ialah to_email dan mesej memaparkan passcode. Hidupkan \"Allow EmailJS API for non-browser applications\" di Account > Security, dan salin juga kunci peribadi.';
+
+  @override
+  String get connectionsEmailTitle => 'Kod e-mel (EmailJS + Gmail)';
+
+  @override
+  String get connectionsFirebaseBody =>
+      'Dalam konsol Firebase, tambah aplikasi Android dengan pakej dan cap jari di bawah, hidupkan Phone dan Google di Authentication > Sign-in method, kemudian salin nilai daripada Project settings.';
+
+  @override
+  String get connectionsFirebaseTitle =>
+      'Kod SMS dan log masuk Google (Firebase)';
+
+  @override
+  String get connectionsIntro =>
+      'Kunci untuk pembantu AI, kod e-mel, kod SMS dan log masuk Google. Kunci yang ditaip di sini kekal dalam telefon ini dan menggantikan kunci terbina dalam aplikasi. Biarkan kotak kosong untuk guna kunci terbina dalam.';
+
+  @override
+  String get connectionsMissing => 'Belum ditetapkan';
+
+  @override
+  String get connectionsRestartNote =>
+      'Selepas menukar nilai Firebase, tutup dan buka semula aplikasi.';
+
+  @override
+  String get connectionsSetHere => 'Ditetapkan pada telefon ini';
+
+  @override
+  String get connectionsTitle => 'Sambungan';
+
+  @override
   String get contentPendingReview =>
       'Jadual ini ialah kandungan demo yang menunggu semakan klinisian bertauliah berdasarkan garis panduan Malaysia. Sentiasa ikut pasukan penjagaan anda.';
 
@@ -411,6 +571,9 @@ class AppLocalizationsMs extends AppLocalizations {
   @override
   String get contractionTooShort =>
       'Itu hanya beberapa saat, jadi tidak disimpan.';
+
+  @override
+  String get copied => 'Disalin';
 
   @override
   String get createAppointment => 'Temu janji';
@@ -475,6 +638,17 @@ class AppLocalizationsMs extends AppLocalizations {
   }
 
   @override
+  String cycleBasedOnRecords(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other:
+          'Berdasarkan $count haid yang anda rekodkan. Setiap rekod baharu mengemas kini bulan-bulan seterusnya.',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get cycleBasedOnTypical => 'Berdasarkan kitaran biasa';
 
   @override
@@ -498,6 +672,10 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get cycleLogToday => 'Rekod haid';
+
+  @override
+  String get cycleNeedSecondPeriod =>
+      'Berdasarkan kitaran biasa 28 hari. Rekod haid anda yang seterusnya dan ramalan akan mengikut rentak anda sendiri.';
 
   @override
   String get cycleNextPeriod => 'Haid seterusnya';
@@ -524,8 +702,35 @@ class AppLocalizationsMs extends AppLocalizations {
   }
 
   @override
+  String cycleShiftEarlier(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other:
+          'Haid terakhir anda bermula $days hari awal daripada ramalan, jadi tarikh seterusnya dikemas kini.',
+      one: 'Haid terakhir anda bermula 1 hari awal daripada ramalan, jadi tarikh seterusnya dikemas kini.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String cycleShiftLater(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other:
+          'Haid terakhir anda bermula $days hari lewat daripada ramalan, jadi tarikh seterusnya dikemas kini.',
+      one: 'Haid terakhir anda bermula 1 hari lewat daripada ramalan, jadi tarikh seterusnya dikemas kini.',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get cycleStale =>
       'Haid yang dijangka sudah lewat lebih daripada satu kitaran. Rekod haid terkini untuk mengemas kini anggaran.';
+
+  @override
+  String get cycleUpcomingTitle => 'Haid seterusnya (anggaran)';
 
   @override
   String get dayAppointments => 'Temu janji';
@@ -583,10 +788,6 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get demoUsePatient => 'Gwen (hamil)';
-
-  @override
-  String get devicesDemoNote =>
-      'Binaan ini menggunakan peranti dan bacaan demo. Penyegerakan sebenar Health Connect dan Bluetooth ditambah dalam peringkat peranti boleh pakai.';
 
   @override
   String get devicesTitle => 'Peranti bersambung';
@@ -892,6 +1093,10 @@ class AppLocalizationsMs extends AppLocalizations {
       'Bawa masuk langkah, kadar denyutan jantung, tidur dan data lain yang sudah direkod oleh telefon atau jam tangan anda.';
 
   @override
+  String get healthConnectDemoNote =>
+      'Health Connect di bawah masih menggunakan bacaan demo dalam binaan ini. Bluetooth di atas adalah sebenar.';
+
+  @override
   String get healthConnectRationale =>
       'Kami hanya membaca jenis data yang anda benarkan, dan hanya selepas anda bersetuju. Anda boleh memutuskan sambungan bila-bila masa.';
 
@@ -999,6 +1204,9 @@ class AppLocalizationsMs extends AppLocalizations {
   String get legendAppointment => 'Temu janji';
 
   @override
+  String get legendFertile => 'Tempoh subur (anggaran)';
+
+  @override
   String get legendLogged => 'Log kesihatan';
 
   @override
@@ -1006,6 +1214,9 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get legendPeriod => 'Haid';
+
+  @override
+  String get legendPredicted => 'Jangkaan haid';
 
   @override
   String get linkActive => 'Boleh melihat rekod yang dikongsi';
@@ -1404,6 +1615,12 @@ class AppLocalizationsMs extends AppLocalizations {
   String get scanTypeHint => 'cth. Imbasan pertumbuhan';
 
   @override
+  String get scanning => 'Mengimbas…';
+
+  @override
+  String get securityTitle => 'Log masuk & keselamatan';
+
+  @override
   String get shareCycle => 'Haid dan kitaran';
 
   @override
@@ -1550,6 +1767,47 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get today => 'Hari ini';
+
+  @override
+  String get totpBody =>
+      'Log masuk dengan kod 6 digit daripada Google Authenticator, Microsoft Authenticator atau aplikasi serupa. Ia berfungsi tanpa SMS atau internet.';
+
+  @override
+  String get totpCodeLabel => 'Kod pengesah';
+
+  @override
+  String get totpEnable => 'Sahkan dan hidupkan';
+
+  @override
+  String get totpKeyLabel => 'Kunci persediaan';
+
+  @override
+  String get totpNoApp =>
+      'Tiada aplikasi pengesah ditemui. Pasang Google Authenticator, kemudian cuba lagi atau taip kunci persediaan.';
+
+  @override
+  String get totpOn =>
+      'Aplikasi pengesah dihidupkan. Semasa log masuk, masukkan kod yang dipaparkan.';
+
+  @override
+  String get totpOpenApp => 'Buka aplikasi pengesah';
+
+  @override
+  String get totpSetup => 'Sediakan aplikasi pengesah';
+
+  @override
+  String get totpStep1 =>
+      '1. Ketik \"Buka aplikasi pengesah\", atau imbas kod QR ini dengan telefon lain, atau taip kunci persediaan ke dalam aplikasi.';
+
+  @override
+  String get totpStep2 =>
+      '2. Masukkan kod 6 digit yang dipaparkan oleh aplikasi.';
+
+  @override
+  String get totpTitle => 'Aplikasi pengesah';
+
+  @override
+  String get totpTurnOff => 'Matikan';
 
   @override
   String get trimesterFirst => 'Trimester pertama';

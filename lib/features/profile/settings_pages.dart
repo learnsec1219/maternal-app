@@ -14,6 +14,7 @@ import '../../data/models.dart';
 import '../../data/session.dart';
 import '../../domain/health_rules.dart';
 import '../patient/patient_data.dart';
+import 'watch_section.dart';
 import 'profile_screen.dart';
 
 /// Label above value, so long labels in any language wrap instead of
@@ -343,7 +344,8 @@ class DevicesPage extends ConsumerWidget {
     return PageScaffold(
       title: l.devicesTitle,
       children: [
-        InfoBanner(l.devicesDemoNote),
+        const WatchCard(),
+        InfoBanner(l.healthConnectDemoNote),
         AppCard(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -403,26 +405,6 @@ class DevicesPage extends ConsumerWidget {
                     }
                   },
                 ),
-            ],
-          ),
-        ),
-        AppCard(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      l.bluetoothTitle,
-                      style: const TextStyle(fontWeight: FontWeight.w700),
-                    ),
-                  ),
-                  status(false),
-                ],
-              ),
-              const SizedBox(height: 8),
-              Text(l.bluetoothBody, style: const TextStyle(height: 1.45)),
             ],
           ),
         ),

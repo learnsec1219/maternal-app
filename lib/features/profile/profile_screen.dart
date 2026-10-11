@@ -12,6 +12,8 @@ import '../calendar/calendar_screen.dart';
 import '../patient/patient_data.dart';
 import '../records/care_pages.dart';
 import '../records/health_pages.dart';
+import 'connections_page.dart';
+import 'security_page.dart';
 import 'settings_pages.dart';
 
 class ProfileScreen extends ConsumerWidget {
@@ -165,7 +167,17 @@ class ProfileScreen extends ConsumerWidget {
                   l.menuAppearance,
                   const AppearancePage(),
                 ),
+                (
+                  Icons.lock_outline_rounded,
+                  l.securityTitle,
+                  const SecurityPage(),
+                ),
                 (Icons.shield_outlined, l.menuPrivacy, const PrivacyPage()),
+                (
+                  Icons.hub_outlined,
+                  l.connectionsTitle,
+                  const ConnectionsPage(),
+                ),
                 (Icons.info_outline_rounded, l.menuAbout, const AboutPage()),
               ]),
               const SignOutButton(),

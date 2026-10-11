@@ -50,6 +50,9 @@ class AppLocalizationsTa extends AppLocalizations {
   String get actionContinue => 'தொடர்';
 
   @override
+  String get actionCopy => 'நகலெடு';
+
+  @override
   String get actionDecline => 'மறு';
 
   @override
@@ -92,7 +95,13 @@ class AppLocalizationsTa extends AppLocalizations {
   String get actionPreviousMonth => 'முந்தைய மாதம்';
 
   @override
+  String get actionRetry => 'மீண்டும் முயல்க';
+
+  @override
   String get actionSave => 'சேமி';
+
+  @override
+  String get actionScan => 'சாதனங்களைத் தேடு';
 
   @override
   String get actionSendCode => 'குறியீட்டை அனுப்பு';
@@ -215,6 +224,20 @@ class AppLocalizationsTa extends AppLocalizations {
   String get appointmentsTitle => 'சந்திப்புகள்';
 
   @override
+  String get assistantBadKey =>
+      'AI சேவை Gemini API சாவியை ஏற்கவில்லை. சுயவிவரம் > இணைப்புகள் பகுதியில் சாவியைச் சரிபார்க்கவும்.';
+
+  @override
+  String get assistantBlocked =>
+      'AI சேவை இந்தக் கேள்விக்குப் பதிலளிக்கவில்லை. வேறு விதமாகக் கேட்டுப் பாருங்கள்.';
+
+  @override
+  String get assistantEducational => 'கல்வித் தகவல்';
+
+  @override
+  String get assistantFailed => 'பதிலை ஏற்ற முடியவில்லை. மீண்டும் முயலவும்.';
+
+  @override
   String get assistantHomeHint =>
       'AI ஆங்கிலம், BM, 中文 அல்லது தமிழில் பதில் தரும். கல்வித் தகவல் மட்டுமே, நோயறிதல் அல்ல.';
 
@@ -225,11 +248,21 @@ class AppLocalizationsTa extends AppLocalizations {
   String get assistantLanguage => 'பதில் மொழி';
 
   @override
-  String get assistantNotConnected =>
-      'இந்த டெமோ பதிப்பில் AI உதவியாளர் இணைக்கப்படவில்லை, எனவே இப்போது பதிலளிக்க முடியாது. அவசரமான எதற்கும், அறிகுறிகள் பகுதியில் உள்ள எச்சரிக்கை அறிகுறிகளைப் பயன்படுத்தவும் அல்லது உங்கள் பராமரிப்புக் குழுவை அழைக்கவும்.';
+  String get assistantNetwork =>
+      'AI சேவையை அணுக முடியவில்லை. உங்கள் இணைய இணைப்பைச் சரிபார்த்து மீண்டும் முயலவும்.';
+
+  @override
+  String get assistantNewChat => 'புதிய உரையாடல்';
+
+  @override
+  String get assistantNotConfigured =>
+      'AI உதவியாளர் பதிலளிக்க Gemini API சாவி தேவை. சுயவிவரம் > இணைப்புகள் பகுதியில் சேர்க்கவும், அல்லது செயலி நிர்வாகியிடம் அதைச் செயலியில் சேர்க்கச் சொல்லவும்.';
 
   @override
   String get assistantSend => 'அனுப்பு';
+
+  @override
+  String get assistantThinking => 'யோசிக்கிறது...';
 
   @override
   String get assistantTitle => 'கேள்வி கேளுங்கள்';
@@ -247,8 +280,15 @@ class AppLocalizationsTa extends AppLocalizations {
   }
 
   @override
-  String get authAccountNotFound =>
-      'கணக்கு எதுவும் இல்லை. புதிய கணக்கை உருவாக்கவும்.';
+  String get authAuthenticatorHelp =>
+      'உங்கள் அங்கீகரிப்புச் செயலி Maternal க்குக் காட்டும் 6 இலக்கக் குறியீட்டை உள்ளிடவும்.';
+
+  @override
+  String get authCancelled => 'உள்நுழைவு ரத்து செய்யப்பட்டது.';
+
+  @override
+  String get authEmailNotSetUp =>
+      'உண்மையான மின்னஞ்சல் குறியீடுகள் இன்னும் அமைக்கப்படவில்லை (இணைப்புகள்).';
 
   @override
   String get authInvalidCode =>
@@ -257,6 +297,23 @@ class AppLocalizationsTa extends AppLocalizations {
   @override
   String get authInvalidIdentifier =>
       'சரியான தொலைபேசி எண் அல்லது மின்னஞ்சலை உள்ளிடவும்.';
+
+  @override
+  String get authNoAccountYet =>
+      'சரிபார்க்கப்பட்டது. இன்னும் கணக்கு இல்லை, ஒன்றை உருவாக்குவோம்.';
+
+  @override
+  String get authSendCodeInstead =>
+      'பதிலாக SMS அல்லது மின்னஞ்சல் மூலம் குறியீடு அனுப்பு';
+
+  @override
+  String authSendFailed(String reason) {
+    return 'குறியீட்டை அனுப்பவோ சரிபார்க்கவோ முடியவில்லை. $reason';
+  }
+
+  @override
+  String get authSmsNotSetUp =>
+      'உண்மையான SMS குறியீடுகளும் Google உள்நுழைவும் இன்னும் அமைக்கப்படவில்லை (இணைப்புகள்).';
 
   @override
   String get babiesMore => 'மேலும்';
@@ -274,11 +331,73 @@ class AppLocalizationsTa extends AppLocalizations {
   String get babyParameters => 'குழந்தையின் அளவீடுகள்';
 
   @override
-  String get bluetoothBody =>
-      'இரத்த அழுத்தமானி போன்ற இணக்கமான உடல்நல மற்றும் அணியக்கூடிய சாதனங்களை இணைக்கவும்.';
+  String bluetoothBattery(int level) {
+    return 'பேட்டரி $level%';
+  }
+
+  @override
+  String get bluetoothConnectFailed =>
+      'இணைக்க முடியவில்லை. கடிகாரத்தைத் தொலைபேசிக்கு அருகில் வைத்து மீண்டும் முயலவும்.';
+
+  @override
+  String get bluetoothDenied =>
+      'Bluetooth அனுமதி வழங்கப்படவில்லை. உங்கள் தொலைபேசியின் அமைப்புகள் > செயலிகள் பகுதியில் Maternal க்கு \"அருகிலுள்ள சாதனங்கள்\" அனுமதியை வழங்கி மீண்டும் முயலவும்.';
+
+  @override
+  String get bluetoothFindWatch =>
+      'Bluetooth ஐ இயக்கி என் கடிகாரத்தைக் கண்டுபிடி';
+
+  @override
+  String get bluetoothHasHeartRate => 'இதயத் துடிப்பைப் பகிர்கிறது';
+
+  @override
+  String bluetoothHeartRate(int bpm) {
+    return 'நிமிடத்திற்கு $bpm துடிப்புகள்';
+  }
+
+  @override
+  String get bluetoothLost => 'கடிகாரம் துண்டிக்கப்பட்டது.';
+
+  @override
+  String get bluetoothNoHeartRate =>
+      'இந்தச் சாதனம் Bluetooth மூலம் இதயத் துடிப்பைப் பகிரவில்லை. பல கடிகாரங்களில் அமைப்புகளில் \"Broadcast heart rate\" (HR broadcast) ஐ இயக்கலாம்.';
+
+  @override
+  String get bluetoothNoneFound => 'இன்னும் சாதனங்கள் எதுவும் இல்லை.';
+
+  @override
+  String get bluetoothOff =>
+      'Bluetooth அணைக்கப்பட்டுள்ளது. அதை இயக்கி மீண்டும் முயலவும்.';
+
+  @override
+  String get bluetoothPromptTitle => 'உங்கள் கடிகாரத்தை இணைக்கவா?';
+
+  @override
+  String get bluetoothRationale =>
+      'அருகிலுள்ள சாதனங்களைக் கண்டறிய செயலிக்கு Bluetooth அனுமதி தேவை. நீங்கள் தேர்வுசெய்யும் உடல்நலச் சாதனங்களை இணைக்க மட்டுமே பயன்படும்.';
+
+  @override
+  String bluetoothReconnect(String name) {
+    return '$name ஐ மீண்டும் இணை';
+  }
+
+  @override
+  String get bluetoothScanHelp =>
+      'கடிகாரத்தை விழிப்பு நிலையில் தொலைபேசிக்கு அருகில் வைத்திருங்கள். இதயத் துடிப்பைப் பகிரும் சாதனங்கள் முதலில் காட்டப்படும்.';
 
   @override
   String get bluetoothTitle => 'Bluetooth சாதனங்கள்';
+
+  @override
+  String get bluetoothUnsupported =>
+      'இந்தத் தொலைபேசி Bluetooth Low Energy ஐ ஆதரிக்கவில்லை.';
+
+  @override
+  String get bluetoothWaitingForReading => 'அளவீட்டுக்காகக் காத்திருக்கிறது…';
+
+  @override
+  String get bluetoothWatchBody =>
+      'Bluetooth மூலம் கடிகாரம் அல்லது உடற்பயிற்சிப் பட்டையை இணைக்கவும். இதயத் துடிப்பு அளவீடுகள் நேரடியாக உங்கள் உடல்நலப் பதிவில் ஒத்திசைக்கப்படும்.';
 
   @override
   String callDoctor(String name) {
@@ -366,6 +485,49 @@ class AppLocalizationsTa extends AppLocalizations {
   String get colScan => 'ஸ்கேன்';
 
   @override
+  String get connectionsAiBody =>
+      'aistudio.google.com > Get API key இல் இலவசச் சாவியை உருவாக்கவும். மாதிரியை gemini-flash-latest ஆகவே விடலாம்.';
+
+  @override
+  String get connectionsAiTitle => 'AI உதவியாளர் (Google Gemini)';
+
+  @override
+  String get connectionsBuiltIn => 'இந்தச் செயலியில் உள்ளமைந்தது';
+
+  @override
+  String get connectionsEmailBody =>
+      'EmailJS இல் ஒரு Gmail சேவையைச் சேர்த்து, \"To\" இல் to_email உம் செய்தியில் passcode உம் உள்ள மின்னஞ்சல் வார்ப்புருவை உருவாக்கவும். Account > Security இல் \"Allow EmailJS API for non-browser applications\" ஐ இயக்கி, தனிப்பட்ட சாவியையும் நகலெடுக்கவும்.';
+
+  @override
+  String get connectionsEmailTitle =>
+      'மின்னஞ்சல் குறியீடுகள் (EmailJS + Gmail)';
+
+  @override
+  String get connectionsFirebaseBody =>
+      'Firebase கன்சோலில் கீழே உள்ள தொகுப்புப் பெயர் மற்றும் கைரேகைகளுடன் ஒரு Android செயலியைச் சேர்க்கவும், Authentication > Sign-in method இல் Phone மற்றும் Google ஐ இயக்கவும், பின்னர் Project settings இலிருந்து மதிப்புகளை நகலெடுக்கவும்.';
+
+  @override
+  String get connectionsFirebaseTitle =>
+      'SMS குறியீடுகள் மற்றும் Google உள்நுழைவு (Firebase)';
+
+  @override
+  String get connectionsIntro =>
+      'AI உதவியாளர், மின்னஞ்சல் குறியீடுகள், SMS குறியீடுகள் மற்றும் Google உள்நுழைவுக்கான சாவிகள். இங்கே தட்டச்சு செய்யும் சாவிகள் இந்தத் தொலைபேசியில் மட்டுமே இருக்கும்; செயலியில் உள்ளவற்றுக்குப் பதிலாகப் பயன்படும். உள்ளமைந்த சாவியைப் பயன்படுத்தப் பெட்டியைக் காலியாக விடவும்.';
+
+  @override
+  String get connectionsMissing => 'அமைக்கப்படவில்லை';
+
+  @override
+  String get connectionsRestartNote =>
+      'Firebase மதிப்புகளை மாற்றிய பின், செயலியை மூடி மீண்டும் திறக்கவும்.';
+
+  @override
+  String get connectionsSetHere => 'இந்தத் தொலைபேசியில் அமைக்கப்பட்டது';
+
+  @override
+  String get connectionsTitle => 'இணைப்புகள்';
+
+  @override
   String get contentPendingReview =>
       'இந்த அட்டவணை மலேசிய வழிகாட்டுதல்களின்படி தகுதியுள்ள மருத்துவரின் மதிப்பாய்வுக்குக் காத்திருக்கும் டெமோ உள்ளடக்கம். எப்போதும் உங்கள் மருத்துவக் குழுவைப் பின்பற்றுங்கள்.';
 
@@ -424,6 +586,9 @@ class AppLocalizationsTa extends AppLocalizations {
   @override
   String get contractionTooShort =>
       'சில வினாடிகள் மட்டுமே இருந்ததால் சேமிக்கப்படவில்லை.';
+
+  @override
+  String get copied => 'நகலெடுக்கப்பட்டது';
 
   @override
   String get createAppointment => 'சந்திப்பு';
@@ -488,6 +653,17 @@ class AppLocalizationsTa extends AppLocalizations {
   }
 
   @override
+  String cycleBasedOnRecords(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other:
+          'நீங்கள் பதிவு செய்த $count மாதவிடாய்களை அடிப்படையாகக் கொண்டது. ஒவ்வொரு புதிய பதிவும் அடுத்த மாதங்களைப் புதுப்பிக்கும்.',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get cycleBasedOnTypical => 'வழக்கமான சுழற்சியை அடிப்படையாகக் கொண்டது';
 
   @override
@@ -526,6 +702,10 @@ class AppLocalizationsTa extends AppLocalizations {
   String get cycleLogToday => 'மாதவிடாயைப் பதிவு செய்';
 
   @override
+  String get cycleNeedSecondPeriod =>
+      'வழக்கமான 28 நாள் சுழற்சியை அடிப்படையாகக் கொண்டது. உங்கள் அடுத்த மாதவிடாயைப் பதிவு செய்தால், கணிப்புகள் உங்கள் சொந்தச் சுழற்சியைப் பின்பற்றும்.';
+
+  @override
   String get cycleNextPeriod => 'அடுத்த மாதவிடாய்';
 
   @override
@@ -551,8 +731,35 @@ class AppLocalizationsTa extends AppLocalizations {
   }
 
   @override
+  String cycleShiftEarlier(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other:
+          'உங்கள் கடைசி மாதவிடாய் கணிப்பை விட $days நாட்கள் முன்னதாகத் தொடங்கியது, எனவே அடுத்த தேதிகள் மாற்றப்பட்டன.',
+      one: 'உங்கள் கடைசி மாதவிடாய் கணிப்பை விட 1 நாள் முன்னதாகத் தொடங்கியது, எனவே அடுத்த தேதிகள் மாற்றப்பட்டன.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String cycleShiftLater(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other:
+          'உங்கள் கடைசி மாதவிடாய் கணிப்பை விட $days நாட்கள் தாமதமாகத் தொடங்கியது, எனவே அடுத்த தேதிகள் மாற்றப்பட்டன.',
+      one: 'உங்கள் கடைசி மாதவிடாய் கணிப்பை விட 1 நாள் தாமதமாகத் தொடங்கியது, எனவே அடுத்த தேதிகள் மாற்றப்பட்டன.',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get cycleStale =>
       'எதிர்பார்த்த மாதவிடாய் ஒரு சுழற்சிக்கு மேல் தாமதமாகியுள்ளது. மதிப்பீடுகளைப் புதுப்பிக்க சமீபத்திய மாதவிடாயைப் பதிவு செய்யவும்.';
+
+  @override
+  String get cycleUpcomingTitle => 'அடுத்தடுத்த மாதவிடாய்கள் (மதிப்பீடு)';
 
   @override
   String get dayAppointments => 'சந்திப்புகள்';
@@ -623,10 +830,6 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get demoUsePatient => 'Gwen (கர்ப்பிணி)';
-
-  @override
-  String get devicesDemoNote =>
-      'இந்தப் பதிப்பு டெமோ சாதனங்களையும் டெமோ அளவீடுகளையும் பயன்படுத்துகிறது. உண்மையான Health Connect மற்றும் Bluetooth ஒத்திசைவு அணியக்கூடிய சாதனங்கள் கட்டத்தில் சேர்க்கப்படும்.';
 
   @override
   String get devicesTitle => 'இணைக்கப்பட்ட சாதனங்கள்';
@@ -946,6 +1149,10 @@ class AppLocalizationsTa extends AppLocalizations {
       'உங்கள் தொலைபேசி அல்லது கடிகாரம் ஏற்கனவே பதிவு செய்யும் அடிகள், இதயத் துடிப்பு, தூக்கம் போன்ற தரவைக் கொண்டுவாருங்கள்.';
 
   @override
+  String get healthConnectDemoNote =>
+      'கீழே உள்ள Health Connect இந்தப் பதிப்பில் இன்னும் டெமோ அளவீடுகளைப் பயன்படுத்துகிறது. மேலே உள்ள Bluetooth உண்மையானது.';
+
+  @override
   String get healthConnectRationale =>
       'நீங்கள் அனுமதிக்கும் தரவு வகைகளை மட்டும், நீங்கள் ஒப்புக்கொண்ட பின் மட்டுமே படிக்கிறோம். எப்போது வேண்டுமானாலும் துண்டிக்கலாம்.';
 
@@ -1059,6 +1266,9 @@ class AppLocalizationsTa extends AppLocalizations {
   String get legendAppointment => 'சந்திப்பு';
 
   @override
+  String get legendFertile => 'கருவுறும் காலம் (மதிப்பீடு)';
+
+  @override
   String get legendLogged => 'உடல்நலப் பதிவு';
 
   @override
@@ -1066,6 +1276,9 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get legendPeriod => 'மாதவிடாய்';
+
+  @override
+  String get legendPredicted => 'கணிக்கப்பட்ட மாதவிடாய்';
 
   @override
   String get linkActive => 'நீங்கள் பகிர்ந்த பதிவுகளைப் பார்க்கலாம்';
@@ -1473,6 +1686,12 @@ class AppLocalizationsTa extends AppLocalizations {
   String get scanTypeHint => 'எ.கா. வளர்ச்சி ஸ்கேன்';
 
   @override
+  String get scanning => 'தேடுகிறது…';
+
+  @override
+  String get securityTitle => 'உள்நுழைவு & பாதுகாப்பு';
+
+  @override
   String get shareCycle => 'மாதவிடாய் மற்றும் சுழற்சி';
 
   @override
@@ -1626,6 +1845,46 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get today => 'இன்று';
+
+  @override
+  String get totpBody =>
+      'Google Authenticator, Microsoft Authenticator அல்லது அதுபோன்ற செயலியின் 6 இலக்கக் குறியீட்டுடன் உள்நுழையவும். SMS அல்லது இணையம் இல்லாமலும் இது வேலை செய்யும்.';
+
+  @override
+  String get totpCodeLabel => 'அங்கீகரிப்புக் குறியீடு';
+
+  @override
+  String get totpEnable => 'சரிபார்த்து இயக்கு';
+
+  @override
+  String get totpKeyLabel => 'அமைப்புச் சாவி';
+
+  @override
+  String get totpNoApp =>
+      'அங்கீகரிப்புச் செயலி எதுவும் இல்லை. Google Authenticator ஐ நிறுவி மீண்டும் முயலவும் அல்லது அமைப்புச் சாவியைத் தட்டச்சு செய்யவும்.';
+
+  @override
+  String get totpOn =>
+      'அங்கீகரிப்புச் செயலி இயக்கத்தில் உள்ளது. உள்நுழையும்போது அது காட்டும் குறியீட்டை உள்ளிடவும்.';
+
+  @override
+  String get totpOpenApp => 'அங்கீகரிப்புச் செயலியைத் திற';
+
+  @override
+  String get totpSetup => 'அங்கீகரிப்புச் செயலியை அமை';
+
+  @override
+  String get totpStep1 =>
+      '1. \"அங்கீகரிப்புச் செயலியைத் திற\" என்பதைத் தட்டவும், அல்லது வேறு தொலைபேசியால் இந்த QR குறியீட்டை ஸ்கேன் செய்யவும், அல்லது அமைப்புச் சாவியைச் செயலியில் தட்டச்சு செய்யவும்.';
+
+  @override
+  String get totpStep2 => '2. செயலி காட்டும் 6 இலக்கக் குறியீட்டை உள்ளிடவும்.';
+
+  @override
+  String get totpTitle => 'அங்கீகரிப்புச் செயலி';
+
+  @override
+  String get totpTurnOff => 'அணை';
 
   @override
   String get trimesterFirst => 'முதல் மூன்று மாதம்';

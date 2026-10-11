@@ -168,6 +168,18 @@ class _CycleView extends ConsumerWidget {
     } else {
       out.add(_CycleCard(e: e, today: today));
     }
+    if (!preg) {
+      out.add(
+        Padding(
+          padding: const EdgeInsets.only(bottom: 10),
+          child: TonalButton(
+            l.cycleLogToday,
+            key: const Key('cycle-log-period'),
+            onPressed: () => pushPage(context, const PeriodPage()),
+          ),
+        ),
+      );
+    }
 
     int key(DateTime d) => dateOnly(d).millisecondsSinceEpoch;
     final period = {
@@ -182,6 +194,27 @@ class _CycleView extends ConsumerWidget {
     final logged = {for (final o in m.of(m.data.obs)) key(o.at)};
     final symd = {for (final s in m.of(m.data.symptoms)) key(s.at)};
     final medd = {for (final i in m.of(m.data.intakes)) key(i.date)};
+    // Predicted periods and fertile windows for the coming months. They move
+    // whenever a newly recorded period differs from the prediction.
+    final predicted = <int>{}, fertile = <int>{};
+    if (!preg) {
+      for (final u in e.upcoming) {
+        for (var d = u.start; !d.isAfter(u.end); d = addDays(d, 1)) {
+          if (!d.isBefore(today)) predicted.add(key(d));
+        }
+        for (
+          var d = u.fertileStart;
+          !d.isAfter(u.fertileEnd);
+          d = addDays(d, 1)
+        ) {
+          if (!d.isBefore(today)) fertile.add(key(d));
+        }
+      }
+      predicted.removeAll(period);
+      fertile
+        ..removeAll(period)
+        ..removeAll(predicted);
+    }
 
     final month = ui.month;
     final lead = DateTime(month.year, month.month).weekday % 7; // Sunday first
@@ -255,12 +288,16 @@ class _CycleView extends ConsumerWidget {
                           context.formatWeekdayDate(day),
                           if (isToday) l.today,
                           if (period.contains(k)) l.legendPeriod,
+                          if (predicted.contains(k)) l.legendPredicted,
+                          if (fertile.contains(k)) l.legendFertile,
                           if (appt.contains(k)) l.legendAppointment,
                           if (logged.contains(k)) l.legendLogged,
                           if (medd.contains(k)) l.legendMedication,
                           if (symd.contains(k)) l.daySymptoms,
                         ].join(', ');
                         final shaded = period.contains(k) || spot.contains(k);
+                        final guess = predicted.contains(k);
+                        final fert = fertile.contains(k);
                         final ring =
                             ui.ringDay != null &&
                             isSameDay(ui.ringDay!, day) &&
@@ -286,18 +323,31 @@ class _CycleView extends ConsumerWidget {
                                       alignment: Alignment.center,
                                       children: [
                                         Container(
+                                          key: guess
+                                              ? Key('predicted-$k')
+                                              : fert
+                                              ? Key('fertile-$k')
+                                              : null,
                                           width: circle,
                                           height: circle,
                                           alignment: Alignment.center,
                                           decoration: BoxDecoration(
                                             shape: BoxShape.circle,
-                                            color: shaded ? p.periodSoft : null,
+                                            color: shaded
+                                                ? p.periodSoft
+                                                : fert
+                                                ? p.fertileSoft
+                                                : null,
                                             border: Border.all(
                                               color:
                                                   isToday && !period.contains(k)
                                                   ? p.ink
+                                                  : guess
+                                                  ? p.period
                                                   : Colors.transparent,
-                                              width: 1.6,
+                                              width: guess && !isToday
+                                                  ? 1.4
+                                                  : 1.6,
                                             ),
                                           ),
                                           child: Text(
@@ -401,6 +451,21 @@ class _CycleView extends ConsumerWidget {
         Flexible(child: Text(text, style: const TextStyle(fontSize: 12))),
       ],
     );
+    Widget ring(Color c, String text) => Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          width: 14,
+          height: 14,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(color: c, width: 1.4),
+          ),
+        ),
+        const SizedBox(width: 6),
+        Flexible(child: Text(text, style: const TextStyle(fontSize: 12))),
+      ],
+    );
     out.add(
       Padding(
         key: const Key('calendar-legend'),
@@ -410,6 +475,9 @@ class _CycleView extends ConsumerWidget {
           runSpacing: 8,
           children: [
             sw(p.periodSoft, l.legendPeriod, dot: false),
+            if (predicted.isNotEmpty) ring(p.period, l.legendPredicted),
+            if (fertile.isNotEmpty)
+              sw(p.fertileSoft, l.legendFertile, dot: false),
             sw(p.ink, l.legendAppointment),
             sw(p.muted, l.legendLogged),
             sw(p.fertile, l.legendMedication),
@@ -494,6 +562,38 @@ class _CycleCard extends StatelessWidget {
                 style: TextStyle(color: p.warn),
               ),
             ),
+          if (e.shiftDays != 0)
+            Padding(
+              key: const Key('cycle-shift'),
+              padding: const EdgeInsets.only(top: 8),
+              child: Text(
+                e.shiftDays > 0
+                    ? l.cycleShiftLater(e.shiftDays)
+                    : l.cycleShiftEarlier(-e.shiftDays),
+                style: const TextStyle(fontWeight: FontWeight.w600),
+              ),
+            ),
+          const SizedBox(height: 12),
+          Text(
+            l.cycleUpcomingTitle,
+            style: const TextStyle(fontWeight: FontWeight.w700),
+          ),
+          const SizedBox(height: 4),
+          for (final u in e.upcoming.skip(1).take(3))
+            Padding(
+              padding: const EdgeInsets.only(top: 2),
+              child: Text(
+                '• ${context.formatLongDate(u.start)}',
+                key: const Key('cycle-upcoming'),
+              ),
+            ),
+          const SizedBox(height: 6),
+          Text(
+            e.status == CycleStatus.defaults
+                ? l.cycleNeedSecondPeriod
+                : l.cycleBasedOnRecords(e.recorded),
+            style: TextStyle(fontSize: 12.5, color: p.muted, height: 1.45),
+          ),
         ],
       ),
     );

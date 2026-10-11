@@ -550,5 +550,242 @@
    "zh": "這些數值來自您的超聲波報告。您的醫生會向您解釋它們對您和寶寶的意義。",
    "ta": "இந்த எண்கள் உங்கள் ஸ்கேன் அறிக்கைகளிலிருந்து வருகின்றன. உங்களுக்கும் உங்கள் குழந்தைக்கும் இவற்றின் பொருள் என்ன என்பதை உங்கள் மருத்துவர் விளக்குவார்."
   }
+ },
+ "assistant": {
+  "intro": {
+   "en": "Hi, I can explain pregnancy and women's health topics and help you prepare questions for your doctor. I can't diagnose or give personal medical advice.",
+   "ms": "Hai, saya boleh menerangkan topik kehamilan dan kesihatan wanita serta membantu anda menyediakan soalan untuk doktor. Saya tidak boleh mendiagnosis atau memberi nasihat perubatan peribadi.",
+   "zh": "您好，我可以解釋懷孕與女性健康的相關知識，並協助您準備要問醫生的問題。我無法診斷，也不能提供個人醫療建議。",
+   "ta": "வணக்கம், கர்ப்பம் மற்றும் பெண்கள் நலம் தொடர்பான தலைப்புகளை விளக்கவும், உங்கள் மருத்துவரிடம் கேட்க வேண்டிய கேள்விகளைத் தயாரிக்கவும் நான் உதவ முடியும். நோயறிதல் செய்யவோ தனிப்பட்ட மருத்துவ ஆலோசனை வழங்கவோ என்னால் முடியாது."
+  },
+  "disclaimer": {
+   "en": "Educational information only, not a diagnosis. Always follow your care team.",
+   "ms": "Maklumat pendidikan sahaja, bukan diagnosis. Sentiasa ikut nasihat pasukan penjagaan anda.",
+   "zh": "僅供衛教參考，並非診斷。請一律遵從您的醫護團隊。",
+   "ta": "இது கல்வித் தகவல் மட்டுமே, நோயறிதல் அல்ல. எப்போதும் உங்கள் மருத்துவக் குழுவின் அறிவுரையைப் பின்பற்றுங்கள்."
+  },
+  "urgentTitle": {
+   "en": "This could need urgent care",
+   "ms": "Ini mungkin memerlukan rawatan segera",
+   "zh": "這可能需要緊急處理",
+   "ta": "இதற்கு அவசர சிகிச்சை தேவைப்படலாம்"
+  },
+  "suggestions": [
+   {
+    "en": "Is it safe to exercise in pregnancy?",
+    "ms": "Adakah selamat bersenam semasa hamil?",
+    "zh": "懷孕期間運動安全嗎？",
+    "ta": "கர்ப்ப காலத்தில் உடற்பயிற்சி செய்வது பாதுகாப்பானதா?"
+   },
+   {
+    "en": "Which foods should I avoid while pregnant?",
+    "ms": "Makanan apa yang perlu saya elakkan semasa hamil?",
+    "zh": "懷孕時應避免哪些食物？",
+    "ta": "கர்ப்ப காலத்தில் எந்த உணவுகளைத் தவிர்க்க வேண்டும்?"
+   },
+   {
+    "en": "How do I count my baby's kicks?",
+    "ms": "Bagaimana cara mengira tendangan bayi?",
+    "zh": "怎樣計算胎動？",
+    "ta": "என் குழந்தையின் உதைகளை எப்படி எண்ணுவது?"
+   },
+   {
+    "en": "Help me prepare questions for my next check-up",
+    "ms": "Bantu saya sediakan soalan untuk pemeriksaan seterusnya",
+    "zh": "幫我準備下次產檢要問的問題",
+    "ta": "அடுத்த பரிசோதனைக்கான கேள்விகளைத் தயாரிக்க உதவுங்கள்"
+   }
+  ],
+  "redFlagKeywords": {
+   "reduced_movement": {
+    "en": [
+     "not moving",
+     "no movement",
+     "stopped moving",
+     "fewer kicks",
+     "less movement",
+     "not kicking"
+    ],
+    "ms": [
+     "tidak bergerak",
+     "kurang bergerak",
+     "tiada tendangan",
+     "kurang tendangan"
+    ],
+    "zh": [
+     "沒有胎動",
+     "胎動減少",
+     "不動了"
+    ],
+    "ta": [
+     "அசையவில்லை",
+     "அசைவு குறைவு",
+     "உதைக்கவில்லை"
+    ]
+   },
+   "heavy_bleeding": {
+    "en": [
+     "heavy bleeding",
+     "bleeding a lot",
+     "soaking a pad",
+     "blood clots"
+    ],
+    "ms": [
+     "pendarahan banyak",
+     "berdarah banyak",
+     "darah beku"
+    ],
+    "zh": [
+     "大量出血",
+     "流很多血",
+     "血塊"
+    ],
+    "ta": [
+     "அதிக இரத்தப்போக்கு",
+     "நிறைய இரத்தம்"
+    ]
+   },
+   "headache_vision": {
+    "en": [
+     "blurred vision",
+     "flashing lights",
+     "severe headache",
+     "seeing spots"
+    ],
+    "ms": [
+     "penglihatan kabur",
+     "sakit kepala teruk",
+     "cahaya berkelip"
+    ],
+    "zh": [
+     "視力模糊",
+     "劇烈頭痛",
+     "眼前閃光"
+    ],
+    "ta": [
+     "கண் மங்கல்",
+     "கடுமையான தலைவலி"
+    ]
+   },
+   "sudden_swelling": {
+    "en": [
+     "sudden swelling",
+     "face swelling",
+     "swollen face"
+    ],
+    "ms": [
+     "bengkak tiba-tiba",
+     "muka bengkak"
+    ],
+    "zh": [
+     "突然水腫",
+     "臉部浮腫"
+    ],
+    "ta": [
+     "திடீர் வீக்கம்",
+     "முகம் வீக்கம்"
+    ]
+   },
+   "abdominal_pain": {
+    "en": [
+     "severe abdominal pain",
+     "severe stomach pain",
+     "constant pain in my belly",
+     "severe tummy pain"
+    ],
+    "ms": [
+     "sakit perut teruk",
+     "sakit perut berterusan"
+    ],
+    "zh": [
+     "劇烈腹痛",
+     "持續腹痛"
+    ],
+    "ta": [
+     "கடுமையான வயிற்று வலி"
+    ]
+   },
+   "fluid_leak": {
+    "en": [
+     "waters broke",
+     "water broke",
+     "leaking fluid",
+     "fluid leaking"
+    ],
+    "ms": [
+     "air ketuban pecah",
+     "air ketuban",
+     "cecair keluar"
+    ],
+    "zh": [
+     "破水",
+     "羊水"
+    ],
+    "ta": [
+     "பனிக்குடம் உடைந்தது",
+     "நீர் கசிவு"
+    ]
+   },
+   "fever": {
+    "en": [
+     "high fever",
+     "fever"
+    ],
+    "ms": [
+     "demam"
+    ],
+    "zh": [
+     "發燒",
+     "發高燒"
+    ],
+    "ta": [
+     "காய்ச்சல்"
+    ]
+   },
+   "breathing": {
+    "en": [
+     "can't breathe",
+     "cannot breathe",
+     "short of breath",
+     "chest pain",
+     "difficulty breathing"
+    ],
+    "ms": [
+     "sesak nafas",
+     "sakit dada",
+     "susah bernafas"
+    ],
+    "zh": [
+     "呼吸困難",
+     "胸痛",
+     "喘不過氣"
+    ],
+    "ta": [
+     "மூச்சுத் திணறல்",
+     "நெஞ்சு வலி"
+    ]
+   },
+   "fainting": {
+    "en": [
+     "fainted",
+     "fainting",
+     "passed out",
+     "unconscious"
+    ],
+    "ms": [
+     "pengsan",
+     "tidak sedarkan diri"
+    ],
+    "zh": [
+     "昏倒",
+     "暈倒",
+     "失去意識"
+    ],
+    "ta": [
+     "மயக்கம்",
+     "சுயநினைவு இழந்தேன்"
+    ]
+   }
+  }
  }
 }

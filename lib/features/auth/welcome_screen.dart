@@ -7,6 +7,9 @@ import '../../core/widgets/common.dart';
 import '../../data/demo_store.dart';
 import '../../data/session.dart';
 import '../settings/language_switcher.dart';
+import '../../core/integrations/integration_config.dart';
+import '../../core/integrations/verification.dart';
+import 'code_flow.dart';
 import 'login_screen.dart';
 import 'onboarding_screen.dart';
 
@@ -72,6 +75,7 @@ class WelcomeScreen extends StatelessWidget {
               l.welcomeDemoHint(DemoAccounts.code),
               title: l.demoModeTitle,
             ),
+            const ConnectionsLink(),
             const Disclaimer(),
           ],
         ),
@@ -81,11 +85,11 @@ class WelcomeScreen extends StatelessWidget {
 }
 
 /// "or" divider and the Google / Microsoft buttons.
-class SsoButtons extends StatelessWidget {
+class SsoButtons extends ConsumerWidget {
   const SsoButtons({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l = context.l10n, p = context.pal;
     return Column(
       children: [
@@ -112,7 +116,9 @@ class SsoButtons extends StatelessWidget {
           GhostButton(
             l.ssoContinueWith(provider),
             icon: icon,
-            onPressed: () => showSsoSheet(context, provider),
+            onPressed: () => ref.read(integrationConfigProvider).hasFirebase
+                ? realSsoSignIn(context, ref, provider)
+                : showSsoSheet(context, provider),
           ),
           const SizedBox(height: 10),
         ],
@@ -122,6 +128,39 @@ class SsoButtons extends StatelessWidget {
           style: TextStyle(color: p.muted, fontSize: 12.5, height: 1.45),
         ),
       ],
+    );
+  }
+}
+
+/// Real Google / Microsoft sign-in through Firebase. A known email signs
+/// in; a new one carries on into sign-up with the email already verified.
+Future<void> realSsoSignIn(
+  BuildContext context,
+  WidgetRef ref,
+  String provider,
+) async {
+  final nav = Navigator.of(context);
+  final String email;
+  try {
+    email = await ref.read(verificationProvider).signInWith(provider);
+  } on VerifyException catch (e) {
+    if (context.mounted && e.error != VerifyError.cancelled) {
+      showToast(context, verifyErrorText(context, e));
+    }
+    return;
+  } on Object catch (e) {
+    if (context.mounted) showToast(context, verifyErrorText(context, e));
+    return;
+  }
+  final known = ref.read(demoStoreProvider).profileByEmail(email);
+  if (known != null) {
+    ref.read(sessionProvider.notifier).signIn(known.id);
+    nav.popUntil((r) => r.isFirst);
+  } else {
+    nav.push(
+      MaterialPageRoute<void>(
+        builder: (_) => OnboardingScreen(verifiedEmail: email),
+      ),
     );
   }
 }
@@ -189,6 +228,7 @@ class _SsoSheet extends ConsumerWidget {
                   }
                 },
               ),
+            const ConnectionsLink(),
           ],
         ),
       ),

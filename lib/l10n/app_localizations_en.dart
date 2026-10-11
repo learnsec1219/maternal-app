@@ -50,6 +50,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get actionContinue => 'Continue';
 
   @override
+  String get actionCopy => 'Copy';
+
+  @override
   String get actionDecline => 'Decline';
 
   @override
@@ -92,7 +95,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get actionPreviousMonth => 'Previous month';
 
   @override
+  String get actionRetry => 'Try again';
+
+  @override
   String get actionSave => 'Save';
+
+  @override
+  String get actionScan => 'Scan for devices';
 
   @override
   String get actionSendCode => 'Send code';
@@ -215,6 +224,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appointmentsTitle => 'Appointments';
 
   @override
+  String get assistantBadKey =>
+      'The AI service refused the Gemini API key. Check the key in Profile > Connections.';
+
+  @override
+  String get assistantBlocked =>
+      'The AI service did not answer this question. Please ask it another way.';
+
+  @override
+  String get assistantEducational => 'Educational information';
+
+  @override
+  String get assistantFailed =>
+      'The answer could not be loaded. Please try again.';
+
+  @override
   String get assistantHomeHint =>
       'AI answers in English, BM, 中文 or தமிழ். Educational, not a diagnosis.';
 
@@ -225,11 +249,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String get assistantLanguage => 'Answer in';
 
   @override
-  String get assistantNotConnected =>
-      'The AI assistant is not connected in this demo build, so it cannot answer yet. For anything urgent, use the warning signs in Symptoms or call your care team.';
+  String get assistantNetwork =>
+      'Could not reach the AI service. Check your internet connection and try again.';
+
+  @override
+  String get assistantNewChat => 'New conversation';
+
+  @override
+  String get assistantNotConfigured =>
+      'The AI assistant needs a Gemini API key before it can answer. Add one in Profile > Connections, or ask the app\'s administrator to build it into the app.';
 
   @override
   String get assistantSend => 'Send';
+
+  @override
+  String get assistantThinking => 'Thinking...';
 
   @override
   String get assistantTitle => 'Ask a question';
@@ -247,8 +281,15 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get authAccountNotFound =>
-      'No account found. Create an account instead.';
+  String get authAuthenticatorHelp =>
+      'Enter the 6-digit code that your authenticator app shows for Maternal.';
+
+  @override
+  String get authCancelled => 'Sign-in was cancelled.';
+
+  @override
+  String get authEmailNotSetUp =>
+      'Real email codes are not set up yet (Connections).';
 
   @override
   String get authInvalidCode =>
@@ -257,6 +298,22 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get authInvalidIdentifier =>
       'Please enter a valid phone number or email.';
+
+  @override
+  String get authNoAccountYet =>
+      'Verified. There is no account yet, so let\'s create one.';
+
+  @override
+  String get authSendCodeInstead => 'Send a code by SMS or email instead';
+
+  @override
+  String authSendFailed(String reason) {
+    return 'Could not send or check the code. $reason';
+  }
+
+  @override
+  String get authSmsNotSetUp =>
+      'Real SMS codes and Google sign-in are not set up yet (Connections).';
 
   @override
   String get babiesMore => 'More';
@@ -274,11 +331,71 @@ class AppLocalizationsEn extends AppLocalizations {
   String get babyParameters => 'Baby\'s measurements';
 
   @override
-  String get bluetoothBody =>
-      'Connect compatible health and wearable devices, such as blood pressure monitors.';
+  String bluetoothBattery(int level) {
+    return 'Battery $level%';
+  }
+
+  @override
+  String get bluetoothConnectFailed =>
+      'Could not connect. Keep the watch close to the phone and try again.';
+
+  @override
+  String get bluetoothDenied =>
+      'Bluetooth permission was not given. Allow \"Nearby devices\" for Maternal in your phone\'s Settings > Apps, then try again.';
+
+  @override
+  String get bluetoothFindWatch => 'Turn on Bluetooth and find my watch';
+
+  @override
+  String get bluetoothHasHeartRate => 'Shares heart rate';
+
+  @override
+  String bluetoothHeartRate(int bpm) {
+    return '$bpm bpm';
+  }
+
+  @override
+  String get bluetoothLost => 'The watch disconnected.';
+
+  @override
+  String get bluetoothNoHeartRate =>
+      'This device does not share heart rate over Bluetooth. On many watches you can turn on \"Broadcast heart rate\" (HR broadcast) in the watch settings.';
+
+  @override
+  String get bluetoothNoneFound => 'No devices found yet.';
+
+  @override
+  String get bluetoothOff => 'Bluetooth is off. Turn it on and try again.';
+
+  @override
+  String get bluetoothPromptTitle => 'Connect your watch?';
+
+  @override
+  String get bluetoothRationale =>
+      'To find nearby devices the app needs Bluetooth permission. It is used only to connect health devices you choose.';
+
+  @override
+  String bluetoothReconnect(String name) {
+    return 'Reconnect $name';
+  }
+
+  @override
+  String get bluetoothScanHelp =>
+      'Keep the watch awake and close to the phone. Devices that share heart rate are listed first.';
 
   @override
   String get bluetoothTitle => 'Bluetooth devices';
+
+  @override
+  String get bluetoothUnsupported =>
+      'This phone does not support Bluetooth Low Energy.';
+
+  @override
+  String get bluetoothWaitingForReading => 'Waiting for a reading…';
+
+  @override
+  String get bluetoothWatchBody =>
+      'Pair a watch or fitness band over Bluetooth. Heart-rate readings sync straight into your Health log.';
 
   @override
   String callDoctor(String name) {
@@ -366,6 +483,48 @@ class AppLocalizationsEn extends AppLocalizations {
   String get colScan => 'Scan';
 
   @override
+  String get connectionsAiBody =>
+      'Create a free key at aistudio.google.com > Get API key. The model can stay as gemini-flash-latest.';
+
+  @override
+  String get connectionsAiTitle => 'AI assistant (Google Gemini)';
+
+  @override
+  String get connectionsBuiltIn => 'Built into this app';
+
+  @override
+  String get connectionsEmailBody =>
+      'In EmailJS, add a Gmail service and an email template whose \"To\" is to_email and whose message shows passcode. Turn on \"Allow EmailJS API for non-browser applications\" under Account > Security, and copy the private key too.';
+
+  @override
+  String get connectionsEmailTitle => 'Email codes (EmailJS + Gmail)';
+
+  @override
+  String get connectionsFirebaseBody =>
+      'In the Firebase console, add an Android app with the package and fingerprints below, turn on Phone and Google under Authentication > Sign-in method, then copy the values from Project settings.';
+
+  @override
+  String get connectionsFirebaseTitle =>
+      'SMS codes and Google sign-in (Firebase)';
+
+  @override
+  String get connectionsIntro =>
+      'Keys for the AI assistant, email codes, SMS codes and Google sign-in. Keys typed here stay on this phone and replace the ones built into the app. Leave a box empty to use the built-in key.';
+
+  @override
+  String get connectionsMissing => 'Not set';
+
+  @override
+  String get connectionsRestartNote =>
+      'After changing the Firebase values, close and reopen the app.';
+
+  @override
+  String get connectionsSetHere => 'Set on this phone';
+
+  @override
+  String get connectionsTitle => 'Connections';
+
+  @override
   String get contentPendingReview =>
       'This schedule is demo content pending review by a qualified clinician against Malaysian guidance. Always follow your care team.';
 
@@ -423,6 +582,9 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get contractionTooShort =>
       'That was only a few seconds, so it was not saved.';
+
+  @override
+  String get copied => 'Copied';
 
   @override
   String get createAppointment => 'Appointment';
@@ -487,6 +649,17 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String cycleBasedOnRecords(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other:
+          'Based on the $count periods you recorded. Each new record updates the following months.',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get cycleBasedOnTypical => 'Based on a typical cycle';
 
   @override
@@ -525,6 +698,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cycleLogToday => 'Log period';
 
   @override
+  String get cycleNeedSecondPeriod =>
+      'Based on a typical 28-day cycle. Record your next period and predictions will follow your own rhythm.';
+
+  @override
   String get cycleNextPeriod => 'Next period';
 
   @override
@@ -549,8 +726,35 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String cycleShiftEarlier(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other:
+          'Your last period started $days days earlier than predicted, so the next dates moved.',
+      one: 'Your last period started 1 day earlier than predicted, so the next dates moved.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String cycleShiftLater(int days) {
+    String _temp0 = intl.Intl.pluralLogic(
+      days,
+      locale: localeName,
+      other:
+          'Your last period started $days days later than predicted, so the next dates moved.',
+      one: 'Your last period started 1 day later than predicted, so the next dates moved.',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get cycleStale =>
       'Your expected period is more than a cycle late. Log your latest period to update the estimates.';
+
+  @override
+  String get cycleUpcomingTitle => 'Following periods (estimate)';
 
   @override
   String get dayAppointments => 'Appointments';
@@ -621,10 +825,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get demoUsePatient => 'Gwen (pregnant)';
-
-  @override
-  String get devicesDemoNote =>
-      'This build uses demo devices and demo readings. Real Health Connect and Bluetooth sync is added in the wearables stage.';
 
   @override
   String get devicesTitle => 'Connected devices';
@@ -943,6 +1143,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Bring in steps, heart rate, sleep and other data your phone or watch already records.';
 
   @override
+  String get healthConnectDemoNote =>
+      'Health Connect below still uses demo readings in this build. Bluetooth above is real.';
+
+  @override
   String get healthConnectRationale =>
       'We read only the data types you allow, and only after you agree. You can disconnect at any time.';
 
@@ -1056,6 +1260,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get legendAppointment => 'Appointment';
 
   @override
+  String get legendFertile => 'Fertile window (estimate)';
+
+  @override
   String get legendLogged => 'Health log';
 
   @override
@@ -1063,6 +1270,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get legendPeriod => 'Period';
+
+  @override
+  String get legendPredicted => 'Predicted period';
 
   @override
   String get linkActive => 'Can see your shared records';
@@ -1466,6 +1676,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get scanTypeHint => 'e.g. Growth scan';
 
   @override
+  String get scanning => 'Scanning…';
+
+  @override
+  String get securityTitle => 'Sign-in & security';
+
+  @override
   String get shareCycle => 'Period and cycle';
 
   @override
@@ -1619,6 +1835,46 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get today => 'Today';
+
+  @override
+  String get totpBody =>
+      'Sign in with the 6-digit code from Google Authenticator, Microsoft Authenticator or a similar app. It works without SMS or internet.';
+
+  @override
+  String get totpCodeLabel => 'Authenticator code';
+
+  @override
+  String get totpEnable => 'Verify and turn on';
+
+  @override
+  String get totpKeyLabel => 'Setup key';
+
+  @override
+  String get totpNoApp =>
+      'No authenticator app found. Install Google Authenticator, then try again or type the setup key.';
+
+  @override
+  String get totpOn =>
+      'Authenticator app is on. When you sign in, enter the code it shows.';
+
+  @override
+  String get totpOpenApp => 'Open authenticator app';
+
+  @override
+  String get totpSetup => 'Set up authenticator app';
+
+  @override
+  String get totpStep1 =>
+      '1. Tap \"Open authenticator app\", or scan this QR code with another phone, or type the setup key into the app.';
+
+  @override
+  String get totpStep2 => '2. Enter the 6-digit code the app shows.';
+
+  @override
+  String get totpTitle => 'Authenticator app';
+
+  @override
+  String get totpTurnOff => 'Turn off';
 
   @override
   String get trimesterFirst => 'First trimester';

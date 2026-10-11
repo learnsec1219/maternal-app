@@ -253,9 +253,11 @@ class AppTextField extends StatelessWidget {
     this.maxLines = 1,
     this.onChanged,
     this.fieldKey,
+    this.obscure = false,
   });
 
   final String label;
+  final bool obscure;
   final TextEditingController? controller;
   final TextInputType? keyboardType;
   final String? hint, helper, error;
@@ -274,7 +276,10 @@ class AppTextField extends StatelessWidget {
       controller: controller,
       keyboardType: keyboardType,
       enabled: enabled,
-      maxLines: maxLines,
+      maxLines: obscure ? 1 : maxLines,
+      obscureText: obscure,
+      autocorrect: !obscure,
+      enableSuggestions: !obscure,
       onChanged: onChanged,
       decoration: InputDecoration(hintText: hint),
     ),
@@ -611,10 +616,12 @@ class PageScaffold extends StatelessWidget {
     this.showLanguage = false,
     this.leading,
     this.actions = const [],
+    this.controller,
   });
 
   final String title;
   final List<Widget> children;
+  final ScrollController? controller;
   final Widget? bottom, leading;
   final bool showLanguage;
   final List<Widget> actions;
@@ -636,6 +643,7 @@ class PageScaffold extends StatelessWidget {
         children: [
           Expanded(
             child: ListView(
+              controller: controller,
               padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
               children: children,
             ),
