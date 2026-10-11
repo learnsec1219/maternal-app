@@ -10,8 +10,7 @@ void main() {
   testWidgets('starts on the welcome screen, not Home', (tester) async {
     await pumpApp(tester);
     expect(find.text('Create an account'), findsOneWidget);
-    expect(find.text('Continue with Google'), findsOneWidget);
-    expect(find.text('Continue with Microsoft'), findsOneWidget);
+    expect(find.text('Continue with Google'), findsNothing);
     expect(find.text('Home'), findsNothing);
   });
 
@@ -44,14 +43,6 @@ void main() {
       findsOneWidget,
     );
     expect(find.text('Hi, Gwen'), findsNothing);
-  });
-
-  testWidgets('Google sign-in offers the demo accounts', (tester) async {
-    await pumpApp(tester);
-    await tapAndSettle(tester, find.text('Continue with Google'));
-    expect(find.text('Demo: Google sign-in'), findsOneWidget);
-    await tapAndSettle(tester, find.text('Aina'));
-    expect(find.text('Hi, Aina'), findsOneWidget);
   });
 
   testWidgets('Create shows the grouped actions', (tester) async {

@@ -285,9 +285,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'Enter the 6-digit code that your authenticator app shows for Maternal.';
 
   @override
-  String get authCancelled => 'Sign-in was cancelled.';
-
-  @override
   String get authEmailNotSetUp =>
       'Real email codes are not set up yet (Connections).';
 
@@ -313,7 +310,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get authSmsNotSetUp =>
-      'Real SMS codes and Google sign-in are not set up yet (Connections).';
+      'Phone numbers use the demo code in this build. Real codes are sent by email.';
 
   @override
   String get babiesMore => 'More';
@@ -366,13 +363,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get bluetoothOff => 'Bluetooth is off. Turn it on and try again.';
-
-  @override
-  String get bluetoothPromptTitle => 'Connect your watch?';
-
-  @override
-  String get bluetoothRationale =>
-      'To find nearby devices the app needs Bluetooth permission. It is used only to connect health devices you choose.';
 
   @override
   String bluetoothReconnect(String name) {
@@ -500,23 +490,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get connectionsEmailTitle => 'Email codes (EmailJS + Gmail)';
 
   @override
-  String get connectionsFirebaseBody =>
-      'In the Firebase console, add an Android app with the package and fingerprints below, turn on Phone and Google under Authentication > Sign-in method, then copy the values from Project settings.';
-
-  @override
-  String get connectionsFirebaseTitle =>
-      'SMS codes and Google sign-in (Firebase)';
-
-  @override
   String get connectionsIntro =>
-      'Keys for the AI assistant, email codes, SMS codes and Google sign-in. Keys typed here stay on this phone and replace the ones built into the app. Leave a box empty to use the built-in key.';
+      'Keys for the AI assistant and email codes. Keys typed here stay on this phone and replace the ones built into the app. Leave a box empty to use the built-in key.';
 
   @override
   String get connectionsMissing => 'Not set';
-
-  @override
-  String get connectionsRestartNote =>
-      'After changing the Firebase values, close and reopen the app.';
 
   @override
   String get connectionsSetHere => 'Set on this phone';
@@ -1704,31 +1682,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get signOutConfirm => 'Sign out of this device?';
-
-  @override
-  String ssoContinueWith(String provider) {
-    return 'Continue with $provider';
-  }
-
-  @override
-  String ssoDemoBody(String provider) {
-    return '$provider sign-in is not set up in this demo build. In the real app this opens the $provider sign-in page. Choose a demo account:';
-  }
-
-  @override
-  String get ssoDemoNewPerson => 'New person (creates an account)';
-
-  @override
-  String ssoDemoTitle(String provider) {
-    return 'Demo: $provider sign-in';
-  }
-
-  @override
-  String get ssoNote =>
-      'We only receive your name and email. Your health records stay in this app.';
-
-  @override
-  String get ssoOr => 'or';
 
   @override
   String get statAlerts => 'Alerts to review';

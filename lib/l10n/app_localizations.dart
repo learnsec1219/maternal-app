@@ -594,12 +594,6 @@ abstract class AppLocalizations {
   /// **'Enter the 6-digit code that your authenticator app shows for Maternal.'**
   String get authAuthenticatorHelp;
 
-  /// No description provided for @authCancelled.
-  ///
-  /// In en, this message translates to:
-  /// **'Sign-in was cancelled.'**
-  String get authCancelled;
-
   /// No description provided for @authEmailNotSetUp.
   ///
   /// In en, this message translates to:
@@ -639,7 +633,7 @@ abstract class AppLocalizations {
   /// No description provided for @authSmsNotSetUp.
   ///
   /// In en, this message translates to:
-  /// **'Real SMS codes and Google sign-in are not set up yet (Connections).'**
+  /// **'Phone numbers use the demo code in this build. Real codes are sent by email.'**
   String get authSmsNotSetUp;
 
   /// No description provided for @babiesMore.
@@ -731,18 +725,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Bluetooth is off. Turn it on and try again.'**
   String get bluetoothOff;
-
-  /// No description provided for @bluetoothPromptTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Connect your watch?'**
-  String get bluetoothPromptTitle;
-
-  /// No description provided for @bluetoothRationale.
-  ///
-  /// In en, this message translates to:
-  /// **'To find nearby devices the app needs Bluetooth permission. It is used only to connect health devices you choose.'**
-  String get bluetoothRationale;
 
   /// No description provided for @bluetoothReconnect.
   ///
@@ -942,22 +924,10 @@ abstract class AppLocalizations {
   /// **'Email codes (EmailJS + Gmail)'**
   String get connectionsEmailTitle;
 
-  /// No description provided for @connectionsFirebaseBody.
-  ///
-  /// In en, this message translates to:
-  /// **'In the Firebase console, add an Android app with the package and fingerprints below, turn on Phone and Google under Authentication > Sign-in method, then copy the values from Project settings.'**
-  String get connectionsFirebaseBody;
-
-  /// No description provided for @connectionsFirebaseTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'SMS codes and Google sign-in (Firebase)'**
-  String get connectionsFirebaseTitle;
-
   /// No description provided for @connectionsIntro.
   ///
   /// In en, this message translates to:
-  /// **'Keys for the AI assistant, email codes, SMS codes and Google sign-in. Keys typed here stay on this phone and replace the ones built into the app. Leave a box empty to use the built-in key.'**
+  /// **'Keys for the AI assistant and email codes. Keys typed here stay on this phone and replace the ones built into the app. Leave a box empty to use the built-in key.'**
   String get connectionsIntro;
 
   /// No description provided for @connectionsMissing.
@@ -965,12 +935,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Not set'**
   String get connectionsMissing;
-
-  /// No description provided for @connectionsRestartNote.
-  ///
-  /// In en, this message translates to:
-  /// **'After changing the Firebase values, close and reopen the app.'**
-  String get connectionsRestartNote;
 
   /// No description provided for @connectionsSetHere.
   ///
@@ -2945,42 +2909,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sign out of this device?'**
   String get signOutConfirm;
-
-  /// No description provided for @ssoContinueWith.
-  ///
-  /// In en, this message translates to:
-  /// **'Continue with {provider}'**
-  String ssoContinueWith(String provider);
-
-  /// No description provided for @ssoDemoBody.
-  ///
-  /// In en, this message translates to:
-  /// **'{provider} sign-in is not set up in this demo build. In the real app this opens the {provider} sign-in page. Choose a demo account:'**
-  String ssoDemoBody(String provider);
-
-  /// No description provided for @ssoDemoNewPerson.
-  ///
-  /// In en, this message translates to:
-  /// **'New person (creates an account)'**
-  String get ssoDemoNewPerson;
-
-  /// No description provided for @ssoDemoTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Demo: {provider} sign-in'**
-  String ssoDemoTitle(String provider);
-
-  /// No description provided for @ssoNote.
-  ///
-  /// In en, this message translates to:
-  /// **'We only receive your name and email. Your health records stay in this app.'**
-  String get ssoNote;
-
-  /// No description provided for @ssoOr.
-  ///
-  /// In en, this message translates to:
-  /// **'or'**
-  String get ssoOr;
 
   /// No description provided for @statAlerts.
   ///

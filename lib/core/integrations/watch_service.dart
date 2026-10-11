@@ -41,6 +41,9 @@ abstract class WatchService {
   /// Asks for Bluetooth permission and to turn Bluetooth on.
   Future<WatchReady> prepare();
 
+  /// Shows Android's own Bluetooth permission box. True when allowed.
+  Future<bool> requestPermission();
+
   /// Devices already connected to the phone and nearby ones, as found.
   Stream<WatchDevice> scan();
   Future<void> stopScan();
@@ -64,6 +67,16 @@ bool _same(String a, String b) {
 
 class BleWatchService implements WatchService {
   StreamController<WatchDevice>? _scan;
+
+  @override
+  Future<bool> requestPermission() async {
+    try {
+      await UniversalBle.requestPermissions();
+      return true;
+    } on Object {
+      return false;
+    }
+  }
 
   @override
   Future<WatchReady> prepare() async {

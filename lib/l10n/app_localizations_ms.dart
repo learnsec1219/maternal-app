@@ -279,9 +279,6 @@ class AppLocalizationsMs extends AppLocalizations {
       'Masukkan kod 6 digit yang dipaparkan oleh aplikasi pengesah anda untuk Maternal.';
 
   @override
-  String get authCancelled => 'Log masuk dibatalkan.';
-
-  @override
   String get authEmailNotSetUp =>
       'Kod e-mel sebenar belum disediakan (Sambungan).';
 
@@ -307,7 +304,7 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get authSmsNotSetUp =>
-      'Kod SMS sebenar dan log masuk Google belum disediakan (Sambungan).';
+      'Nombor telefon menggunakan kod demo dalam binaan ini. Kod sebenar dihantar melalui e-mel.';
 
   @override
   String get babiesMore => 'Lebih';
@@ -360,13 +357,6 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get bluetoothOff => 'Bluetooth dimatikan. Hidupkannya dan cuba lagi.';
-
-  @override
-  String get bluetoothPromptTitle => 'Sambungkan jam tangan anda?';
-
-  @override
-  String get bluetoothRationale =>
-      'Untuk mencari peranti berdekatan, aplikasi memerlukan kebenaran Bluetooth. Ia hanya digunakan untuk menyambung peranti kesihatan yang anda pilih.';
 
   @override
   String bluetoothReconnect(String name) {
@@ -495,23 +485,11 @@ class AppLocalizationsMs extends AppLocalizations {
   String get connectionsEmailTitle => 'Kod e-mel (EmailJS + Gmail)';
 
   @override
-  String get connectionsFirebaseBody =>
-      'Dalam konsol Firebase, tambah aplikasi Android dengan pakej dan cap jari di bawah, hidupkan Phone dan Google di Authentication > Sign-in method, kemudian salin nilai daripada Project settings.';
-
-  @override
-  String get connectionsFirebaseTitle =>
-      'Kod SMS dan log masuk Google (Firebase)';
-
-  @override
   String get connectionsIntro =>
-      'Kunci untuk pembantu AI, kod e-mel, kod SMS dan log masuk Google. Kunci yang ditaip di sini kekal dalam telefon ini dan menggantikan kunci terbina dalam aplikasi. Biarkan kotak kosong untuk guna kunci terbina dalam.';
+      'Kunci untuk pembantu AI dan kod e-mel. Kunci yang ditaip di sini kekal dalam telefon ini dan menggantikan kunci terbina dalam aplikasi. Biarkan kotak kosong untuk guna kunci terbina dalam.';
 
   @override
   String get connectionsMissing => 'Belum ditetapkan';
-
-  @override
-  String get connectionsRestartNote =>
-      'Selepas menukar nilai Firebase, tutup dan buka semula aplikasi.';
 
   @override
   String get connectionsSetHere => 'Ditetapkan pada telefon ini';
@@ -1643,31 +1621,6 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get signOutConfirm => 'Log keluar dari peranti ini?';
-
-  @override
-  String ssoContinueWith(String provider) {
-    return 'Teruskan dengan $provider';
-  }
-
-  @override
-  String ssoDemoBody(String provider) {
-    return 'Log masuk $provider belum disediakan dalam binaan demo ini. Dalam aplikasi sebenar, halaman log masuk $provider akan dibuka. Pilih akaun demo:';
-  }
-
-  @override
-  String get ssoDemoNewPerson => 'Orang baharu (cipta akaun)';
-
-  @override
-  String ssoDemoTitle(String provider) {
-    return 'Demo: log masuk $provider';
-  }
-
-  @override
-  String get ssoNote =>
-      'Kami hanya menerima nama dan e-mel anda. Rekod kesihatan anda kekal dalam aplikasi ini.';
-
-  @override
-  String get ssoOr => 'atau';
 
   @override
   String get statAlerts => 'Amaran untuk disemak';

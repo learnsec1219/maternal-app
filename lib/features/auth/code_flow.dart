@@ -17,9 +17,6 @@ enum CodeMethod {
   /// A real code by email (EmailJS).
   email,
 
-  /// A real code by SMS (Firebase).
-  sms,
-
   /// The 6-digit code in Google Authenticator or a similar app.
   totp,
 }
@@ -56,10 +53,8 @@ class CodeFlow {
       } else {
         method = CodeMethod.demo;
       }
-    } else if (cfg.hasFirebase) {
-      await v.sendSmsCode(id);
-      method = CodeMethod.sms;
     } else {
+      // Phone numbers: SMS codes are not used in this build.
       method = CodeMethod.demo;
     }
   }
@@ -74,7 +69,6 @@ class CodeFlow {
       CodeMethod.demo => c == DemoAccounts.code,
       CodeMethod.email =>
         ref.read(verificationProvider).checkEmailCode(target, c),
-      CodeMethod.sms => ref.read(verificationProvider).checkSmsCode(c),
       CodeMethod.totp =>
         totpSecret != null && Totp.verify(totpSecret, c, DateTime.now()),
       null => false,
@@ -97,8 +91,7 @@ class CodeNote extends StatelessWidget {
   Widget build(BuildContext context) {
     final l = context.l10n;
     return switch (flow.method) {
-      CodeMethod.email ||
-      CodeMethod.sms => InfoBanner(l.otpSentTo(flow.target)),
+      CodeMethod.email => InfoBanner(l.otpSentTo(flow.target)),
       CodeMethod.totp => InfoBanner(l.authAuthenticatorHelp),
       CodeMethod.demo => InfoBanner(
         demoAccount
@@ -116,8 +109,7 @@ String verifyErrorText(BuildContext context, Object e) {
   final l = context.l10n;
   if (e is VerifyException) {
     return switch (e.error) {
-      VerifyError.notConfigured => l.authSmsNotSetUp,
-      VerifyError.cancelled => l.authCancelled,
+      VerifyError.notConfigured => l.authEmailNotSetUp,
       VerifyError.sendFailed => l.authSendFailed(e.detail),
     };
   }

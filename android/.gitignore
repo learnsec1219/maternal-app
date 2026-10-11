@@ -13,6 +13,3 @@ key.properties
 **/*.keystore
 **/*.jks
 
-# Shared debug key so every debug APK has the same SHA-1 (needed by
-# Firebase phone and Google sign-in). Debug builds only, never release.
-!app/debug.keystore

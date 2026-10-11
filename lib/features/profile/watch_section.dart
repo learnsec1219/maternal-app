@@ -390,33 +390,15 @@ class _WatchScanPageState extends ConsumerState<WatchScanPage> {
   }
 }
 
-/// Asks once, after sign-in, whether to connect a watch over Bluetooth.
+/// The first time each person signs in on this phone, shows Android's own
+/// Bluetooth permission box (Allow / Don't allow). Pairing a watch happens
+/// later from Profile > Connected devices.
 Future<void> askForWatchOnce(BuildContext context, WidgetRef ref) async {
-  const key = 'watch.asked';
+  final person = ref.read(sessionProvider);
+  if (person == null) return;
+  final key = 'watch.asked.$person';
   final store = ref.read(localStoreProvider);
   if (store.readString(key) == 'yes') return;
   await store.writeString(key, 'yes');
-  if (!context.mounted) return;
-  final l = context.l10n;
-  final go = await showDialog<bool>(
-    context: context,
-    builder: (ctx) => AlertDialog(
-      key: const Key('watch-prompt'),
-      icon: const Icon(Icons.watch_outlined),
-      title: Text(l.bluetoothPromptTitle),
-      content: Text(l.bluetoothRationale),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.pop(ctx, false),
-          child: Text(l.actionNotNow),
-        ),
-        FilledButton(
-          key: const Key('watch-prompt-yes'),
-          onPressed: () => Navigator.pop(ctx, true),
-          child: Text(l.actionContinue),
-        ),
-      ],
-    ),
-  );
-  if (go == true && context.mounted) await findWatch(context, ref);
+  await ref.read(watchServiceProvider).requestPermission();
 }

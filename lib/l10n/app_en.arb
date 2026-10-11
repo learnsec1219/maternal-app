@@ -124,7 +124,6 @@
     }
   },
   "authAuthenticatorHelp": "Enter the 6-digit code that your authenticator app shows for Maternal.",
-  "authCancelled": "Sign-in was cancelled.",
   "authEmailNotSetUp": "Real email codes are not set up yet (Connections).",
   "authInvalidCode": "That code is not right. Please check and try again.",
   "authInvalidIdentifier": "Please enter a valid phone number or email.",
@@ -138,7 +137,7 @@
       }
     }
   },
-  "authSmsNotSetUp": "Real SMS codes and Google sign-in are not set up yet (Connections).",
+  "authSmsNotSetUp": "Phone numbers use the demo code in this build. Real codes are sent by email.",
   "babiesMore": "More",
   "babiesSingle": "Single",
   "babiesTriplets": "Triplets",
@@ -168,8 +167,6 @@
   "bluetoothNoHeartRate": "This device does not share heart rate over Bluetooth. On many watches you can turn on \"Broadcast heart rate\" (HR broadcast) in the watch settings.",
   "bluetoothNoneFound": "No devices found yet.",
   "bluetoothOff": "Bluetooth is off. Turn it on and try again.",
-  "bluetoothPromptTitle": "Connect your watch?",
-  "bluetoothRationale": "To find nearby devices the app needs Bluetooth permission. It is used only to connect health devices you choose.",
   "bluetoothReconnect": "Reconnect {name}",
   "@bluetoothReconnect": {
     "placeholders": {
@@ -277,11 +274,8 @@
   "connectionsBuiltIn": "Built into this app",
   "connectionsEmailBody": "In EmailJS, add a Gmail service and an email template whose \"To\" is to_email and whose message shows passcode. Turn on \"Allow EmailJS API for non-browser applications\" under Account > Security, and copy the private key too.",
   "connectionsEmailTitle": "Email codes (EmailJS + Gmail)",
-  "connectionsFirebaseBody": "In the Firebase console, add an Android app with the package and fingerprints below, turn on Phone and Google under Authentication > Sign-in method, then copy the values from Project settings.",
-  "connectionsFirebaseTitle": "SMS codes and Google sign-in (Firebase)",
-  "connectionsIntro": "Keys for the AI assistant, email codes, SMS codes and Google sign-in. Keys typed here stay on this phone and replace the ones built into the app. Leave a box empty to use the built-in key.",
+  "connectionsIntro": "Keys for the AI assistant and email codes. Keys typed here stay on this phone and replace the ones built into the app. Leave a box empty to use the built-in key.",
   "connectionsMissing": "Not set",
-  "connectionsRestartNote": "After changing the Firebase values, close and reopen the app.",
   "connectionsSetHere": "Set on this phone",
   "connectionsTitle": "Connections",
   "contentPendingReview": "This schedule is demo content pending review by a qualified clinician against Malaysian guidance. Always follow your care team.",
@@ -932,33 +926,6 @@
   "shareVitals": "Health logs and vital signs",
   "sharingTitle": "Shared with my doctors",
   "signOutConfirm": "Sign out of this device?",
-  "ssoContinueWith": "Continue with {provider}",
-  "@ssoContinueWith": {
-    "placeholders": {
-      "provider": {
-        "type": "String"
-      }
-    }
-  },
-  "ssoDemoBody": "{provider} sign-in is not set up in this demo build. In the real app this opens the {provider} sign-in page. Choose a demo account:",
-  "@ssoDemoBody": {
-    "placeholders": {
-      "provider": {
-        "type": "String"
-      }
-    }
-  },
-  "ssoDemoNewPerson": "New person (creates an account)",
-  "ssoDemoTitle": "Demo: {provider} sign-in",
-  "@ssoDemoTitle": {
-    "placeholders": {
-      "provider": {
-        "type": "String"
-      }
-    }
-  },
-  "ssoNote": "We only receive your name and email. Your health records stay in this app.",
-  "ssoOr": "or",
   "statAlerts": "Alerts to review",
   "statAverage": "Average",
   "statHighest": "Highest",

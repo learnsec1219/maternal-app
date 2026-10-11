@@ -27,19 +27,6 @@ enum IntegrationKey {
   emailJsPrivateKey(
     'EMAILJS_PRIVATE_KEY',
     String.fromEnvironment('EMAILJS_PRIVATE_KEY'),
-  ),
-  firebaseApiKey(
-    'FIREBASE_API_KEY',
-    String.fromEnvironment('FIREBASE_API_KEY'),
-  ),
-  firebaseAppId('FIREBASE_APP_ID', String.fromEnvironment('FIREBASE_APP_ID')),
-  firebaseProjectId(
-    'FIREBASE_PROJECT_ID',
-    String.fromEnvironment('FIREBASE_PROJECT_ID'),
-  ),
-  firebaseSenderId(
-    'FIREBASE_SENDER_ID',
-    String.fromEnvironment('FIREBASE_SENDER_ID'),
   );
 
   const IntegrationKey(this.envName, this.buildValue);
@@ -50,7 +37,7 @@ enum IntegrationKey {
 
   /// Hidden like a password on the Connections page.
   bool get secret => switch (this) {
-    geminiApiKey || emailJsPrivateKey || firebaseApiKey => true,
+    geminiApiKey || emailJsPrivateKey => true,
     _ => false,
   };
 }
@@ -71,13 +58,6 @@ class IntegrationConfig {
     IntegrationKey.emailJsServiceId,
     IntegrationKey.emailJsTemplateId,
     IntegrationKey.emailJsPublicKey,
-  ]);
-
-  bool get hasFirebase => _all([
-    IntegrationKey.firebaseApiKey,
-    IntegrationKey.firebaseAppId,
-    IntegrationKey.firebaseProjectId,
-    IntegrationKey.firebaseSenderId,
   ]);
 }
 

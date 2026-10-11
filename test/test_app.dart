@@ -36,7 +36,7 @@ Future<void> pumpApp(
   SharedPreferences.setMockInitialValues({
     'session.personId': ?signedIn,
     'settings.locale': ?language,
-    if (askedForWatch) 'watch.asked': 'yes',
+    if (askedForWatch && signedIn != null) 'watch.asked.$signedIn': 'yes',
     ...prefs,
   });
   final sp = await SharedPreferences.getInstance();
@@ -72,6 +72,13 @@ class FakeWatch implements WatchService {
   final readings = StreamController<int>.broadcast();
   WatchReady ready = WatchReady.ready;
   bool prepared = false;
+  int permissionAsks = 0;
+
+  @override
+  Future<bool> requestPermission() async {
+    permissionAsks++;
+    return true;
+  }
 
   @override
   Future<WatchReady> prepare() async {

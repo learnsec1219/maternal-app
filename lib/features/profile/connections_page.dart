@@ -6,16 +6,7 @@ import '../../core/theme/app_theme.dart';
 import '../../core/util/l10n.dart';
 import '../../core/widgets/common.dart';
 
-/// Package name and debug-key fingerprints Firebase needs for SMS codes and
-/// Google sign-in. They match `android/app/debug.keystore`.
-const androidPackage = 'com.maternal.maternal';
-const debugSha1 = 'F9:0A:AF:BE:C0:B4:02:7B:B1:FE:A7:D1:DB:4A:69:CF:DA:CF:47:4C';
-const debugSha256 =
-    '9B:12:B4:AB:ED:45:EA:2A:1C:35:7B:3B:28:DE:48:AD:14:D4:5A:E3:04:A2:89:DD:'
-    '8A:C1:D9:3F:A5:A8:3E:93';
-
-/// Keys for the AI assistant, email codes and Firebase (SMS codes, Google
-/// sign-in). Values typed here are kept on this phone and win over the ones
+/// Keys for the AI assistant and email codes. Values typed here are kept on this phone and win over the ones
 /// built into the APK, so a tester can try a service without a new build.
 class ConnectionsPage extends ConsumerStatefulWidget {
   const ConnectionsPage({super.key});
@@ -126,26 +117,6 @@ class _ConnectionsPageState extends ConsumerState<ConnectionsPage> {
           IntegrationKey.emailJsPublicKey,
           IntegrationKey.emailJsPrivateKey,
         ]),
-        section(
-          l.connectionsFirebaseTitle,
-          cfg.hasFirebase,
-          l.connectionsFirebaseBody,
-          [
-            IntegrationKey.firebaseApiKey,
-            IntegrationKey.firebaseAppId,
-            IntegrationKey.firebaseProjectId,
-            IntegrationKey.firebaseSenderId,
-          ],
-          extra: SelectableText(
-            'Package: $androidPackage\nSHA-1: $debugSha1\n'
-            'SHA-256: $debugSha256',
-            style: TextStyle(fontSize: 12, color: p.muted, height: 1.5),
-          ),
-        ),
-        Text(
-          l.connectionsRestartNote,
-          style: TextStyle(fontSize: 12.5, color: p.muted, height: 1.45),
-        ),
       ],
     );
   }

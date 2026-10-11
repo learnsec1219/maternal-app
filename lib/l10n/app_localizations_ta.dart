@@ -284,9 +284,6 @@ class AppLocalizationsTa extends AppLocalizations {
       'உங்கள் அங்கீகரிப்புச் செயலி Maternal க்குக் காட்டும் 6 இலக்கக் குறியீட்டை உள்ளிடவும்.';
 
   @override
-  String get authCancelled => 'உள்நுழைவு ரத்து செய்யப்பட்டது.';
-
-  @override
   String get authEmailNotSetUp =>
       'உண்மையான மின்னஞ்சல் குறியீடுகள் இன்னும் அமைக்கப்படவில்லை (இணைப்புகள்).';
 
@@ -313,7 +310,7 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get authSmsNotSetUp =>
-      'உண்மையான SMS குறியீடுகளும் Google உள்நுழைவும் இன்னும் அமைக்கப்படவில்லை (இணைப்புகள்).';
+      'இந்தப் பதிப்பில் தொலைபேசி எண்கள் டெமோ குறியீட்டைப் பயன்படுத்துகின்றன. உண்மையான குறியீடுகள் மின்னஞ்சலில் அனுப்பப்படும்.';
 
   @override
   String get babiesMore => 'மேலும்';
@@ -368,13 +365,6 @@ class AppLocalizationsTa extends AppLocalizations {
   @override
   String get bluetoothOff =>
       'Bluetooth அணைக்கப்பட்டுள்ளது. அதை இயக்கி மீண்டும் முயலவும்.';
-
-  @override
-  String get bluetoothPromptTitle => 'உங்கள் கடிகாரத்தை இணைக்கவா?';
-
-  @override
-  String get bluetoothRationale =>
-      'அருகிலுள்ள சாதனங்களைக் கண்டறிய செயலிக்கு Bluetooth அனுமதி தேவை. நீங்கள் தேர்வுசெய்யும் உடல்நலச் சாதனங்களை இணைக்க மட்டுமே பயன்படும்.';
 
   @override
   String bluetoothReconnect(String name) {
@@ -503,23 +493,11 @@ class AppLocalizationsTa extends AppLocalizations {
       'மின்னஞ்சல் குறியீடுகள் (EmailJS + Gmail)';
 
   @override
-  String get connectionsFirebaseBody =>
-      'Firebase கன்சோலில் கீழே உள்ள தொகுப்புப் பெயர் மற்றும் கைரேகைகளுடன் ஒரு Android செயலியைச் சேர்க்கவும், Authentication > Sign-in method இல் Phone மற்றும் Google ஐ இயக்கவும், பின்னர் Project settings இலிருந்து மதிப்புகளை நகலெடுக்கவும்.';
-
-  @override
-  String get connectionsFirebaseTitle =>
-      'SMS குறியீடுகள் மற்றும் Google உள்நுழைவு (Firebase)';
-
-  @override
   String get connectionsIntro =>
-      'AI உதவியாளர், மின்னஞ்சல் குறியீடுகள், SMS குறியீடுகள் மற்றும் Google உள்நுழைவுக்கான சாவிகள். இங்கே தட்டச்சு செய்யும் சாவிகள் இந்தத் தொலைபேசியில் மட்டுமே இருக்கும்; செயலியில் உள்ளவற்றுக்குப் பதிலாகப் பயன்படும். உள்ளமைந்த சாவியைப் பயன்படுத்தப் பெட்டியைக் காலியாக விடவும்.';
+      'AI உதவியாளர் மற்றும் மின்னஞ்சல் குறியீடுகளுக்கான சாவிகள். இங்கே தட்டச்சு செய்யும் சாவிகள் இந்தத் தொலைபேசியில் மட்டுமே இருக்கும்; செயலியில் உள்ளவற்றுக்குப் பதிலாகப் பயன்படும். உள்ளமைந்த சாவியைப் பயன்படுத்தப் பெட்டியைக் காலியாக விடவும்.';
 
   @override
   String get connectionsMissing => 'அமைக்கப்படவில்லை';
-
-  @override
-  String get connectionsRestartNote =>
-      'Firebase மதிப்புகளை மாற்றிய பின், செயலியை மூடி மீண்டும் திறக்கவும்.';
 
   @override
   String get connectionsSetHere => 'இந்தத் தொலைபேசியில் அமைக்கப்பட்டது';
@@ -1714,31 +1692,6 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get signOutConfirm => 'இந்தச் சாதனத்திலிருந்து வெளியேறவா?';
-
-  @override
-  String ssoContinueWith(String provider) {
-    return '$provider மூலம் தொடர்';
-  }
-
-  @override
-  String ssoDemoBody(String provider) {
-    return 'இந்த டெமோ பதிப்பில் $provider உள்நுழைவு அமைக்கப்படவில்லை. உண்மையான செயலியில் இது $provider உள்நுழைவுப் பக்கத்தைத் திறக்கும். ஒரு டெமோ கணக்கைத் தேர்வுசெய்யவும்:';
-  }
-
-  @override
-  String get ssoDemoNewPerson => 'புதிய நபர் (கணக்கை உருவாக்கும்)';
-
-  @override
-  String ssoDemoTitle(String provider) {
-    return 'டெமோ: $provider உள்நுழைவு';
-  }
-
-  @override
-  String get ssoNote =>
-      'உங்கள் பெயரும் மின்னஞ்சலும் மட்டுமே எங்களுக்குக் கிடைக்கும். உங்கள் உடல்நலப் பதிவுகள் இந்தச் செயலியிலேயே இருக்கும்.';
-
-  @override
-  String get ssoOr => 'அல்லது';
 
   @override
   String get statAlerts => 'மதிப்பாய்வுக்கான எச்சரிக்கைகள்';

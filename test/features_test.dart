@@ -28,25 +28,12 @@ class FakeAssistant implements AssistantClient {
 
 class FakeVerification implements VerificationService {
   final emails = <String>[];
-  final sms = <String>[];
 
   @override
   Future<void> sendEmailCode(String email) async => emails.add(email);
 
   @override
   bool checkEmailCode(String email, String code) => code == '654321';
-
-  @override
-  Future<void> sendSmsCode(String phone) async => sms.add(phone);
-
-  @override
-  bool get smsAutoVerified => false;
-
-  @override
-  Future<bool> checkSmsCode(String code) async => code == '111222';
-
-  @override
-  Future<String> signInWith(String provider) async => 'demo.cycle@example.com';
 }
 
 void main() {
@@ -245,51 +232,48 @@ void main() {
     expect(find.byKey(const Key('login-submit')), findsNothing);
   });
 
-  testWidgets('a real SMS code is sent to the international number', (
-    tester,
-  ) async {
-    final v = FakeVerification();
-    await pumpApp(
-      tester,
-      prefs: const {
-        'integration.FIREBASE_API_KEY': 'k',
-        'integration.FIREBASE_APP_ID': 'a',
-        'integration.FIREBASE_PROJECT_ID': 'p',
-        'integration.FIREBASE_SENDER_ID': 's',
-      },
-      overrides: [verificationProvider.overrideWithValue(v)],
-    );
-    await tapAndSettle(tester, find.text('I already have an account'));
-    await tester.enterText(find.byKey(const Key('login-id')), '0123456789');
-    await tapAndSettle(tester, find.byKey(const Key('login-submit')));
-    expect(v.sms, ['0123456789']);
-    await tester.enterText(find.byKey(const Key('login-code')), '111222');
-    await tapAndSettle(tester, find.byKey(const Key('login-submit')));
-    expect(find.byKey(const Key('login-submit')), findsNothing);
-  });
-
-  testWidgets('asks for Bluetooth after sign-in and syncs the watch', (
+  testWidgets('first sign-in shows the Bluetooth permission box once', (
     tester,
   ) async {
     final watch = FakeWatch();
     await pumpApp(tester, signedIn: 'p1', askedForWatch: false, watch: watch);
-    expect(find.byKey(const Key('watch-prompt')), findsOneWidget);
-    await tapAndSettle(tester, find.byKey(const Key('watch-prompt-yes')));
+    expect(watch.permissionAsks, 1);
+    // Signing out and in again does not ask a second time.
+    await tapAndSettle(tester, find.byKey(const Key('nav-profile')));
+    await tester.scrollUntilVisible(
+      find.byKey(const Key('sign-out')),
+      300,
+      scrollable: find.descendant(
+        of: find.byKey(const Key('profile-list')),
+        matching: find.byType(Scrollable),
+      ),
+    );
+    await tapAndSettle(tester, find.byKey(const Key('sign-out')));
+    await tapAndSettle(tester, find.byKey(const Key('sign-out-confirm')));
+    await tapAndSettle(tester, find.text('I already have an account'));
+    await tester.enterText(
+      find.byKey(const Key('login-id')),
+      'demo.patient@example.com',
+    );
+    await tapAndSettle(tester, find.byKey(const Key('login-submit')));
+    await tester.enterText(find.byKey(const Key('login-code')), '123456');
+    await tapAndSettle(tester, find.byKey(const Key('login-submit')));
+    expect(find.text('Hi, Gwen'), findsOneWidget);
+    expect(watch.permissionAsks, 1);
+  });
+
+  testWidgets('pairs a watch and syncs heart rate', (tester) async {
+    final watch = FakeWatch();
+    await pumpApp(tester, signedIn: 'p1', watch: watch);
+    await tapAndSettle(tester, find.byKey(const Key('nav-profile')));
+    await tapAndSettle(tester, find.text('Connected devices'));
+    await tapAndSettle(tester, find.byKey(const Key('watch-find')));
     expect(watch.prepared, isTrue);
-    expect(find.text('Band 8'), findsOneWidget);
     await tapAndSettle(tester, find.text('Band 8'));
     watch.readings.add(88);
     await tester.pumpAndSettle();
-    await tapAndSettle(tester, find.byKey(const Key('nav-profile')));
-    await tapAndSettle(tester, find.text('Connected devices'));
     expect(find.text('88 bpm'), findsOneWidget);
     expect(find.text('Battery 80%'), findsOneWidget);
     expect(find.text('1 reading synced'), findsOneWidget);
-  });
-
-  testWidgets('the Bluetooth prompt is asked only once', (tester) async {
-    await pumpApp(tester, signedIn: 'p1', askedForWatch: false);
-    await tapAndSettle(tester, find.text('Not now'));
-    expect(find.byKey(const Key('watch-prompt')), findsNothing);
   });
 }

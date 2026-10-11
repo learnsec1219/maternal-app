@@ -111,10 +111,6 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
       });
       try {
         await _flow.start(ref, id, demoAccount: false);
-        if (_flow.method == CodeMethod.sms &&
-            ref.read(verificationProvider).smsAutoVerified) {
-          _verified = true;
-        }
       } on Object catch (e) {
         _flow.reset();
         if (mounted) _error = verifyErrorText(context, e);

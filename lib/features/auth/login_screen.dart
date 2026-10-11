@@ -10,7 +10,6 @@ import '../../core/integrations/totp.dart';
 import '../../core/integrations/verification.dart';
 import 'code_flow.dart';
 import 'onboarding_screen.dart';
-import 'welcome_screen.dart';
 
 final _emailRe = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$');
 final _phoneRe = RegExp(r'^\+?\d{8,15}$');
@@ -92,10 +91,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         totpSecret: _totpSecret,
       ),
     );
-    if (_flow.method == CodeMethod.sms &&
-        ref.read(verificationProvider).smsAutoVerified) {
-      _done();
-    }
   }
 
   Future<void> _verify() async {
@@ -190,7 +185,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           l.loginRecoveryHint,
           style: TextStyle(color: p.muted, fontSize: 12.5, height: 1.5),
         ),
-        const SsoButtons(),
         const ConnectionsLink(),
         AppCard(
           color: p.sky,

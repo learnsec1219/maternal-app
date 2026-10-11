@@ -271,9 +271,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get authAuthenticatorHelp => '請輸入驗證器應用程式為 Maternal 顯示的 6 位數代碼。';
 
   @override
-  String get authCancelled => '已取消登入。';
-
-  @override
   String get authEmailNotSetUp => '尚未設定真實的電郵驗證碼（連線）。';
 
   @override
@@ -294,7 +291,7 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get authSmsNotSetUp => '尚未設定真實的簡訊驗證碼與 Google 登入（連線）。';
+  String get authSmsNotSetUp => '此版本的手機號碼使用示範代碼，真實代碼會以電郵寄送。';
 
   @override
   String get babiesMore => '更多';
@@ -346,12 +343,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get bluetoothOff => '藍牙已關閉。請開啟後再試一次。';
-
-  @override
-  String get bluetoothPromptTitle => '要連接您的手錶嗎？';
-
-  @override
-  String get bluetoothRationale => '為了搜尋附近的裝置，應用程式需要藍牙權限，只會用來連接您選擇的健康裝置。';
 
   @override
   String bluetoothReconnect(String name) {
@@ -471,21 +462,11 @@ class AppLocalizationsZh extends AppLocalizations {
   String get connectionsEmailTitle => '電郵驗證碼（EmailJS + Gmail）';
 
   @override
-  String get connectionsFirebaseBody =>
-      '在 Firebase 主控台新增 Android 應用程式，使用下方的套件名稱與指紋，在 Authentication > Sign-in method 開啟 Phone 和 Google，再從 Project settings 複製各項數值。';
-
-  @override
-  String get connectionsFirebaseTitle => '簡訊驗證碼與 Google 登入（Firebase）';
-
-  @override
   String get connectionsIntro =>
-      'AI 助理、電郵驗證碼、簡訊驗證碼及 Google 登入所需的金鑰。在此輸入的金鑰只保存在這部手機，並取代應用程式內建的金鑰。留空即使用內建金鑰。';
+      'AI 助理與電郵驗證碼所需的金鑰。在此輸入的金鑰只保存在這部手機，並取代應用程式內建的金鑰。留空即使用內建金鑰。';
 
   @override
   String get connectionsMissing => '尚未設定';
-
-  @override
-  String get connectionsRestartNote => '更改 Firebase 數值後，請關閉並重新開啟應用程式。';
 
   @override
   String get connectionsSetHere => '已在此手機設定';
@@ -1576,30 +1557,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get signOutConfirm => '要從此裝置登出嗎？';
-
-  @override
-  String ssoContinueWith(String provider) {
-    return '使用 $provider 繼續';
-  }
-
-  @override
-  String ssoDemoBody(String provider) {
-    return '此示範版本尚未設定 $provider 登入。正式版會開啟 $provider 登入頁面。請選擇示範帳戶：';
-  }
-
-  @override
-  String get ssoDemoNewPerson => '新使用者（建立帳戶）';
-
-  @override
-  String ssoDemoTitle(String provider) {
-    return '示範：$provider 登入';
-  }
-
-  @override
-  String get ssoNote => '我們只會取得您的姓名和電子郵件，您的健康紀錄仍保存在本應用程式中。';
-
-  @override
-  String get ssoOr => '或';
 
   @override
   String get statAlerts => '待查看警示';
