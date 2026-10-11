@@ -609,7 +609,7 @@ abstract class AppLocalizations {
   /// No description provided for @authInvalidIdentifier.
   ///
   /// In en, this message translates to:
-  /// **'Please enter a valid phone number or email.'**
+  /// **'Please enter a valid email address.'**
   String get authInvalidIdentifier;
 
   /// No description provided for @authNoAccountYet.
@@ -621,7 +621,7 @@ abstract class AppLocalizations {
   /// No description provided for @authSendCodeInstead.
   ///
   /// In en, this message translates to:
-  /// **'Send a code by SMS or email instead'**
+  /// **'Send a code by email instead'**
   String get authSendCodeInstead;
 
   /// No description provided for @authSendFailed.
@@ -629,12 +629,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Could not send or check the code. {reason}'**
   String authSendFailed(String reason);
-
-  /// No description provided for @authSmsNotSetUp.
-  ///
-  /// In en, this message translates to:
-  /// **'Phone numbers use the demo code in this build. Real codes are sent by email.'**
-  String get authSmsNotSetUp;
 
   /// No description provided for @babiesMore.
   ///
@@ -846,18 +840,6 @@ abstract class AppLocalizations {
   /// **'Doctors here can see the records you share. Remove access at any time.'**
   String get careTeamIntro;
 
-  /// No description provided for @channelEmail.
-  ///
-  /// In en, this message translates to:
-  /// **'Email'**
-  String get channelEmail;
-
-  /// No description provided for @channelPhone.
-  ///
-  /// In en, this message translates to:
-  /// **'Phone'**
-  String get channelPhone;
-
   /// No description provided for @chartBandNote.
   ///
   /// In en, this message translates to:
@@ -924,10 +906,22 @@ abstract class AppLocalizations {
   /// **'Email codes (EmailJS + Gmail)'**
   String get connectionsEmailTitle;
 
+  /// No description provided for @connectionsGoogleBody.
+  ///
+  /// In en, this message translates to:
+  /// **'The Web client ID from Google Cloud. Sign-in also needs an Android client there with this app\'s package name and SHA-1.'**
+  String get connectionsGoogleBody;
+
+  /// No description provided for @connectionsGoogleTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Google sign-in'**
+  String get connectionsGoogleTitle;
+
   /// No description provided for @connectionsIntro.
   ///
   /// In en, this message translates to:
-  /// **'Keys for the AI assistant and email codes. Keys typed here stay on this phone and replace the ones built into the app. Leave a box empty to use the built-in key.'**
+  /// **'Keys for the AI assistant, email codes and Google sign-in. Keys typed here stay on this phone and replace the ones built into the app. Leave a box empty to use the built-in key.'**
   String get connectionsIntro;
 
   /// No description provided for @connectionsMissing.
@@ -1782,12 +1776,6 @@ abstract class AppLocalizations {
   /// **'Phone number'**
   String get fieldPhone;
 
-  /// No description provided for @fieldPhoneOrEmail.
-  ///
-  /// In en, this message translates to:
-  /// **'Phone or email'**
-  String get fieldPhoneOrEmail;
-
   /// No description provided for @fieldPortion.
   ///
   /// In en, this message translates to:
@@ -1901,6 +1889,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Other time'**
   String get glucoseRandom;
+
+  /// No description provided for @googleConsentAllow.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow and continue'**
+  String get googleConsentAllow;
+
+  /// No description provided for @googleConsentBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Maternal will copy these from your Google account into your profile. You can change them later in Personal information.'**
+  String get googleConsentBody;
+
+  /// No description provided for @googleConsentManual.
+  ///
+  /// In en, this message translates to:
+  /// **'I\'ll enter my details myself'**
+  String get googleConsentManual;
+
+  /// No description provided for @googleConsentTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Use your Google details?'**
+  String get googleConsentTitle;
+
+  /// No description provided for @googleContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue with Google'**
+  String get googleContinue;
+
+  /// No description provided for @googleFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Google sign-in didn\'t work: {detail}'**
+  String googleFailed(String detail);
+
+  /// No description provided for @googleNotSetUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Google sign-in is not set up in this build yet. Please use your email.'**
+  String get googleNotSetUp;
+
+  /// No description provided for @googlePhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile photo'**
+  String get googlePhoto;
+
+  /// No description provided for @googlePhotoValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Google photo'**
+  String get googlePhotoValue;
 
   /// No description provided for @gravidaPara.
   ///
@@ -2151,19 +2193,19 @@ abstract class AppLocalizations {
   /// No description provided for @loginChangeIdentifier.
   ///
   /// In en, this message translates to:
-  /// **'Use a different phone or email'**
+  /// **'Use a different email'**
   String get loginChangeIdentifier;
 
   /// No description provided for @loginIntro.
   ///
   /// In en, this message translates to:
-  /// **'Enter your phone number or email. We will send you a one-time code.'**
+  /// **'Enter your email. We will send you a one-time code.'**
   String get loginIntro;
 
   /// No description provided for @loginRecoveryHint.
   ///
   /// In en, this message translates to:
-  /// **'Can\'t receive codes on this phone or email? Contact your clinic to recover your account.'**
+  /// **'Can\'t receive codes at this email? Contact your clinic to recover your account.'**
   String get loginRecoveryHint;
 
   /// No description provided for @loginTitle.
@@ -2601,7 +2643,7 @@ abstract class AppLocalizations {
   /// No description provided for @onboardingVerifySubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Choose phone or email and we will send a one-time code.'**
+  /// **'Enter your email and we will send a one-time code.'**
   String get onboardingVerifySubtitle;
 
   /// No description provided for @onboardingVerifyTitle.
@@ -2910,6 +2952,12 @@ abstract class AppLocalizations {
   /// **'Sign out of this device?'**
   String get signOutConfirm;
 
+  /// No description provided for @ssoOr.
+  ///
+  /// In en, this message translates to:
+  /// **'or'**
+  String get ssoOr;
+
   /// No description provided for @statAlerts.
   ///
   /// In en, this message translates to:
@@ -3099,7 +3147,7 @@ abstract class AppLocalizations {
   /// No description provided for @totpBody.
   ///
   /// In en, this message translates to:
-  /// **'Sign in with the 6-digit code from Google Authenticator, Microsoft Authenticator or a similar app. It works without SMS or internet.'**
+  /// **'Sign in with the 6-digit code from Google Authenticator, Microsoft Authenticator or a similar app. It works without email or internet.'**
   String get totpBody;
 
   /// No description provided for @totpCodeLabel.

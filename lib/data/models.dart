@@ -49,6 +49,7 @@ class Profile {
     this.history,
     this.risks,
     this.clinicianTarget,
+    this.photoUrl,
   });
 
   final String id;
@@ -66,6 +67,9 @@ class Profile {
   DateTime? journeyStart;
   String? gp, history, risks;
   int? clinicianTarget;
+
+  /// Photo shared by Google sign-in, if the person allowed it.
+  String? photoUrl;
 }
 
 class Observation {

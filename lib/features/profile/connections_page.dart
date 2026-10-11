@@ -6,7 +6,7 @@ import '../../core/theme/app_theme.dart';
 import '../../core/util/l10n.dart';
 import '../../core/widgets/common.dart';
 
-/// Keys for the AI assistant and email codes. Values typed here are kept on this phone and win over the ones
+/// Keys for the AI assistant, email codes and Google sign-in. Values typed here are kept on this phone and win over the ones
 /// built into the APK, so a tester can try a service without a new build.
 class ConnectionsPage extends ConsumerStatefulWidget {
   const ConnectionsPage({super.key});
@@ -117,6 +117,12 @@ class _ConnectionsPageState extends ConsumerState<ConnectionsPage> {
           IntegrationKey.emailJsPublicKey,
           IntegrationKey.emailJsPrivateKey,
         ]),
+        section(
+          l.connectionsGoogleTitle,
+          cfg.hasGoogle,
+          l.connectionsGoogleBody,
+          [IntegrationKey.googleClientId],
+        ),
       ],
     );
   }

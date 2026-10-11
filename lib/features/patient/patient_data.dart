@@ -282,16 +282,31 @@ const obsLimits = <ObsType, List<double>>{
   ObsType.mood: [1, 5],
 };
 
-/// Round letter avatar.
+/// Round avatar: the person's photo when there is one, else their initial.
 class Avatar extends StatelessWidget {
-  const Avatar(this.name, {super.key, this.size = 40});
+  const Avatar(this.name, {super.key, this.size = 40, this.photoUrl});
   final String name;
   final double size;
+  final String? photoUrl;
 
   @override
   Widget build(BuildContext context) {
     final p = Theme.of(context).colorScheme;
     final ch = name.isEmpty ? '?' : String.fromCharCode(name.runes.first);
+    final letter = _letter(p, ch);
+    if (photoUrl == null || photoUrl!.isEmpty) return letter;
+    return ClipOval(
+      child: Image.network(
+        photoUrl!,
+        width: size,
+        height: size,
+        fit: BoxFit.cover,
+        errorBuilder: (_, _, _) => letter,
+      ),
+    );
+  }
+
+  Widget _letter(ColorScheme p, String ch) {
     return Container(
       width: size,
       height: size,

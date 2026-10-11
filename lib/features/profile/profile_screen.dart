@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../core/integrations/google_auth.dart';
 import '../../core/theme/app_theme.dart';
 import '../../core/util/clock.dart';
 import '../../core/util/l10n.dart';
@@ -96,7 +97,7 @@ class ProfileScreen extends ConsumerWidget {
                 color: p.roseTint,
                 child: Column(
                   children: [
-                    Avatar(me.name, size: 80),
+                    Avatar(me.name, size: 80, photoUrl: me.photoUrl),
                     const SizedBox(height: 8),
                     Text(
                       me.name,
@@ -237,6 +238,7 @@ class SignOutButton extends ConsumerWidget {
               ref.read(patientTabProvider.notifier).set(0);
               ref.read(doctorTabProvider.notifier).set(0);
               ref.read(sessionProvider.notifier).signOut();
+              await ref.read(googleAuthProvider).signOut();
             }
           },
           child: Row(

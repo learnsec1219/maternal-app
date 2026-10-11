@@ -46,7 +46,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         padding: const EdgeInsets.only(top: 6, bottom: 12),
         child: Row(
           children: [
-            Avatar(me.name, size: 44),
+            Avatar(me.name, size: 44, photoUrl: me.photoUrl),
             const SizedBox(width: 10),
             Expanded(
               child: Column(

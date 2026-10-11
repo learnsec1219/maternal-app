@@ -21,7 +21,7 @@ enum CodeMethod {
   totp,
 }
 
-/// Picks how to verify a phone number or email, sends the code, checks it.
+/// Picks how to verify an email, sends the code, checks it.
 class CodeFlow {
   CodeMethod? method;
   String target = '';
@@ -46,15 +46,10 @@ class CodeFlow {
       method = CodeMethod.totp;
     } else if (demoAccount) {
       method = CodeMethod.demo;
-    } else if (isEmail(id)) {
-      if (cfg.hasEmail) {
-        await v.sendEmailCode(id);
-        method = CodeMethod.email;
-      } else {
-        method = CodeMethod.demo;
-      }
+    } else if (cfg.hasEmail) {
+      await v.sendEmailCode(id);
+      method = CodeMethod.email;
     } else {
-      // Phone numbers: SMS codes are not used in this build.
       method = CodeMethod.demo;
     }
   }
@@ -97,7 +92,7 @@ class CodeNote extends StatelessWidget {
         demoAccount
             ? l.onboardingDemoCode(DemoAccounts.code)
             : '${l.onboardingDemoCode(DemoAccounts.code)} '
-                  '${CodeFlow.isEmail(flow.target) ? l.authEmailNotSetUp : l.authSmsNotSetUp}',
+                  '${l.authEmailNotSetUp}',
         title: l.demoModeTitle,
       ),
       null => const SizedBox.shrink(),

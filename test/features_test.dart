@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:maternal/core/integrations/gemini_client.dart';
+import 'package:maternal/core/integrations/google_auth.dart';
 import 'package:maternal/core/integrations/totp.dart';
 import 'package:maternal/core/integrations/verification.dart';
 import 'package:maternal/core/integrations/watch_service.dart';
@@ -34,6 +35,18 @@ class FakeVerification implements VerificationService {
 
   @override
   bool checkEmailCode(String email, String code) => code == '654321';
+}
+
+class FakeGoogle implements GoogleAuth {
+  FakeGoogle(this.profile);
+  final GoogleProfile? profile;
+  int signOuts = 0;
+
+  @override
+  Future<GoogleProfile?> signIn() async => profile;
+
+  @override
+  Future<void> signOut() async => signOuts++;
 }
 
 void main() {
@@ -74,11 +87,6 @@ void main() {
     expect(parseHeartRate([0x00, 72]), 72);
     expect(parseHeartRate([0x01, 0x2c, 0x01]), 300);
     expect(parseHeartRate([0x00]), isNull);
-  });
-
-  test('local phone numbers become international', () {
-    expect(toE164('012-345 6789'), '+60123456789');
-    expect(toE164('+60 12 345 6789'), '+60123456789');
   });
 
   testWidgets('kick counter shows the footprint and counts each tap', (
@@ -275,5 +283,77 @@ void main() {
     expect(find.text('88 bpm'), findsOneWidget);
     expect(find.text('Battery 80%'), findsOneWidget);
     expect(find.text('1 reading synced'), findsOneWidget);
+  });
+
+  testWidgets('Google sign-in copies the Google details after asking', (
+    tester,
+  ) async {
+    final google = FakeGoogle(
+      const GoogleProfile(email: 'Siti.Aminah@gmail.com', name: 'Siti Aminah'),
+    );
+    await pumpApp(
+      tester,
+      overrides: [googleAuthProvider.overrideWithValue(google)],
+    );
+    await tapAndSettle(tester, find.byKey(const Key('google-sign-in')));
+    expect(find.byKey(const Key('google-consent')), findsOneWidget);
+    expect(find.text('Siti Aminah'), findsOneWidget);
+    expect(find.text('siti.aminah@gmail.com'), findsOneWidget);
+    await tapAndSettle(tester, find.byKey(const Key('google-allow')));
+    expect(find.text('Hi, Siti'), findsOneWidget);
+    await tapAndSettle(tester, find.byKey(const Key('nav-profile')));
+    await tapAndSettle(tester, find.text('Personal information'));
+    expect(find.text('siti.aminah@gmail.com'), findsOneWidget);
+  });
+
+  testWidgets('Google sign-in with a known email goes straight in', (
+    tester,
+  ) async {
+    final google = FakeGoogle(
+      const GoogleProfile(email: 'demo.patient@example.com', name: 'Gwen'),
+    );
+    await pumpApp(
+      tester,
+      overrides: [googleAuthProvider.overrideWithValue(google)],
+    );
+    await tapAndSettle(tester, find.byKey(const Key('google-sign-in')));
+    expect(find.byKey(const Key('google-consent')), findsNothing);
+    expect(find.text('Hi, Gwen'), findsOneWidget);
+  });
+
+  testWidgets('declining the Google details goes to sign-up with the email', (
+    tester,
+  ) async {
+    final google = FakeGoogle(
+      const GoogleProfile(email: 'new.mum@gmail.com', name: 'New Mum'),
+    );
+    await pumpApp(
+      tester,
+      overrides: [googleAuthProvider.overrideWithValue(google)],
+    );
+    await tapAndSettle(tester, find.byKey(const Key('google-sign-in')));
+    await tapAndSettle(tester, find.byKey(const Key('google-manual')));
+    expect(find.byKey(const Key('onboarding-next')), findsOneWidget);
+    expect(find.text('Hi, New'), findsNothing);
+  });
+
+  testWidgets('Google sign-in says so when it is not set up', (tester) async {
+    await pumpApp(tester);
+    await tapAndSettle(tester, find.byKey(const Key('google-sign-in')));
+    expect(
+      find.text(
+        'Google sign-in is not set up in this build yet. Please use your email.',
+      ),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets('sign-up asks for an email only', (tester) async {
+    await pumpApp(tester);
+    await tapAndSettle(tester, find.text('Create an account'));
+    await tapAndSettle(tester, find.byIcon(Icons.person_outline_rounded).first);
+    await tapAndSettle(tester, find.byKey(const Key('onboarding-next')));
+    expect(find.byKey(const Key('signup-email')), findsOneWidget);
+    expect(find.text('Phone'), findsNothing);
   });
 }

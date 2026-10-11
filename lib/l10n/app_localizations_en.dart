@@ -293,24 +293,19 @@ class AppLocalizationsEn extends AppLocalizations {
       'That code is not right. Please check and try again.';
 
   @override
-  String get authInvalidIdentifier =>
-      'Please enter a valid phone number or email.';
+  String get authInvalidIdentifier => 'Please enter a valid email address.';
 
   @override
   String get authNoAccountYet =>
       'Verified. There is no account yet, so let\'s create one.';
 
   @override
-  String get authSendCodeInstead => 'Send a code by SMS or email instead';
+  String get authSendCodeInstead => 'Send a code by email instead';
 
   @override
   String authSendFailed(String reason) {
     return 'Could not send or check the code. $reason';
   }
-
-  @override
-  String get authSmsNotSetUp =>
-      'Phone numbers use the demo code in this build. Real codes are sent by email.';
 
   @override
   String get babiesMore => 'More';
@@ -446,12 +441,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'Doctors here can see the records you share. Remove access at any time.';
 
   @override
-  String get channelEmail => 'Email';
-
-  @override
-  String get channelPhone => 'Phone';
-
-  @override
   String get chartBandNote =>
       'The shaded band is the typical range from your care team\'s settings.';
 
@@ -490,8 +479,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get connectionsEmailTitle => 'Email codes (EmailJS + Gmail)';
 
   @override
+  String get connectionsGoogleBody =>
+      'The Web client ID from Google Cloud. Sign-in also needs an Android client there with this app\'s package name and SHA-1.';
+
+  @override
+  String get connectionsGoogleTitle => 'Google sign-in';
+
+  @override
   String get connectionsIntro =>
-      'Keys for the AI assistant and email codes. Keys typed here stay on this phone and replace the ones built into the app. Leave a box empty to use the built-in key.';
+      'Keys for the AI assistant, email codes and Google sign-in. Keys typed here stay on this phone and replace the ones built into the app. Leave a box empty to use the built-in key.';
 
   @override
   String get connectionsMissing => 'Not set';
@@ -1033,9 +1029,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get fieldPhone => 'Phone number';
 
   @override
-  String get fieldPhoneOrEmail => 'Phone or email';
-
-  @override
   String get fieldPortion => 'Portion';
 
   @override
@@ -1106,6 +1099,37 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get glucoseRandom => 'Other time';
+
+  @override
+  String get googleConsentAllow => 'Allow and continue';
+
+  @override
+  String get googleConsentBody =>
+      'Maternal will copy these from your Google account into your profile. You can change them later in Personal information.';
+
+  @override
+  String get googleConsentManual => 'I\'ll enter my details myself';
+
+  @override
+  String get googleConsentTitle => 'Use your Google details?';
+
+  @override
+  String get googleContinue => 'Continue with Google';
+
+  @override
+  String googleFailed(String detail) {
+    return 'Google sign-in didn\'t work: $detail';
+  }
+
+  @override
+  String get googleNotSetUp =>
+      'Google sign-in is not set up in this build yet. Please use your email.';
+
+  @override
+  String get googlePhoto => 'Profile photo';
+
+  @override
+  String get googlePhotoValue => 'Your Google photo';
 
   @override
   String get gravidaPara => 'Gravida / para';
@@ -1259,15 +1283,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get linkPending => 'Waiting for the doctor to accept';
 
   @override
-  String get loginChangeIdentifier => 'Use a different phone or email';
+  String get loginChangeIdentifier => 'Use a different email';
 
   @override
   String get loginIntro =>
-      'Enter your phone number or email. We will send you a one-time code.';
+      'Enter your email. We will send you a one-time code.';
 
   @override
   String get loginRecoveryHint =>
-      'Can\'t receive codes on this phone or email? Contact your clinic to recover your account.';
+      'Can\'t receive codes at this email? Contact your clinic to recover your account.';
 
   @override
   String get loginTitle => 'Sign in';
@@ -1502,7 +1526,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get onboardingVerifySubtitle =>
-      'Choose phone or email and we will send a one-time code.';
+      'Enter your email and we will send a one-time code.';
 
   @override
   String get onboardingVerifyTitle => 'Verify your account';
@@ -1684,6 +1708,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get signOutConfirm => 'Sign out of this device?';
 
   @override
+  String get ssoOr => 'or';
+
+  @override
   String get statAlerts => 'Alerts to review';
 
   @override
@@ -1791,7 +1818,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get totpBody =>
-      'Sign in with the 6-digit code from Google Authenticator, Microsoft Authenticator or a similar app. It works without SMS or internet.';
+      'Sign in with the 6-digit code from Google Authenticator, Microsoft Authenticator or a similar app. It works without email or internet.';
 
   @override
   String get totpCodeLabel => 'Authenticator code';

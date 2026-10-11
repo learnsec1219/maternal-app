@@ -27,6 +27,10 @@ enum IntegrationKey {
   emailJsPrivateKey(
     'EMAILJS_PRIVATE_KEY',
     String.fromEnvironment('EMAILJS_PRIVATE_KEY'),
+  ),
+  googleClientId(
+    'GOOGLE_SERVER_CLIENT_ID',
+    String.fromEnvironment('GOOGLE_SERVER_CLIENT_ID'),
   );
 
   const IntegrationKey(this.envName, this.buildValue);
@@ -59,6 +63,8 @@ class IntegrationConfig {
     IntegrationKey.emailJsTemplateId,
     IntegrationKey.emailJsPublicKey,
   ]);
+
+  bool get hasGoogle => _all([IntegrationKey.googleClientId]);
 }
 
 final integrationConfigProvider =

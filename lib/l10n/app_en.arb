@@ -126,9 +126,9 @@
   "authAuthenticatorHelp": "Enter the 6-digit code that your authenticator app shows for Maternal.",
   "authEmailNotSetUp": "Real email codes are not set up yet (Connections).",
   "authInvalidCode": "That code is not right. Please check and try again.",
-  "authInvalidIdentifier": "Please enter a valid phone number or email.",
+  "authInvalidIdentifier": "Please enter a valid email address.",
   "authNoAccountYet": "Verified. There is no account yet, so let's create one.",
-  "authSendCodeInstead": "Send a code by SMS or email instead",
+  "authSendCodeInstead": "Send a code by email instead",
   "authSendFailed": "Could not send or check the code. {reason}",
   "@authSendFailed": {
     "placeholders": {
@@ -137,7 +137,6 @@
       }
     }
   },
-  "authSmsNotSetUp": "Phone numbers use the demo code in this build. Real codes are sent by email.",
   "babiesMore": "More",
   "babiesSingle": "Single",
   "babiesTriplets": "Triplets",
@@ -248,8 +247,6 @@
   "calorieTarget": "Daily target",
   "careTeamEmpty": "No doctors linked yet.",
   "careTeamIntro": "Doctors here can see the records you share. Remove access at any time.",
-  "channelEmail": "Email",
-  "channelPhone": "Phone",
   "chartBandNote": "The shaded band is the typical range from your care team's settings.",
   "chartSummary": "Chart of {name}: {count} readings, latest {latest}.",
   "@chartSummary": {
@@ -274,7 +271,9 @@
   "connectionsBuiltIn": "Built into this app",
   "connectionsEmailBody": "In EmailJS, add a Gmail service and an email template whose \"To\" is to_email and whose message shows passcode. Turn on \"Allow EmailJS API for non-browser applications\" under Account > Security, and copy the private key too.",
   "connectionsEmailTitle": "Email codes (EmailJS + Gmail)",
-  "connectionsIntro": "Keys for the AI assistant and email codes. Keys typed here stay on this phone and replace the ones built into the app. Leave a box empty to use the built-in key.",
+  "connectionsGoogleBody": "The Web client ID from Google Cloud. Sign-in also needs an Android client there with this app's package name and SHA-1.",
+  "connectionsGoogleTitle": "Google sign-in",
+  "connectionsIntro": "Keys for the AI assistant, email codes and Google sign-in. Keys typed here stay on this phone and replace the ones built into the app. Leave a box empty to use the built-in key.",
   "connectionsMissing": "Not set",
   "connectionsSetHere": "Set on this phone",
   "connectionsTitle": "Connections",
@@ -584,7 +583,6 @@
   "fieldNumberOfBabies": "Number of babies",
   "fieldOtp": "One-time code",
   "fieldPhone": "Phone number",
-  "fieldPhoneOrEmail": "Phone or email",
   "fieldPortion": "Portion",
   "fieldPrePregnancyWeight": "Pre-pregnancy weight",
   "fieldPreferredLanguage": "Preferred language",
@@ -614,6 +612,22 @@
   "glucoseAfterMeal": "After a meal",
   "glucoseFasting": "Fasting",
   "glucoseRandom": "Other time",
+  "googleConsentAllow": "Allow and continue",
+  "googleConsentBody": "Maternal will copy these from your Google account into your profile. You can change them later in Personal information.",
+  "googleConsentManual": "I'll enter my details myself",
+  "googleConsentTitle": "Use your Google details?",
+  "googleContinue": "Continue with Google",
+  "googleFailed": "Google sign-in didn't work: {detail}",
+  "@googleFailed": {
+    "placeholders": {
+      "detail": {
+        "type": "String"
+      }
+    }
+  },
+  "googleNotSetUp": "Google sign-in is not set up in this build yet. Please use your email.",
+  "googlePhoto": "Profile photo",
+  "googlePhotoValue": "Your Google photo",
   "gravidaPara": "Gravida / para",
   "growthCompareScans": "Compare scans",
   "growthNoScans": "No scans recorded yet.",
@@ -711,9 +725,9 @@
   "legendPredicted": "Predicted period",
   "linkActive": "Can see your shared records",
   "linkPending": "Waiting for the doctor to accept",
-  "loginChangeIdentifier": "Use a different phone or email",
-  "loginIntro": "Enter your phone number or email. We will send you a one-time code.",
-  "loginRecoveryHint": "Can't receive codes on this phone or email? Contact your clinic to recover your account.",
+  "loginChangeIdentifier": "Use a different email",
+  "loginIntro": "Enter your email. We will send you a one-time code.",
+  "loginRecoveryHint": "Can't receive codes at this email? Contact your clinic to recover your account.",
   "loginTitle": "Sign in",
   "macroCarbs": "Carbs",
   "macroFat": "Fat",
@@ -816,7 +830,7 @@
       }
     }
   },
-  "onboardingVerifySubtitle": "Choose phone or email and we will send a one-time code.",
+  "onboardingVerifySubtitle": "Enter your email and we will send a one-time code.",
   "onboardingVerifyTitle": "Verify your account",
   "otpSentTo": "Code sent to {destination}",
   "@otpSentTo": {
@@ -926,6 +940,7 @@
   "shareVitals": "Health logs and vital signs",
   "sharingTitle": "Shared with my doctors",
   "signOutConfirm": "Sign out of this device?",
+  "ssoOr": "or",
   "statAlerts": "Alerts to review",
   "statAverage": "Average",
   "statHighest": "Highest",
@@ -981,7 +996,7 @@
     }
   },
   "today": "Today",
-  "totpBody": "Sign in with the 6-digit code from Google Authenticator, Microsoft Authenticator or a similar app. It works without SMS or internet.",
+  "totpBody": "Sign in with the 6-digit code from Google Authenticator, Microsoft Authenticator or a similar app. It works without email or internet.",
   "totpCodeLabel": "Authenticator code",
   "totpEnable": "Verify and turn on",
   "totpKeyLabel": "Setup key",

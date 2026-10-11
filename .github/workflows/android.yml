@@ -28,23 +28,28 @@ jobs:
       - run: flutter analyze
       - run: flutter test
 
-      # Optional service keys come from repository secrets (Settings >
-      # Secrets and variables > Actions). A missing secret just leaves that
-      # service off; testers can also type keys in the app's Connections page.
+      # Service keys come from repository secrets (Settings > Secrets and
+      # variables > Actions). A missing secret just leaves that service off;
+      # testers can also type keys in the app's Connections page. The EmailJS
+      # service, template and public key are public identifiers (EmailJS puts
+      # them in web pages too), so they have defaults here; the private key
+      # and the Gemini key stay secret.
       - name: Build debug APK
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          EMAILJS_SERVICE_ID: ${{ secrets.EMAILJS_SERVICE_ID }}
-          EMAILJS_TEMPLATE_ID: ${{ secrets.EMAILJS_TEMPLATE_ID }}
-          EMAILJS_PUBLIC_KEY: ${{ secrets.EMAILJS_PUBLIC_KEY }}
+          EMAILJS_SERVICE_ID: ${{ secrets.EMAILJS_SERVICE_ID || 'service_8l7jip2' }}
+          EMAILJS_TEMPLATE_ID: ${{ secrets.EMAILJS_TEMPLATE_ID || 'template_yodm97g' }}
+          EMAILJS_PUBLIC_KEY: ${{ secrets.EMAILJS_PUBLIC_KEY || 'qXjfse8hSPIzWm_lb' }}
           EMAILJS_PRIVATE_KEY: ${{ secrets.EMAILJS_PRIVATE_KEY }}
+          GOOGLE_SERVER_CLIENT_ID: ${{ secrets.GOOGLE_SERVER_CLIENT_ID }}
         run: |
           flutter build apk --debug \
             --dart-define=GEMINI_API_KEY="$GEMINI_API_KEY" \
             --dart-define=EMAILJS_SERVICE_ID="$EMAILJS_SERVICE_ID" \
             --dart-define=EMAILJS_TEMPLATE_ID="$EMAILJS_TEMPLATE_ID" \
             --dart-define=EMAILJS_PUBLIC_KEY="$EMAILJS_PUBLIC_KEY" \
-            --dart-define=EMAILJS_PRIVATE_KEY="$EMAILJS_PRIVATE_KEY"
+            --dart-define=EMAILJS_PRIVATE_KEY="$EMAILJS_PRIVATE_KEY" \
+            --dart-define=GOOGLE_SERVER_CLIENT_ID="$GOOGLE_SERVER_CLIENT_ID"
 
       - uses: actions/upload-artifact@v4
         with:

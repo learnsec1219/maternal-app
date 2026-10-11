@@ -214,6 +214,7 @@ Map<String, dynamic> _profileToJson(Profile p) => {
   'due': p.due?.toIso8601String(),
   'babies': p.babies,
   'journeyStart': p.journeyStart?.toIso8601String(),
+  'photoUrl': p.photoUrl,
 };
 
 Profile? _profileFromJson(Map<String, dynamic> j) {
@@ -232,6 +233,7 @@ Profile? _profileFromJson(Map<String, dynamic> j) {
       due: date('due'),
       babies: (j['babies'] as num?)?.toInt() ?? 1,
       journeyStart: date('journeyStart'),
+      photoUrl: j['photoUrl'] as String?,
     );
   } on Object {
     return null;

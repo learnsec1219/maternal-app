@@ -277,21 +277,18 @@ class AppLocalizationsZh extends AppLocalizations {
   String get authInvalidCode => '驗證碼不正確，請檢查後再試。';
 
   @override
-  String get authInvalidIdentifier => '請輸入有效的手機號碼或電郵。';
+  String get authInvalidIdentifier => '請輸入有效的電郵地址。';
 
   @override
   String get authNoAccountYet => '已驗證。目前還沒有帳戶，我們來建立一個。';
 
   @override
-  String get authSendCodeInstead => '改用簡訊或電郵傳送代碼';
+  String get authSendCodeInstead => '改用電郵寄送驗證碼';
 
   @override
   String authSendFailed(String reason) {
     return '無法傳送或驗證代碼。$reason';
   }
-
-  @override
-  String get authSmsNotSetUp => '此版本的手機號碼使用示範代碼，真實代碼會以電郵寄送。';
 
   @override
   String get babiesMore => '更多';
@@ -419,12 +416,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get careTeamIntro => '這裡的醫生可以查看您分享的紀錄，您可隨時移除存取權。';
 
   @override
-  String get channelEmail => '電郵';
-
-  @override
-  String get channelPhone => '手機';
-
-  @override
   String get chartBandNote => '陰影區為醫療團隊設定的一般範圍。';
 
   @override
@@ -462,8 +453,15 @@ class AppLocalizationsZh extends AppLocalizations {
   String get connectionsEmailTitle => '電郵驗證碼（EmailJS + Gmail）';
 
   @override
+  String get connectionsGoogleBody =>
+      'Google Cloud 的網頁用戶端 ID。登入也需要在該處建立包含本應用程式套件名稱與 SHA-1 的 Android 用戶端。';
+
+  @override
+  String get connectionsGoogleTitle => 'Google 登入';
+
+  @override
   String get connectionsIntro =>
-      'AI 助理與電郵驗證碼所需的金鑰。在此輸入的金鑰只保存在這部手機，並取代應用程式內建的金鑰。留空即使用內建金鑰。';
+      'AI 助理、電郵驗證碼與 Google 登入所需的金鑰。在此輸入的金鑰只保存在這部手機，並取代應用程式內建的金鑰。留空即使用內建金鑰。';
 
   @override
   String get connectionsMissing => '尚未設定';
@@ -954,9 +952,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get fieldPhone => '手機號碼';
 
   @override
-  String get fieldPhoneOrEmail => '手機或電郵';
-
-  @override
   String get fieldPortion => '份量';
 
   @override
@@ -1014,6 +1009,36 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get glucoseRandom => '其他時間';
+
+  @override
+  String get googleConsentAllow => '允許並繼續';
+
+  @override
+  String get googleConsentBody =>
+      'Maternal 會將以下資料從您的 Google 帳戶複製到個人檔案。您之後可在「個人資料」中修改。';
+
+  @override
+  String get googleConsentManual => '我自行輸入資料';
+
+  @override
+  String get googleConsentTitle => '使用您的 Google 資料？';
+
+  @override
+  String get googleContinue => '使用 Google 繼續';
+
+  @override
+  String googleFailed(String detail) {
+    return 'Google 登入失敗：$detail';
+  }
+
+  @override
+  String get googleNotSetUp => '此版本尚未設定 Google 登入，請使用電郵。';
+
+  @override
+  String get googlePhoto => '個人照片';
+
+  @override
+  String get googlePhotoValue => '您的 Google 照片';
 
   @override
   String get gravidaPara => '孕次／產次';
@@ -1156,13 +1181,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get linkPending => '等待醫生接受';
 
   @override
-  String get loginChangeIdentifier => '使用其他手機或電郵';
+  String get loginChangeIdentifier => '使用其他電郵';
 
   @override
-  String get loginIntro => '請輸入您的手機號碼或電郵，我們會傳送一次性驗證碼給您。';
+  String get loginIntro => '請輸入您的電郵，我們會寄送一次性驗證碼。';
 
   @override
-  String get loginRecoveryHint => '無法在此手機或電郵收到驗證碼？請聯絡您的診所以恢復帳戶。';
+  String get loginRecoveryHint => '無法在此電郵收到驗證碼？請聯絡您的診所以恢復帳戶。';
 
   @override
   String get loginTitle => '登入';
@@ -1387,7 +1412,7 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get onboardingVerifySubtitle => '選擇手機或電郵，我們會傳送一次性驗證碼。';
+  String get onboardingVerifySubtitle => '請輸入電郵，我們會寄送一次性驗證碼。';
 
   @override
   String get onboardingVerifyTitle => '驗證您的帳戶';
@@ -1559,6 +1584,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get signOutConfirm => '要從此裝置登出嗎？';
 
   @override
+  String get ssoOr => '或';
+
+  @override
   String get statAlerts => '待查看警示';
 
   @override
@@ -1659,7 +1687,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get totpBody =>
-      '使用 Google Authenticator、Microsoft Authenticator 或類似應用程式的 6 位數代碼登入，不需簡訊或網路。';
+      '使用 Google Authenticator、Microsoft Authenticator 或類似應用程式的 6 位數驗證碼登入，無需電郵或網絡。';
 
   @override
   String get totpCodeLabel => '驗證器代碼';

@@ -292,25 +292,19 @@ class AppLocalizationsTa extends AppLocalizations {
       'அந்தக் குறியீடு சரியில்லை. சரிபார்த்து மீண்டும் முயலவும்.';
 
   @override
-  String get authInvalidIdentifier =>
-      'சரியான தொலைபேசி எண் அல்லது மின்னஞ்சலை உள்ளிடவும்.';
+  String get authInvalidIdentifier => 'சரியான மின்னஞ்சல் முகவரியை உள்ளிடவும்.';
 
   @override
   String get authNoAccountYet =>
       'சரிபார்க்கப்பட்டது. இன்னும் கணக்கு இல்லை, ஒன்றை உருவாக்குவோம்.';
 
   @override
-  String get authSendCodeInstead =>
-      'பதிலாக SMS அல்லது மின்னஞ்சல் மூலம் குறியீடு அனுப்பு';
+  String get authSendCodeInstead => 'பதிலாக மின்னஞ்சலில் குறியீட்டை அனுப்பு';
 
   @override
   String authSendFailed(String reason) {
     return 'குறியீட்டை அனுப்பவோ சரிபார்க்கவோ முடியவில்லை. $reason';
   }
-
-  @override
-  String get authSmsNotSetUp =>
-      'இந்தப் பதிப்பில் தொலைபேசி எண்கள் டெமோ குறியீட்டைப் பயன்படுத்துகின்றன. உண்மையான குறியீடுகள் மின்னஞ்சலில் அனுப்பப்படும்.';
 
   @override
   String get babiesMore => 'மேலும்';
@@ -448,12 +442,6 @@ class AppLocalizationsTa extends AppLocalizations {
       'இங்குள்ள மருத்துவர்கள் நீங்கள் பகிரும் பதிவுகளைப் பார்க்கலாம். எப்போது வேண்டுமானாலும் அனுமதியை நீக்கலாம்.';
 
   @override
-  String get channelEmail => 'மின்னஞ்சல்';
-
-  @override
-  String get channelPhone => 'தொலைபேசி';
-
-  @override
   String get chartBandNote =>
       'நிழலிட்ட பட்டை உங்கள் மருத்துவக் குழுவின் அமைப்புகளில் உள்ள வழக்கமான வரம்பு.';
 
@@ -493,8 +481,15 @@ class AppLocalizationsTa extends AppLocalizations {
       'மின்னஞ்சல் குறியீடுகள் (EmailJS + Gmail)';
 
   @override
+  String get connectionsGoogleBody =>
+      'Google Cloud இலிருந்து Web client ID. உள்நுழைவுக்கு இந்தச் செயலியின் package பெயர் மற்றும் SHA-1 உடன் ஒரு Android client உம் அங்கே தேவை.';
+
+  @override
+  String get connectionsGoogleTitle => 'Google உள்நுழைவு';
+
+  @override
   String get connectionsIntro =>
-      'AI உதவியாளர் மற்றும் மின்னஞ்சல் குறியீடுகளுக்கான சாவிகள். இங்கே தட்டச்சு செய்யும் சாவிகள் இந்தத் தொலைபேசியில் மட்டுமே இருக்கும்; செயலியில் உள்ளவற்றுக்குப் பதிலாகப் பயன்படும். உள்ளமைந்த சாவியைப் பயன்படுத்தப் பெட்டியைக் காலியாக விடவும்.';
+      'AI உதவியாளர், மின்னஞ்சல் குறியீடுகள் மற்றும் Google உள்நுழைவுக்கான சாவிகள். இங்கே தட்டச்சு செய்யும் சாவிகள் இந்தத் தொலைபேசியில் மட்டுமே இருக்கும்; செயலியில் உள்ளவற்றுக்குப் பதிலாகப் பயன்படும். உள்ளமைந்த சாவியைப் பயன்படுத்தப் பெட்டியைக் காலியாக விடவும்.';
 
   @override
   String get connectionsMissing => 'அமைக்கப்படவில்லை';
@@ -1039,9 +1034,6 @@ class AppLocalizationsTa extends AppLocalizations {
   String get fieldPhone => 'தொலைபேசி எண்';
 
   @override
-  String get fieldPhoneOrEmail => 'தொலைபேசி அல்லது மின்னஞ்சல்';
-
-  @override
   String get fieldPortion => 'அளவு';
 
   @override
@@ -1112,6 +1104,37 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get glucoseRandom => 'வேறு நேரம்';
+
+  @override
+  String get googleConsentAllow => 'அனுமதித்து தொடர்';
+
+  @override
+  String get googleConsentBody =>
+      'Maternal இவற்றை உங்கள் Google கணக்கிலிருந்து உங்கள் சுயவிவரத்தில் நகலெடுக்கும். பின்னர் தனிப்பட்ட தகவலில் மாற்றலாம்.';
+
+  @override
+  String get googleConsentManual => 'என் விவரங்களை நானே உள்ளிடுகிறேன்';
+
+  @override
+  String get googleConsentTitle => 'உங்கள் Google விவரங்களைப் பயன்படுத்தவா?';
+
+  @override
+  String get googleContinue => 'Google மூலம் தொடர்';
+
+  @override
+  String googleFailed(String detail) {
+    return 'Google உள்நுழைவு தோல்வியடைந்தது: $detail';
+  }
+
+  @override
+  String get googleNotSetUp =>
+      'இந்தப் பதிப்பில் Google உள்நுழைவு இன்னும் அமைக்கப்படவில்லை. உங்கள் மின்னஞ்சலைப் பயன்படுத்தவும்.';
+
+  @override
+  String get googlePhoto => 'சுயவிவரப் படம்';
+
+  @override
+  String get googlePhotoValue => 'உங்கள் Google படம்';
 
   @override
   String get gravidaPara => 'கர்ப்ப / பிரசவ எண்ணிக்கை';
@@ -1265,16 +1288,15 @@ class AppLocalizationsTa extends AppLocalizations {
   String get linkPending => 'மருத்துவர் ஏற்கக் காத்திருக்கிறது';
 
   @override
-  String get loginChangeIdentifier =>
-      'வேறு தொலைபேசி அல்லது மின்னஞ்சலைப் பயன்படுத்து';
+  String get loginChangeIdentifier => 'வேறு மின்னஞ்சலைப் பயன்படுத்து';
 
   @override
   String get loginIntro =>
-      'உங்கள் தொலைபேசி எண் அல்லது மின்னஞ்சலை உள்ளிடவும். ஒருமுறை குறியீட்டை (OTP) அனுப்புவோம்.';
+      'உங்கள் மின்னஞ்சலை உள்ளிடவும். ஒருமுறை குறியீட்டை அனுப்புவோம்.';
 
   @override
   String get loginRecoveryHint =>
-      'இந்தத் தொலைபேசி அல்லது மின்னஞ்சலில் குறியீடு வரவில்லையா? கணக்கை மீட்க உங்கள் கிளினிக்கைத் தொடர்புகொள்ளவும்.';
+      'இந்த மின்னஞ்சலில் குறியீடுகள் வரவில்லையா? கணக்கை மீட்க உங்கள் மருத்துவமனையைத் தொடர்பு கொள்ளவும்.';
 
   @override
   String get loginTitle => 'உள்நுழை';
@@ -1511,7 +1533,7 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get onboardingVerifySubtitle =>
-      'தொலைபேசி அல்லது மின்னஞ்சலைத் தேர்வுசெய்யவும்; ஒருமுறை குறியீட்டை அனுப்புவோம்.';
+      'உங்கள் மின்னஞ்சலை உள்ளிடவும், ஒருமுறை குறியீட்டை அனுப்புவோம்.';
 
   @override
   String get onboardingVerifyTitle => 'உங்கள் கணக்கைச் சரிபார்க்கவும்';
@@ -1694,6 +1716,9 @@ class AppLocalizationsTa extends AppLocalizations {
   String get signOutConfirm => 'இந்தச் சாதனத்திலிருந்து வெளியேறவா?';
 
   @override
+  String get ssoOr => 'அல்லது';
+
+  @override
   String get statAlerts => 'மதிப்பாய்வுக்கான எச்சரிக்கைகள்';
 
   @override
@@ -1801,7 +1826,7 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get totpBody =>
-      'Google Authenticator, Microsoft Authenticator அல்லது அதுபோன்ற செயலியின் 6 இலக்கக் குறியீட்டுடன் உள்நுழையவும். SMS அல்லது இணையம் இல்லாமலும் இது வேலை செய்யும்.';
+      'Google Authenticator, Microsoft Authenticator அல்லது இதுபோன்ற செயலியின் 6 இலக்கக் குறியீட்டுடன் உள்நுழையவும். மின்னஞ்சல் அல்லது இணையம் இல்லாமலும் செயல்படும்.';
 
   @override
   String get totpCodeLabel => 'அங்கீகரிப்புக் குறியீடு';

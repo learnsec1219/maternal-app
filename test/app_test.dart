@@ -10,7 +10,8 @@ void main() {
   testWidgets('starts on the welcome screen, not Home', (tester) async {
     await pumpApp(tester);
     expect(find.text('Create an account'), findsOneWidget);
-    expect(find.text('Continue with Google'), findsNothing);
+    expect(find.text('Continue with Google'), findsOneWidget);
+    expect(find.textContaining('Phone'), findsNothing);
     expect(find.text('Home'), findsNothing);
   });
 

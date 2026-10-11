@@ -6,6 +6,7 @@ import '../../core/widgets/common.dart';
 import '../../data/demo_store.dart';
 import '../settings/language_switcher.dart';
 import 'code_flow.dart';
+import 'google_button.dart';
 import 'login_screen.dart';
 import 'onboarding_screen.dart';
 
@@ -65,7 +66,7 @@ class WelcomeScreen extends StatelessWidget {
                 MaterialPageRoute<void>(builder: (_) => const LoginScreen()),
               ),
             ),
-            const SizedBox(height: 10),
+            const GoogleButton(),
             const SizedBox(height: 10),
             InfoBanner(
               l.welcomeDemoHint(DemoAccounts.code),

@@ -7,20 +7,17 @@ import '../../core/widgets/common.dart';
 import '../../data/demo_store.dart';
 import '../../data/session.dart';
 import '../../core/integrations/totp.dart';
-import '../../core/integrations/verification.dart';
 import 'code_flow.dart';
+import 'google_button.dart';
 import 'onboarding_screen.dart';
 
 final _emailRe = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$');
-final _phoneRe = RegExp(r'^\+?\d{8,15}$');
 
-bool isValidIdentifier(String id) =>
-    _emailRe.hasMatch(id) ||
-    _phoneRe.hasMatch(id.replaceAll(RegExp(r'[\s\-()]'), ''));
+bool isValidEmail(String id) => _emailRe.hasMatch(id);
 
-/// Phone or email, then a one-time code: a real SMS or email code when
-/// those services are set up, the authenticator app when the account has one,
-/// and the demo code 123456 for the built-in demo accounts.
+/// Email, then a one-time code: a real email code when EmailJS is set up,
+/// the authenticator app when the account has one, and the demo code 123456
+/// for the built-in demo accounts. Google sign-in sits below.
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
 
@@ -43,18 +40,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     super.dispose();
   }
 
-  String? _lookup(String id) {
-    final data = ref.read(demoStoreProvider);
-    final clean = id.replaceAll(RegExp(r'[\s\-()]'), '').toLowerCase();
-    final e164 = CodeFlow.isEmail(clean) ? clean : toE164(clean);
-    for (final p in data.profiles.values) {
-      if (p.email?.toLowerCase() == clean ||
-          (p.phone != null && (p.phone == clean || toE164(p.phone!) == e164))) {
-        return p.id;
-      }
-    }
-    return null;
-  }
+  String? _lookup(String email) =>
+      ref.read(demoStoreProvider).profileByEmail(email)?.id;
 
   /// The built-in demo accounts keep the demo code.
   bool get _demoAccount => _personId != null && !_personId!.startsWith('new');
@@ -77,8 +64,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   Future<void> _send() async {
     final l = context.l10n;
-    final id = _id.text.trim();
-    if (!isValidIdentifier(id)) {
+    final id = _id.text.trim().toLowerCase();
+    if (!isValidEmail(id)) {
       setState(() => _error = l.authInvalidIdentifier);
       return;
     }
@@ -114,13 +101,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       return;
     }
     // Verified, but no account yet: carry on into sign-up.
-    final id = _id.text.trim();
+    final id = _id.text.trim().toLowerCase();
     showToast(context, context.l10n.authNoAccountYet);
     nav.pushReplacement(
       MaterialPageRoute<void>(
-        builder: (_) => CodeFlow.isEmail(id)
-            ? OnboardingScreen(verifiedEmail: id.toLowerCase())
-            : OnboardingScreen(verifiedPhone: toE164(id)),
+        builder: (_) => OnboardingScreen(verifiedEmail: id),
       ),
     );
   }
@@ -136,7 +121,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         const SizedBox(height: 14),
         AppTextField(
           fieldKey: const Key('login-id'),
-          label: l.fieldPhoneOrEmail,
+          label: l.fieldEmail,
           controller: _id,
           enabled: !_flow.sent && !_busy,
           keyboardType: TextInputType.emailAddress,
@@ -180,6 +165,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             }),
             child: Text(l.loginChangeIdentifier),
           ),
+        const GoogleButton(),
         const SizedBox(height: 8),
         Text(
           l.loginRecoveryHint,

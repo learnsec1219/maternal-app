@@ -287,24 +287,19 @@ class AppLocalizationsMs extends AppLocalizations {
       'Kod itu tidak betul. Sila semak dan cuba lagi.';
 
   @override
-  String get authInvalidIdentifier =>
-      'Sila masukkan nombor telefon atau e-mel yang sah.';
+  String get authInvalidIdentifier => 'Sila masukkan alamat e-mel yang sah.';
 
   @override
   String get authNoAccountYet =>
       'Disahkan. Belum ada akaun, jadi mari kita cipta satu.';
 
   @override
-  String get authSendCodeInstead => 'Hantar kod melalui SMS atau e-mel';
+  String get authSendCodeInstead => 'Hantar kod melalui e-mel';
 
   @override
   String authSendFailed(String reason) {
     return 'Tidak dapat menghantar atau menyemak kod. $reason';
   }
-
-  @override
-  String get authSmsNotSetUp =>
-      'Nombor telefon menggunakan kod demo dalam binaan ini. Kod sebenar dihantar melalui e-mel.';
 
   @override
   String get babiesMore => 'Lebih';
@@ -440,12 +435,6 @@ class AppLocalizationsMs extends AppLocalizations {
       'Doktor di sini boleh melihat rekod yang anda kongsi. Tarik balik akses bila-bila masa.';
 
   @override
-  String get channelEmail => 'E-mel';
-
-  @override
-  String get channelPhone => 'Telefon';
-
-  @override
   String get chartBandNote =>
       'Jalur berlorek ialah julat biasa daripada tetapan pasukan penjagaan anda.';
 
@@ -485,8 +474,15 @@ class AppLocalizationsMs extends AppLocalizations {
   String get connectionsEmailTitle => 'Kod e-mel (EmailJS + Gmail)';
 
   @override
+  String get connectionsGoogleBody =>
+      'ID klien Web dari Google Cloud. Log masuk juga memerlukan klien Android di sana dengan nama pakej dan SHA-1 aplikasi ini.';
+
+  @override
+  String get connectionsGoogleTitle => 'Log masuk Google';
+
+  @override
   String get connectionsIntro =>
-      'Kunci untuk pembantu AI dan kod e-mel. Kunci yang ditaip di sini kekal dalam telefon ini dan menggantikan kunci terbina dalam aplikasi. Biarkan kotak kosong untuk guna kunci terbina dalam.';
+      'Kunci untuk pembantu AI, kod e-mel dan log masuk Google. Kunci yang ditaip di sini kekal dalam telefon ini dan menggantikan kunci terbina dalam aplikasi. Biarkan kotak kosong untuk guna kunci terbina dalam.';
 
   @override
   String get connectionsMissing => 'Belum ditetapkan';
@@ -996,9 +992,6 @@ class AppLocalizationsMs extends AppLocalizations {
   String get fieldPhone => 'Nombor telefon';
 
   @override
-  String get fieldPhoneOrEmail => 'Telefon atau e-mel';
-
-  @override
   String get fieldPortion => 'Hidangan';
 
   @override
@@ -1056,6 +1049,37 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get glucoseRandom => 'Masa lain';
+
+  @override
+  String get googleConsentAllow => 'Benarkan dan teruskan';
+
+  @override
+  String get googleConsentBody =>
+      'Maternal akan menyalin butiran ini dari akaun Google anda ke profil anda. Anda boleh mengubahnya kemudian dalam Maklumat peribadi.';
+
+  @override
+  String get googleConsentManual => 'Saya akan isi butiran sendiri';
+
+  @override
+  String get googleConsentTitle => 'Guna butiran Google anda?';
+
+  @override
+  String get googleContinue => 'Teruskan dengan Google';
+
+  @override
+  String googleFailed(String detail) {
+    return 'Log masuk Google tidak berjaya: $detail';
+  }
+
+  @override
+  String get googleNotSetUp =>
+      'Log masuk Google belum disediakan dalam binaan ini. Sila gunakan e-mel anda.';
+
+  @override
+  String get googlePhoto => 'Foto profil';
+
+  @override
+  String get googlePhotoValue => 'Foto Google anda';
 
   @override
   String get gravidaPara => 'Gravida / para';
@@ -1203,15 +1227,15 @@ class AppLocalizationsMs extends AppLocalizations {
   String get linkPending => 'Menunggu doktor menerima';
 
   @override
-  String get loginChangeIdentifier => 'Guna telefon atau e-mel lain';
+  String get loginChangeIdentifier => 'Guna e-mel lain';
 
   @override
   String get loginIntro =>
-      'Masukkan nombor telefon atau e-mel anda. Kami akan menghantar kod sekali guna.';
+      'Masukkan e-mel anda. Kami akan menghantar kod sekali guna.';
 
   @override
   String get loginRecoveryHint =>
-      'Tidak dapat menerima kod pada telefon atau e-mel ini? Hubungi klinik anda untuk memulihkan akaun.';
+      'Tidak menerima kod di e-mel ini? Hubungi klinik anda untuk memulihkan akaun.';
 
   @override
   String get loginTitle => 'Log masuk';
@@ -1447,7 +1471,7 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get onboardingVerifySubtitle =>
-      'Pilih telefon atau e-mel dan kami akan menghantar kod sekali guna.';
+      'Masukkan e-mel anda dan kami akan menghantar kod sekali guna.';
 
   @override
   String get onboardingVerifyTitle => 'Sahkan akaun anda';
@@ -1623,6 +1647,9 @@ class AppLocalizationsMs extends AppLocalizations {
   String get signOutConfirm => 'Log keluar dari peranti ini?';
 
   @override
+  String get ssoOr => 'atau';
+
+  @override
   String get statAlerts => 'Amaran untuk disemak';
 
   @override
@@ -1723,7 +1750,7 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get totpBody =>
-      'Log masuk dengan kod 6 digit daripada Google Authenticator, Microsoft Authenticator atau aplikasi serupa. Ia berfungsi tanpa SMS atau internet.';
+      'Log masuk dengan kod 6 digit daripada Google Authenticator, Microsoft Authenticator atau aplikasi serupa. Ia berfungsi tanpa e-mel atau internet.';
 
   @override
   String get totpCodeLabel => 'Kod pengesah';

@@ -211,7 +211,10 @@ void main() {
       await tester.tap(find.byIcon(Icons.person_outline_rounded).first);
       await tester.pumpAndSettle();
       await next();
-      await tester.enterText(find.byType(TextField).first, '+60123456789');
+      await tester.enterText(
+        find.byType(TextField).first,
+        'new.person@example.com',
+      );
       await next();
       await tester.enterText(find.byType(TextField).last, '123456');
       await next();

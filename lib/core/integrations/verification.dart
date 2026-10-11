@@ -29,15 +29,6 @@ final verificationProvider = Provider<VerificationService>(
   (ref) => LiveVerification(ref.watch(integrationConfigProvider)),
 );
 
-/// Malaysian numbers typed locally (012-345 6789) become +60123456789.
-String toE164(String phone) {
-  var p = phone.replaceAll(RegExp(r'[\s\-()]'), '');
-  if (p.startsWith('00')) p = '+${p.substring(2)}';
-  if (p.startsWith('0')) p = '+60${p.substring(1)}';
-  if (!p.startsWith('+')) p = '+$p';
-  return p;
-}
-
 class LiveVerification implements VerificationService {
   LiveVerification(this.config, {http.Client? client})
     : _http = client ?? http.Client();

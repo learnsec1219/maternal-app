@@ -15,7 +15,6 @@ import '../../data/session.dart';
 import '../../domain/health_rules.dart';
 import '../settings/language_switcher.dart';
 import '../settings/locale_controller.dart';
-import '../../core/integrations/verification.dart';
 import 'code_flow.dart';
 import 'login_screen.dart';
 
@@ -24,14 +23,11 @@ enum _Step { role, verify, personal, body, pregnancy, done }
 /// Multi-step sign-up: role, verify phone or email, about you, body,
 /// pregnancy, done. Doctors skip body and pregnancy and wait for approval.
 class OnboardingScreen extends ConsumerStatefulWidget {
-  const OnboardingScreen({super.key, this.verifiedEmail, this.verifiedPhone});
+  const OnboardingScreen({super.key, this.verifiedEmail});
 
-  /// Set when the person came from Google or Microsoft, or already proved
-  /// this email with a code: no code step.
+  /// Set when the person came from Google or already proved this email with
+  /// a code: no code step.
   final String? verifiedEmail;
-
-  /// Set when the person already proved this phone number with an SMS code.
-  final String? verifiedPhone;
 
   @override
   ConsumerState<OnboardingScreen> createState() => _OnboardingScreenState();
@@ -40,7 +36,7 @@ class OnboardingScreen extends ConsumerStatefulWidget {
 class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   _Step _step = _Step.role;
   UserRole? _role;
-  bool _email = false, _verified = false, _busy = false;
+  bool _verified = false, _busy = false;
   final _flow = CodeFlow();
   String? _error;
   final _id = TextEditingController();
@@ -58,12 +54,8 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   void initState() {
     super.initState();
     if (widget.verifiedEmail != null) {
-      _email = true;
       _verified = true;
       _id.text = widget.verifiedEmail!;
-    } else if (widget.verifiedPhone != null) {
-      _verified = true;
-      _id.text = widget.verifiedPhone!;
     }
   }
 
@@ -99,9 +91,9 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
 
   Future<void> _verifyStep() async {
     final l = context.l10n;
-    final id = _id.text.trim();
+    final id = _id.text.trim().toLowerCase();
     if (!_flow.sent) {
-      if (!isValidIdentifier(id) || _email != id.contains('@')) {
+      if (!isValidEmail(id)) {
         setState(() => _error = l.authInvalidIdentifier);
         return;
       }
@@ -162,8 +154,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
     final profile = Profile(
       id: id,
       name: _name.text.trim(),
-      email: _email ? _id.text.trim().toLowerCase() : null,
-      phone: _email ? null : toE164(_id.text),
+      email: _id.text.trim().toLowerCase(),
       dob: _dob,
       height: _height,
       weight: _weight,
@@ -277,22 +268,13 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
           l.onboardingVerifyTitle,
           l.onboardingVerifySubtitle,
           [
-            ChoiceChips<bool>(
-              options: [(false, l.channelPhone), (true, l.channelEmail)],
-              selected: _email,
-              onSelected: (v) => setState(() {
-                _email = v;
-                _flow.reset();
-              }),
-            ),
             AppTextField(
-              label: _email ? l.fieldEmail : l.fieldPhone,
+              fieldKey: const Key('signup-email'),
+              label: l.fieldEmail,
               controller: _id,
               enabled: !_flow.sent && !_busy,
-              hint: _email ? 'name@example.com' : '+60 12-345 6789',
-              keyboardType: _email
-                  ? TextInputType.emailAddress
-                  : TextInputType.phone,
+              hint: 'name@example.com',
+              keyboardType: TextInputType.emailAddress,
             ),
             if (_flow.sent) ...[
               AppTextField(
@@ -550,7 +532,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
               child: Column(
                 children: [
                   row(l.fieldFullName, _name.text.trim()),
-                  row(l.fieldPhoneOrEmail, _id.text.trim()),
+                  row(l.fieldEmail, _id.text.trim()),
                   if (!doctor && _pregnant == true && _due != null)
                     row(l.fieldDueDate, context.formatLongDate(_due!)),
                 ],
